@@ -1,0 +1,1 @@
+data dictionary or codebook processed data goes here. Per default this file won't be pushed to github (see .gitignore)
