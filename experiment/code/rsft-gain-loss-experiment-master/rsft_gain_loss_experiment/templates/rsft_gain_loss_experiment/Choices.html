@@ -1,0 +1,123 @@
+{% extends "rsft_gain_loss_experiment/Page.html" %}
+{% load otree static %}
+{% load i18n %}
+
+{% block content %}
+  <div class = "row row1">
+      <div class = "trial-container"></div>
+  </div>
+
+  <div class = "row">
+      <div class="progress-container">
+        <span class="line" id="line1"></span>
+        <span class="line" id="line2"></span>
+        <div class="progress-total">
+          <div class="progress-bar">
+            <span class="state"></span>
+          </div>
+        </div>
+      </div> 
+      </div>
+  </div>
+
+  <div class = "row">
+    <button type="button" value={{ stimulus_position.0 }} class="option rsft-btn-choices">
+      <span class = "rsft-span-choices">
+        <div class = "{{ img1 }} sprite" id = "option1">
+        </div>
+      </span>
+    </button>
+      
+    <button type="button" value={{ stimulus_position.1 }} class="option rsft-btn-choices">
+      <span class = "rsft-span-choices">
+        <div class = "{{ img2 }} sprite" id = "option2">
+        </div>
+      </span>
+    </button>
+  </div>
+  </div>
+
+  <span class = 'hidden' formnovalidate="formnovalidate">
+  {% next_button %}
+  </span>
+
+ <div class = 'hidden'>
+  {% for field in form %}
+    {% formfield field %}
+  {% endfor %}
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+{% block scripts %}
+  <script>
+
+  /* Variables for this block defined in pages.py*/
+    var stimulus_position = {{ stimulus_position }},
+      num_trials = {{ Constants.num_trials }},
+      state = {{ state|json }},
+      outcomes = {{ outcomes }},
+      budget = {{ budget|json }},
+      xmin = - {{ max_earning|json }},
+      xmax = {{ max_earning|json }};
+    var direction = outcomes[0][0] < 0 ? -1 : 1;
+
+    /* Variables set here */
+    var trial = 1,
+        rt_end = 0,
+        rt_start = 0,
+        old_s = 0,
+        start = state; /* state at the beginning */
+
+
+    
+    /* ------------------------------------------------------------------------
+    Next, we define a function to be executed every time a user clicks on the button  which is called .rsft-btn-choice 
+    */
+    $('.rsft-btn-choices').click(function() {
+      rt_end = window.performance.now();
+      $('#id_rt_ms' + (trial)).val( Math.round(rt_end - rt_start) );
+
+      var choice = $(this).val();
+      var choice_position = stimulus_position[choice];
+      $('#id_choice'+trial).val(choice);
+      outcome = outcomes[choice_position][trial - 1];
+      state += outcome
+      $('#id_state' + (trial + 1)).val(state);
+      hideActions();
+      var x = $(this);
+      showOutcome(x);
+      set_state(outcome, state);
+    
+      setTimeout(function() {
+        if (trial < num_trials) {
+          hideOutcome(x);
+          showActions();
+        }
+        if (trial == num_trials) {
+          $('#id_success').val( +(state >= budget) );
+          $('#id_successes').val( {{ successes }} + (state >= budget) );
+          clickNext()
+        }
+        trial += 1;
+        highlight_trial(trial);    
+        rt_start = window.performance.now();
+      }, 1000);
+      
+    });
+
+    $('#id_state' +trial).val(state);
+    draw_trials(num_trials);
+    highlight_trial(trial);
+
+    draw_progress(s = start, b = budget, direction = direction);
+
+  </script>
+{% endblock %}

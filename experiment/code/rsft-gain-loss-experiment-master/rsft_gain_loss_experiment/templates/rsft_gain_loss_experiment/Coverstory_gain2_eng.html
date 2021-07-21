@@ -1,0 +1,60 @@
+{% extends "rsft_gain_loss_experiment/Page.html" %}
+{% load otree static %}
+{% load i18n %}
+
+{% block title %}
+    {% blocktrans trimmed %}Increasing points{% endblocktrans %}
+{% endblock %}
+
+
+{% block content %}
+  <h3>{% blocktrans trimmed %}Example of score and threshold{% endblocktrans %}</h3>
+  
+  <p>{% blocktrans trimmed %}
+  The following graphic shows a possible score and threshold at the beginning of a round. Here you start with -29 points. The threshold is 0 points. The <b>goal</b> is <b>to reach at least 0 points</b>.{% endblocktrans %}</p>
+
+  <p>
+  <img src='{% static "img/gain4E.png" %}'/ width = '600px'>
+  </p>
+
+  <p>{% blocktrans trimmed %}
+  A second example: Your score is 0 and the threshold is +29. The <b>goal</b> is to reach <b>at least +29 points</b>.{% endblocktrans %}</p>
+
+  <p>
+  <img src='{% static "img/gain1E.png" %}'/ width = '600px'>
+  </p>
+
+
+  <h3>{% blocktrans trimmed %}Example of increasing points{% endblocktrans %}</h3>
+  <p>{% blocktrans trimmed %}
+  Imagine you choose an option and receive +5&nbsp;points. Your score increases from 0 to +5&nbsp;points (see below).{% endblocktrans %}
+  </p>
+
+   <div class = "flex-row">
+    <div>
+      <img class = 'center' src='{% static "img/gain2E.png" %}'/ width = '80%'>
+        <p class = 'example3E'>
+      {% blocktrans trimmed %}
+      Score: 0 points
+      {% endblocktrans %}
+      </p>
+    </div>
+    <div>
+      <img class = 'center' src='{% static "img/gain3E.png" %}'/ width = '80%'>
+        <p class = 'example4E'>
+        {% blocktrans trimmed %}
+        Score: +5 points
+      {% endblocktrans %}
+      </p>
+    </div>
+   </div>
+
+  <h3>{% blocktrans trimmed %}Practise round{% endblocktrans %}</h3> 
+  <p>{% blocktrans trimmed %}
+      <b>The next page shows a decision round. This round is for you to try out the task and get familiar with it. This round will not matter for your bonus. Click on "Next" and choose an option by clicking on it.</b>{% endblocktrans %}</p>
+
+
+  {% next_button %}
+
+{% endblock %}
+

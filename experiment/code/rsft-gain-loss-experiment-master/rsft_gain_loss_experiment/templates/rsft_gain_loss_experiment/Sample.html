@@ -1,0 +1,121 @@
+{% extends "rsft_gain_loss_experiment/Page.html" %}
+{% load otree static %}
+{% load i18n %}
+
+{% block content %}
+  <div id="rsft-hidden" class="hidden">
+      <span>
+            We will move on (you reached maximum Sample trials)
+      </span>
+  </div>
+
+  <div class = "hidden" id="goal_condition">
+      Your goal will be {{ budget | to0 }}
+  </div>
+
+  <div class = "row" id="hide-options">
+    <button type="button" value={{ stimulus_position.0 }} class="option rsft-btn-choices">
+      <span class = "rsft-span-choices">
+        <div class = "{{ img1 }} sprite" id = "option1">
+        </div>
+      </span>
+    </button>
+      
+    <button type="button" value={{ stimulus_position.1 }} class="option rsft-btn-choices">
+      <span class = "rsft-span-choices">
+        <div class = "{{ img2 }} sprite" id = "option2">
+        </div>
+      </span>
+    </button>
+  </div>
+  <div class="row">
+      <span>
+          <input class="otree-btn-next" type="submit" value="I am ready to move on"/>
+      </span>
+  </div>
+
+
+
+ <div>  class="hidden"
+  {% for field in form %}
+    {% formfield field %}
+  {% endfor %}
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+{% block scripts %}
+  <script>
+
+  /* Variables for this block defined in pages.py*/
+    var stimulus_position = {{ stimulus_position }},
+      num_trials = {{ Constants.num_samples }},
+      state = {{ state|json }},
+      outcomes = {{ outcomes }},
+      budget = {{ budget|json }},
+      xmin = - {{ max_earning|json }},
+      xmax = {{ max_earning|json }};
+    var direction = outcomes[0][0] < 0 ? -1 : 1;
+
+    /* Variables set here */
+    var trial = 1,
+        rt_end = 0,
+        rt_start = 0,
+        old_s = 0,
+        start = state; /* state at the beginning */
+
+    /* ------------------------------------------------------------------------
+    Next, we define a function to be executed every time a user clicks on the button  which is called .rsft-btn-choice 
+    */
+    $('.rsft-btn-choices').click(function() {
+      rt_end = window.performance.now();
+      $('#id_rt_ms' + (trial)).val( Math.round(rt_end - rt_start) );
+
+
+      var choice = $(this).val();
+      var choice_position = stimulus_position[choice];
+      $('#id_sample'+trial).val(choice);
+      outcome = outcomes[choice_position][trial - 1];
+      state += outcome
+      $('#id_draw' + (trial)).val(state);
+      hideActions();
+      var x = $(this);
+      showOutcome(x);
+      set_state(outcome, state);
+
+      if (goal_condition = 1){
+          document.getElementById("goal_condition").classList.remove("hidden")
+      }
+      setTimeout(function() {
+        if (trial < num_trials) {
+          hideOutcome(x);
+          showActions();
+        }
+        if (trial == num_trials) {
+          $('#id_success').val( +(state >= budget) );
+          $('#id_successes').val( {{ successes }} + (state >= budget) );
+          document.getElementById("rsft-hidden").classList.remove("hidden");
+          document.getElementById("hide-options").classList.add("hidden");
+          setTimeout(clickNext(), 4000);
+        }
+        trial += 1;
+        highlight_trial(trial);    
+        rt_start = window.performance.now();
+
+
+      }, 1000);
+      
+    });
+    $('#id_state' +trial).val(state);
+    draw_trials(num_trials);
+    highlight_trial(trial);
+
+    draw_progress(s = start, b = budget, direction = direction);
+  </script>
+{% endblock %}

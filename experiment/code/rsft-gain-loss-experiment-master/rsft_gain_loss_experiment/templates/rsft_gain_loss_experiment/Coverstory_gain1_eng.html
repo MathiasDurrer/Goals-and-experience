@@ -1,0 +1,47 @@
+{% extends "rsft_gain_loss_experiment/Page.html" %}
+{% load otree static %}
+{% load i18n %}
+
+{% block title %}
+    {% blocktrans trimmed %}Increasing points{% endblocktrans %}
+{% endblock %}
+
+
+{% block content %}
+  <p> {% blocktrans trimmed %}
+    Here you learn about the layout and the procedure of decision rounds (rounds), in which your score increases.
+  {% endblocktrans %}
+  </p>
+  <h3>{% blocktrans trimmed %}Example of options{% endblocktrans %}</h3>
+  
+  <p>{% blocktrans trimmed %}
+    You will choose between <b> two options 5 times</b> in order to <b>increase your score</b> and reach the <b>threshold</b>. The following graphics show two possible options in a round. Each option offers <b>points with a probability</b>.
+    You choose an <b> option by clicking on it</b>. Right after the choice you get feedback about how many points you received.
+    No matter how often you choose an option, the probabilities stay the same during the round.
+  {% endblocktrans %}</p>
+
+   <div class = "flex-row">
+    <div>
+      <img class = 'center' src='{% static "img/gop1m.png" %}'/ width = '70%'>
+      <p class = 'example2E'>
+      {% blocktrans trimmed %}
+      This option offers +7&nbsp;points with a probability of 20&nbsp;% or +5 points with a probability of 80&nbsp;%.
+      {% endblocktrans %}  
+      </p>
+    </div>
+    <div>
+      <img class = 'center' src='{% static "img/gop2.png" %}'/ width = '70%'>
+       <p class = 'example2E'>
+      {% blocktrans trimmed %}
+      This option offers +3&nbsp;points with a probability of 60&nbsp;% or +9 points with a probability of 40&nbsp;%.
+      {% endblocktrans %}  
+      </p>
+    </div>
+   </div>
+
+   <p>{% blocktrans trimmed %}On the next page you will see an example of the threshold for increasing points.{% endblocktrans %} </p>
+
+  {% next_button %}
+
+{% endblock %}
+

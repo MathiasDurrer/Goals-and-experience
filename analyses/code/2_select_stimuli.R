@@ -1,8 +1,11 @@
 # install.packages("pacman")
-# rm(list = ls)
+# clear environment to make sure no bugs happen if run multiple times in the same session
+rm(list = ls(all.names = TRUE))
 # loading data table (if not already loaded)
 pacman::p_load(data.table)
 
+# select working directory
+setwd("C:/Users/mathi/Desktop/Goals-and-experience/analyses/code")
 # read in all stimuli
 res <- fread(file = "all_stimuli.csv")
 # constructing designid: id for every combination of budget and (lottery-)pair
@@ -84,7 +87,7 @@ res[,sum(rareevent == T), by = difficultylevel]
 res[,sum(rareevent == F), by = difficultylevel]
 
 # seed for reproducability
-set.seed(5476)
+# set.seed(5476)
 # generating design with drawdesign function
 design  <- drawdesign(res = res)
 # geneating utility with overallutility function for the "design"
@@ -101,7 +104,7 @@ temp <- design[t == 1]
 n <- 0
 # loops picking a proposaldesign and genereating  proposalutility, then comparing proposalutility and utility, 
 # if proposalutlity is bigger than utility proposaldesign is assigned as the new design and proposalutility as the new utility to beat
-while(n < 500) {
+while(n < 500000) {
   proposaldesign <- drawdesign(res = res)
   
   proposalutility <- overallutility(stimuli = proposaldesign)
@@ -117,3 +120,13 @@ while(n < 500) {
 temp <- design[t == 1]
 # view temp ordered by difficultylevel and rareevent
 View(temp[order(difficultylevel, rareevent)])
+# rename colums into: x1HV,x2HV,p1HV,p2HV,x1LV,x2LV,p1LV,p2LV,budget,state and only include 
+# (to get the canfiguration that sprites.R is coded for) 
+## sprites.R generates sprites to display lotteries on the experiment webpage
+design_sprite <- rbind(design[t == 1,.(x_r, y_r, px_r, py_r, x, y, px, py, b, s)])
+#only taking first 8 rows to test sprite generation
+# design_sprite <- design_sprite[1:7,]
+colnames(design_sprite) <- c("x1HV","x2HV","p1HV","p2HV","x1LV","x2LV","p1LV","p2LV","budget","state")
+
+# write .csv file into static of rsft-gain-loss-experiment folder replacing positive-gain.csv
+fwrite(design_sprite, file = "C:/Users/mathi/Desktop/Goals-and-experience/experiment/code/rsft-gain-loss-experiment-master/rsft_gain_loss_experiment/static/stimuli/positive_gain.csv")

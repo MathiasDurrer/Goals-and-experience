@@ -1,0 +1,28 @@
+{% extends "exp_files/Page.html" %}
+{% load static otree %}
+{% load i18n %}
+
+<!-- =====================================================================
+This code loads the css styles. They are in the folder: static/css/
+css styles: Text files with the ending "css" that define the
+layout (fonts, font size, colors, etc) of the html pages
+===================================================================== -->
+{% block app_styles %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/theme.css' %}" >
+  <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/sprites.css' %}" >
+{% endblock %}
+
+
+
+<!-- =====================================================================
+This code loads the javascript scripts. They are in the folder: statis/js/
+Scripts = code with the functions to interact with buttons (etc.) on a page
+===================================================================== -->
+{% block app_scripts %}
+  <script src="{% static 'js/highcharts.js' %}"></script>
+  <script src="{% static 'js/setupCharts.js' %}"></script>
+  <script src="{% static 'js/drawAction.js' %}"></script>
+  <script src="{% static 'js/drawTrial.js' %}"></script>
+  <script src="{% static 'js/drawEarnings.js' %}"></script>
+{% endblock %}

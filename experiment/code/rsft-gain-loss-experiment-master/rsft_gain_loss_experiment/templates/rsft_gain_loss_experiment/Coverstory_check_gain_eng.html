@@ -1,0 +1,26 @@
+{% extends "rsft_gain_loss_experiment/SurveyPage.html" %}
+{% load otree static %}
+{% load i18n %}
+
+
+{% block title %}
+  {% blocktrans trimmed %}Comprehension check for increasing points{% endblocktrans %}
+{% endblock %}
+
+
+{% block content %}
+  <p>{% blocktrans trimmed %}
+  It is important that you understand the task. Below you see an example choice situation. Please answer the questions regarding this choice situation.
+  {% endblocktrans %}</p>
+  <div style = "display: inline-block; width: 60%; margin-top:40px;">
+  <img style = 'border:.1em solid #000000' src='{% static "img/gaincheck.png" %}'/ width = '98%'>
+  </div>
+  <div style = "display: inline-block; width: 40%; margin-top:0px;">
+    {% formfields %}
+  </div>
+
+
+  {% next_button %}
+
+{% endblock %}
+

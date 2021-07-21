@@ -1,0 +1,4 @@
+### otree 5.xx does not support django anymore
+otree < 5
+numpy
+

@@ -1,0 +1,39 @@
+{% extends "rsft_gain_loss_experiment/Page.html" %}
+{% load otree static %}
+{% load i18n %}
+
+{% block title %}
+  {% blocktrans trimmed %} Summary
+  {% endblocktrans %}
+{% endblock %}
+
+
+{% block content %}
+  <h3>{% blocktrans trimmed %}Increasing points{% endblocktrans %}</h3>
+
+  {% blocktrans trimmed %}<ul>
+  <li>The goal is to collect points in order to reach or exceed a predefined threshold.
+  <li>You choose between two options, which increase your points.
+  <li>What matters is, that you <b>reach the threshold</b> in 5 decisions.
+
+  </ul>{% endblocktrans %}
+
+  <h3>{% blocktrans trimmed %}Decreasing points{% endblocktrans %}</h3>
+
+  {% blocktrans trimmed %}<ul>
+  <li> The goal is to avoid that the score falls below a predefined threshold.
+  <li> You choose between two options, which deduct points.
+  <li> What matters is, that your score is <b>not lower than the threshold</b> after 5 decisions.
+  </ul>{% endblocktrans %}
+
+  <h3>{% blocktrans trimmed %}Rounds{% endblocktrans %}</h3>
+
+  {% blocktrans trimmed %}<ul>
+  <li><b>After 5 decisions a round ends</b>. A new round with a new starting score, a new threshold and new options starts. Note that the decisions you make in a round do not affect the next round. The rounds are independent of each other.
+  </ul>{% endblocktrans %}
+
+
+  {% next_button %}
+
+{% endblock %}
+

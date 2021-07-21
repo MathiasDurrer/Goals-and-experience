@@ -1,0 +1,154 @@
+/*  =========================================================================
+This is a global style for all apps
+Author: Jana B. Jarecki
+Using this style
+  To use the style, you must modify oTree/_templates/global/Page.html by adding this line into global_styles: <link rel="stylesheet" type="text/css" href="{% static 'global/theme.css' %}"/>
+========================================================================== */
+
+
+/*  =========================================================================
+  
+  # Introduction
+  For an introduction to how to change the format, please read: 
+  
+  https://www.w3schools.com/css/css_intro.asp
+
+========================================================================== */
+
+
+
+/*  =========================================================================  
+  Overall color scheme as variables and downloading fonts
+========================================================================== */
+
+/* We download the fonts that we use in all apps */
+/* Do not write any code before this */
+@import url('https://fonts.googleapis.com/css2?family=Coming+Soon&family=Roboto+Slab:wght@400;600&display=swap');
+
+/* We create variables for colors that we use throughout all apps,
+      which we use by, for example, "color: var(--main-color);" */
+:root {
+  /* General variables for the color scheme of the experiment */
+  --dark-color: rgb(0,62,25); /*h1 heading */
+  --main-color: rgb(2, 140, 100); /* next-button, headings, selected answers */
+  --light-color: rgb(123, 197, 174); /* mouse over next-button, example text */
+  --lightest-color: rgb(209, 237, 225); /* empty radio buttons or textfields */
+  /* Font colors */
+  --text-color: black; /* color of all normal text*/
+  --text-light-color: #999; /* for text, that is not that key */
+  --text-error-color: rgb(255, 32, 33); /* errors such as forgetting a survey answer, attention-check */
+}
+
+
+/*  ======================================================================== */
+
+
+
+
+/*  =========================================================================  
+  Overall styles for specific elements in the webpage
+========================================================================== */
+
+/* ---------------------------------------------------------------------------
+General settings for the body of every page
+--------------------------------------------------------------------------- */
+.otree-body {
+  width: 750px; /* how wide is the content area on the screen? */
+  max-width: 95%; /* maximum width as % of the screen width */
+}
+
+html, body, p, span, li, ul, a, b, i, mark, strong,  fieldset, legend, title, h1, h2new, h2, h3, h4, .option, .btn, .goal-reached-info p, .chart-trial, .chart-earnings, .example {
+  /* which font(s) to use for all our text? */
+  /* The first font is used,
+    if it isn't installed the second is used,
+      if this isn't installed, the third is used,
+        etc. */
+  font-family: "Arial", Helvetica, Verdana, Arial, sans-serif;
+   /* how large is our text? */
+  font-size:    14px;
+  /* how much line spacing for our text ? */
+  line-height:  1.5em; 
+}
+
+  
+/* ---------------------------------------------------------------------------
+Settings for the title and headings
+(h1 = level 1 heading, h2 = level 2, etc.)
+--------------------------------------------------------------------------- */
+/* title and h1 have the same style: */
+h1, h2.otree-title {
+  font-family:    "Coming Soon", cursive !important; /* we use a fancy font */
+  color:          var(--dark-color); /* we color this heading diffrently */
+  font-size:      2em; /* we enlarge it to 2 x the size of the text (em)*/
+  text-align: center; /* we alogn the heading to the center */
+  text-transform:   uppercase; /* we show everything in capital letters */
+  margin-top:     1.5em;
+  margin-bottom:  .2em;
+}
+
+h2, h3 {
+  font-family:      "Arial"; /* we use the same font as out text */
+  color:            var(--main-color); /* we color this differently */
+  font-size:        1.2em; /* we enlarge it to 1.2 x the size of the text */
+  text-transform:   uppercase;
+  margin-top:       1.5em;
+  margin-bottom:    .2em;
+}
+
+/* ---------------------------------------------------------------------------
+Settings for buttons like the "next" button
+--------------------------------------------------------------------------- */
+/* General buttons */
+button {
+  border: none;
+  background: transparent;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+/* The "Next" Button */
+.otree-btn-next {
+    color: white !important;
+    background-color: var(--main-color) !important;
+    border-radius: 15px !important;
+    border: none !important;
+    line-height: 1.5;
+    padding: .3rem .9rem;
+    margin-top: 5vh;
+    margin-left: 99vh;
+    outline: none;
+  }
+
+.otree-btn-next:hover,
+.otree-btn-next:focus,
+.otree-btn-next:active {
+  background-color: var(--light-color) !important;
+  color: var(--text-color) !important;
+  outline: none !important;
+}
+
+.hidden {
+        display: none;
+        visibility: hidden;
+      }
+
+/* btn class */
+.btn {
+  color: inherit;
+  outline: none;
+}
+
+.btn:focus,
+.btn:hover,
+.btn:active,
+.btn:enabled {
+  border: none;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.otree-form-errors, .form-control-errors {
+  color: var(--text-error-color);
+}

@@ -1,0 +1,45 @@
+{% extends "rsft_gain_loss_experiment/Page.html" %}
+{% load otree static %}
+{% load i18n %}
+
+{% block title %}
+    {% blocktrans trimmed %}Decreasing points{% endblocktrans %}
+{% endblock %}
+
+
+{% block content %}
+  <p> {% blocktrans trimmed %} Here you learn about the layout and the procedure of decision rounds (rounds), in which your score decreases.{% endblocktrans %}
+  </p>
+
+  <h3>{% blocktrans trimmed %}Example of options{% endblocktrans %}</h3>
+  <p>{% blocktrans trimmed %}
+  You will choose between <b> two options 5 times</b>. The options <b>decrease your score</b>. You should <b>avoid</b> that your score <b>falls below the threshold</b>.
+  The following graphics show two possible options in a round. Each option deducts <b>points with a probability</b>.
+  You choose an <b> option by clicking on it</b>. Right after the choice you get feedback about how many points were deducted. No matter how often you choose an option, the probabilities stay the same during the round.
+ {% endblocktrans %}
+
+   <div class = "flex-row">
+    <div>
+      <img class = 'center' src='{% static "img/lop1.png" %}'/ width = '70%'>
+      <p class = 'example2E'>
+      {% blocktrans trimmed %}
+      This option deducts 8&nbsp; points with a probability of 40&nbsp;% or 2 points with a probability of 60&nbsp;%.
+      {% endblocktrans %}  
+      </p>
+    </div>
+    <div>
+      <img class = 'center' src='{% static "img/lop2m.png" %}'/ width = '70%'>
+      <p class = 'example2E'>
+      {% blocktrans trimmed %}
+      This option deducts 5&nbsp;points with a probability of 70&nbsp;% or 3&nbsp;points with a probability of 30&nbsp;%.
+      {% endblocktrans %}  
+      </p>
+    </div>
+   </div>
+
+   <p> {% blocktrans trimmed %}On the next page you will see an example of the threshold for decreasing points.{% endblocktrans %} </p>
+
+  {% next_button %}
+  
+{% endblock %}
+

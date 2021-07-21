@@ -1,0 +1,37 @@
+{% extends "rsft_gain_loss_experiment/SurveyPage.html" %}
+{% load otree static %}
+{% load i18n %}
+
+{% block title %}
+    {% blocktrans trimmed %}Instructions{% endblocktrans %}
+{% endblock %}
+
+
+{% block content %}
+  {% blocktrans trimmed %}
+  In this study you repeatedly make decisions about points in several rounds. Each round starts with a given amount of points. This starting point score can be negative, zero or positive. You change the point score by choosing between two options. Your task is to change your score in a way that it matches a threshold (see below). The threshold can be negative, zero or positive.{% endblocktrans %}
+
+  <h3>{% blocktrans trimmed %}Increasing points{% endblocktrans %}</h3>
+  <p> {% blocktrans trimmed %}
+      In some rounds <b>the options increase the point score</b>. These rounds involve a <b>threshold</b> that is <b>zero</b> or <b>positive</b> (i.e. 10). Your goal in these rounds is to achieve that your <b>score meets or exceeds the threshold</b> (equal or higher).
+  {% endblocktrans %}
+  </p>
+
+  <h3>{% blocktrans trimmed %}Decreasing points{% endblocktrans %}</h3>
+  <p> {% blocktrans trimmed %}
+      In some rounds <b>the options decrease the point score</b>. These rounds involve a <b>threshold</b> of <b>zero</b> or <b>negative</b> (i.e. -10). Your goal in these rounds is to <b>avoid</b> that your score <b>falls below the threshold</b> (not smaller).
+  {% endblocktrans %}
+  </p>
+
+ <h3>{% blocktrans trimmed %}Comprehension question regarding the threshold{% endblocktrans %}</h3>
+
+ <p> {% blocktrans trimmed %} Please answer the following comprehension questions correctly.
+  {% endblocktrans %}
+  </p>
+
+ {% formfields %}
+
+ {% next_button %}
+
+{% endblock %}
+

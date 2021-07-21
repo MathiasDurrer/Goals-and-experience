@@ -1,0 +1,24 @@
+{% extends "rsft_gain_loss_experiment/Page.html" %}
+{% load otree static %}
+{% load i18n %}
+
+{% block title %}
+  {% blocktrans trimmed %} Decisions
+  {% endblocktrans %}
+{% endblock %}
+
+
+{% block content %}
+
+  <p>{% blocktrans trimmed %}
+  On the next pages you will see 4 decision blocks and each block contains {{ num_blocks }} decision rounds. You can take short breaks (a couple of seconds) between rounds, if you like. However, please complete the whole study in one go without longer breaks (don't interrupt the study, don't make a longer pause, please).
+{% endblocktrans %}</p>
+
+<p>{% blocktrans trimmed %}
+	Click on "Next" to start the first block.
+{% endblocktrans %}</p>
+
+  {% next_button %}
+
+{% endblock %}
+
