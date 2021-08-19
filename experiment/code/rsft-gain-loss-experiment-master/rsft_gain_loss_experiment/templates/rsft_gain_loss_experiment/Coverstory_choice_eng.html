@@ -1,0 +1,112 @@
+{% extends "rsft_gain_loss_experiment/Page.html" %}
+{% load otree static %}
+{% load i18n %}
+
+{% block title %}
+    {% blocktrans trimmed %}Instructions III{% endblocktrans %}
+{% endblock %}
+
+
+{% block content %}
+  <p> {% blocktrans trimmed %}
+    Here you learn about the layout and the procedure of <b> decision </b> phases.
+  {% endblocktrans %}
+  </p>
+
+  <h3>{% blocktrans trimmed %}Example of options{% endblocktrans %}</h3>
+
+  <p>{% blocktrans trimmed %}
+    In decision phases, You will choose between <b> two options {{ num_trials }} times</b> in order to <b>increase your score</b> and reach the <b>threshold</b>. The following graphics show two possible options in a round. Each option offers <b>points with a probability</b>.
+    You choose an <b> option by clicking on it</b>. Right after the choice you get feedback about how many points you received.
+    No matter how often you choose an option, the probabilities stay the same during the block.
+  {% endblocktrans %}</p>
+
+   {% if sample_condition == 1 %}
+    <div class = "flex-row">
+        <div>
+            <img class = 'center' src='{% static "img/dfe_1.png" %}' / width = '70%'>
+            <p class = 'example2E'>
+            {% blocktrans trimmed %}
+                This option offers +7&nbsp;points or +5 points.
+            {% endblocktrans %}</p>
+        </div>
+        <div>
+            <img class = 'center' src='{% static "img/dfe_2.png" %}' / width = '70%'>
+            <p class = 'example2E'>
+            {% blocktrans trimmed %}
+                This option offers +3&nbsp;points or +9 points.
+            {% endblocktrans %}</p>
+        </div>
+    </div>
+  {% else %}
+      <div class = "flex-row">
+        <div>
+            <img class = 'center' src='{% static "img/gop1m.png" %}' / width = '70%'>
+            <p class = 'example2E'>
+            {% blocktrans trimmed %}
+                This option offers +7&nbsp;points with a probability of 20&nbsp;% or +5 points with a probability of 80&nbsp;%.
+            {% endblocktrans %}</p>
+        </div>
+        <div>
+            <img class = 'center' src='{% static "img/gop2.png" %}' / width = '70%'>
+            <p class = 'example2E'>
+            {% blocktrans trimmed %}
+                This option offers +3&nbsp;points with a probability of 60&nbsp;% or +9 points with a probability of 40&nbsp;%.
+            {% endblocktrans %}</p>
+        </div>
+    </div>
+  {% endif %}
+   <h3>{% blocktrans trimmed %}Thresholds{% endblocktrans %}</h3>
+    {% if sample_condition == 1 %}
+      {% if goal_condition == 0 %}
+           <p> {% blocktrans trimmed %}You will be informed about your threshold in the <b> decision phase. </b>{% endblocktrans %}</p>
+      {% else %}
+            <p> {% blocktrans trimmed %}You will be informed about your threshold in the <b> sample phase </b>.{% endblocktrans %}</p>
+      {% endif %}
+    {% else %}
+      {% if goal_condition == 0 %}
+           <p> {% blocktrans trimmed %}You will be informed about your threshold in the <b> decision phase. </b>{% endblocktrans %}</p>
+      {% else %}
+            <p> {% blocktrans trimmed %}You will be informed about your threshold in the <b> inspection phase </b>.{% endblocktrans %}</p>
+      {% endif %}
+    {% endif %}
+    <h3>{% blocktrans trimmed %}Example of the threshold{% endblocktrans %}</h3>
+
+    <div class = "flex-row">
+        <div>
+            <div>
+                <img class = 'center' src='{% static "img/gain1E.png" %}' / width = '60%'>
+                <p class = 'example2E'>
+                {% blocktrans trimmed %}
+                In this case Your starting score is 0 (like always), and Your threshold is 29
+                {% endblocktrans %}
+                </p>
+            </div>
+        </div>
+        <div>
+            <div>
+                <img class = 'center' src='{% static "img/gain3E.png" %}' / width = '90%'>
+                <p class = 'example2E'>
+                {% blocktrans trimmed %}
+                In this case Your score is 5, and Your threshold is 29
+                {% endblocktrans %}
+                </p>
+            </div>
+        </div>
+    </div>
+     {% formfields %}
+  <h3>{% blocktrans trimmed %}Practise round{% endblocktrans %}</h3>
+  {% if sample_condition == 1 %}
+    <p>{% blocktrans trimmed %}
+      <b>The next page shows one block (1 sample and 1 choice phase). This block is for you to try out the task and get familiar with it. This round will not matter for your bonus. Click on "Next" and choose an option by clicking on it.</b>{% endblocktrans %}</p>
+  {% else %}
+      <p>{% blocktrans trimmed %}
+      <b>The next page shows one block (1 inspection and 1 choice phase). This block is for you to try out the task and get familiar with it. This round will not matter for your bonus. Click on "Next" and choose an option by clicking on it.</b>{% endblocktrans %}</p>
+  {% endif %}
+
+
+
+  {% next_button %}
+
+{% endblock %}
+

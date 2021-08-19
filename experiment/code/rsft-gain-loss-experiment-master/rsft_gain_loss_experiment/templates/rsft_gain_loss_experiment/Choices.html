@@ -23,14 +23,14 @@
   <div class = "row">
     <button type="button" value={{ stimulus_position.0 }} class="option rsft-btn-choices">
       <span class = "rsft-span-choices">
-        <div class = "{{ img1 }} sprite" id = "option1">
+        <div class = "{{ img1 }} sample_condition_{{ sample_condition }} sprite" id = "option1">
         </div>
       </span>
     </button>
       
     <button type="button" value={{ stimulus_position.1 }} class="option rsft-btn-choices">
       <span class = "rsft-span-choices">
-        <div class = "{{ img2 }} sprite" id = "option2">
+        <div class = "{{ img2 }} sample_condition_{{ sample_condition }} sprite" id = "option2">
         </div>
       </span>
     </button>
@@ -74,6 +74,7 @@
         rt_end = 0,
         rt_start = 0,
         old_s = 0,
+        /* sample_condition = 1,*/
         start = state; /* state at the beginning */
 
 

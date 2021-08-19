@@ -10,7 +10,7 @@
 
 {% block content %}
   <p> {% blocktrans with fee=participation_fee %}
-  After completition of the study you will receive {{ fee }}. In addition to this you can receive a bonus payment. The exact height of your bonus depends on your choices during the decision rounds.
+  After completion of the study you will receive {{ fee }}. In addition to this you can receive a bonus payment. The exact height of your bonus depends on your choices during the decision rounds.
   {% endblocktrans %}</p>
 
   <p> {% blocktrans with bonus=bonus_amount %}
@@ -20,8 +20,8 @@
 
   <p> {% blocktrans%}
   <b>You only get the bonus for rounds, in which you reach the goal:</b><ul>
-  <li>For "increasing points" rounds this means your score in the end of a round meets or exceeds the threshold.
-  <li>For "decreasing points" rounds this means your score in the end of a round is equal or higher than the threshold.{% endblocktrans %}</ul></p>
+  <li>This means your score in the end of a round meets or exceeds the threshold.
+  {% endblocktrans %}</ul></p>
 
   <h3>{% blocktrans trimmed %}
     Comprehension question for the bonus
@@ -29,10 +29,6 @@
 
   {% formfields %}
 
-
-    <p>{% blocktrans trimmed %}
-  On the next pages you will see 4 times {{num_blocks}} decision rounds. You can take short breaks (a couple of seconds) between rounds, if you like. However, please complete the whole study in one go without longer breaks (don't interrupt the study, don't make a longer pause, please).
-{% endblocktrans %}</p>
 
   {% next_button %}
 

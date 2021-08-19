@@ -8,6 +8,8 @@ import numpy
 import csv
 from django.utils.translation import ugettext as _
 from . import exp
+import itertools
+import itertools
 
 author = 'Laura Marbacher & Jana B. Jarecki'
 
@@ -19,12 +21,10 @@ Risk sensitive foraging
 class Constants(BaseConstants):
   name_in_url = 'rsft_gain_loss_experiment'
   players_per_group = None
-  num_familiarization_rounds = 2
+  num_familiarization_rounds = 1
   num_repetitions = 1
-  num_samples = 5
-  #num_draws = 50
+  num_samples = 50
   num_trials = 5
-  num_sampling_trials = 50
   num_multitrial = num_repetitions + num_familiarization_rounds
   num_oneshot = 0
   num_rounds = exp.num_rounds # in exp.py the number of rounds is calculated
@@ -33,7 +33,7 @@ class Constants(BaseConstants):
   action_label = _('Option')
   initial_state = 0
   num_actions = 2
-  lang = 'de'
+  lang = 'en'
   attention_fail_error = "Nicht ganz richtig"
   attention_fail_error_e = "Not totally correct"
   duration = 55
@@ -41,12 +41,16 @@ class Constants(BaseConstants):
 
 
 
+
 class Subsession(BaseSubsession):
+
   def concat_stimulus(self, i, stimuli):
     y = "_".join( str(x) for x in ['%.0f' % stimuli[i][0], '%.0f' % (stimuli[i][2] * 100), '%.0f' % stimuli[i][1]] )
     return(y)
 
   def creating_session(self):
+    goal_condition = itertools.cycle([0, 1])
+    #  sample_condition = itertools.cycle([0, 1]) to iterate the sample condition as well: change "p.participant.vars['sample_condition'] = 1" to "p.participant.vars['sample_condition'] = next(sample_condition)" and use this line again
   # Executed at the very start
   # Loops through all the round_numbers and players
     for p in self.get_players():
@@ -62,13 +66,17 @@ class Subsession(BaseSubsession):
       stimulus_position = p.participant.vars['AM'].get_action_position(round_number)
       feature_color = p.participant.vars['AM'].get_feature_appearance(round_number)[0]
 
+
       # Store variables
       p.phase = p.participant.vars['PM'].get_phaseL(round_number)
-      p.block = p.participant.vars['PM'].get_block(round_number)      
+      p.block = p.participant.vars['PM'].get_block(round_number)
       p.budget = stimuli[2][0]
       p.stimulus0 = self.concat_stimulus(0, stimuli)
       p.stimulus1 = self.concat_stimulus(1, stimuli)
       p.state = stimuli[2][1]
+
+
+
       # this is only if we have one-shot trials in there
       # if (phase in ['critical']):
       #   p.trial = stimuli[2][2]
@@ -77,7 +85,7 @@ class Subsession(BaseSubsession):
       p.successes = 0
 
       # Do and store the randomizations
-      p.layout_featurecolor = '_'.join(''.join(str(y) for y in x) for x in [feature_color])     
+      p.layout_featurecolor = '_'.join(''.join(str(y) for y in x) for x in [feature_color])
       p.layout_stimulusposition_01 = ''.join(str(x) for x in stimulus_position)
 
       # Initialize containers
@@ -93,6 +101,8 @@ class Subsession(BaseSubsession):
         p.participant.vars['decision_number'] = [None] * n
         p.participant.vars['outcomes'] = [None] * n
         p.participant.vars['sampling_outcomes'] = [None] * n
+        p.participant.vars['goal_condition'] = next(goal_condition) # goal_condition = 1 = goal shown during sampling; goal_condition = 0 = goal not shown during sampling #
+        p.participant.vars['sample_condition'] = 1  # sample_condition = 0 = dfd (probabilities shown); sample_condition = 1 = dfe (probabilities not shown) #
       p.participant.vars['stimulus_position'][round_number] = stimulus_position
 
       # Define the names of teh sprites for the images
@@ -111,14 +121,15 @@ class Subsession(BaseSubsession):
       p.participant.vars['max_earnings'][round_number] = max(maxx * (Constants.num_trials), p.budget)
       p.participant.vars['num_blocks'][round_number] = p.participant.vars['PM'].get_num_trials_in_phase(round_number)
       p.participant.vars['decision_number'][round_number] = p.participant.vars['PM'].get_decision_number_in_phase(round_number)
-
       if (self.round_number == 1):
         p.successes = 0
+
 
 class Group(BaseGroup):
   pass
 
-# These functions 'make_..._field' generate the hidden html input fiels
+
+# These functions 'make_..._field' generate the hidden html input fields
 #   which will store the responses of participants
 def make_choice_field(trial):
   return models.IntegerField(
@@ -159,7 +170,7 @@ class Player(BasePlayer):
 
   # ENGLISH --------------------------------------------------------------
 
-  #Gains
+  #dfd
   g1e = models.IntegerField(
     label = "What is the number of the current decision?")
   def g1e_error_message(self, value):
@@ -169,12 +180,12 @@ class Player(BasePlayer):
   g2e = models.IntegerField(
     label = "How high is the threshold?")
   def g2e_error_message(self, value):
-    if value != 0:
+    if value != 29:
       return Constants.attention_fail_error_e
 
   g3e = models.IntegerField(label = "How high is the current score?")
   def g3e_error_message(self, value):
-    if value != -13:
+    if value != 12:
       return Constants.attention_fail_error_e
 
   g4e = models.IntegerField(label = "What is the maximum number of points that the right option offers?")
@@ -182,46 +193,50 @@ class Player(BasePlayer):
     if value != 9:
       return Constants.attention_fail_error_e
 
-  # Losses
-  l1e = models.IntegerField(
-    label="How high is the threshold?")
-  def l1e_error_message(self, value):
-    if value != 0:
-      return Constants.attention_fail_error_e
-
-  l2e = models.IntegerField(label="How high is the current score?")
-  def l2e_error_message(self, value):
-    if value != 11:
-      return Constants.attention_fail_error_e
-
-  l3e = models.IntegerField(
-    label = "What is the probability, that the right option deducts 2 points? (Number from 1-100)?")
-  def l3e_error_message(self, value):
+  g5e = models.IntegerField(label="What is the probability to gain 3 points?")
+  def g4e_error_message(self, value):
     if value != 60:
       return Constants.attention_fail_error_e
 
-  l4e = models.IntegerField(
-    label = "How high is the starting score?")
-  def l4e_error_message(self, value):
-    if value != 21:
+  # dfe
+  l1e = models.IntegerField(
+    label="What is the number of the current decision?")
+  def g1e_error_message(self, value):
+    if value != 3:
+      return Constants.attention_fail_error_e  # error msg is defined above
+
+  l2e = models.IntegerField(
+    label="How high is the threshold?")
+  def g2e_error_message(self, value):
+    if value != 29:
+      return Constants.attention_fail_error_e
+
+  l3e = models.IntegerField(label="How high is the current score?")
+  def g3e_error_message(self, value):
+    if value != 12:
+      return Constants.attention_fail_error_e
+
+  l4e = models.IntegerField(label="What is the maximum number of points that the left option offers?")
+  def g4e_error_message(self, value):
+    if value != 9:
       return Constants.attention_fail_error_e
 
   # Coverstory 0
   c1e = models.IntegerField(
     widget = widgets.RadioSelect,
-    label = "In rounds, in which points are increasing, your goal is...",
+    label = "In sampling phases, your goal is...",
     choices = [
       [1, "to meet or to exceed the threshold."],
-      [2, "not to meet and not to exceed the threshold."],
+      [2, "gain a sense of the outcomes of the options and their probabilities."],
       [3, "There is no goal."]
     ])
   def c1_error_message(self, value):
-    if value != 1:
+    if value != 2:
       return Constants.attention_fail_error
 
   c2e = models.BooleanField(
     widget = widgets.RadioSelectHorizontal,
-    label = "Imagine you are in a round, in which points are increasing and the threshold is 10. Your score in the end of a round is 10 points. This means you...",
+    label = "Imagine you are in a phase, in which the threshold is 10. Your score in the end of a round is 10 points. This means you...",
     choices = [
       [True, "have reached the goal."],
       [False, "have not reached the goal."]
@@ -231,32 +246,33 @@ class Player(BasePlayer):
       return Constants.attention_fail_error_e
 
   c3e = models.BooleanField(
-    widget = widgets.RadioSelectHorizontal,
-    label = "Imagine you are in a round, in which points are increasing and the threshold is 0. Your score in the end of a round is -2 points. This means you...",
+    widget = widgets.RadioSelect,
+    label = "In decision phases, your goal is...",
     choices = [
-      [False, "have reached the goal."],
-      [True, "have not reached the goal."]
+      [1, "to meet or to exceed the threshold."],
+      [2, "gain a sense of the outcomes of the options and their probabilities."],
+      [3, "There is no goal."]
     ])
   def c3e_error_message(self, value):
-    if value == False:
+    if value != 1:
       return Constants.attention_fail_error_e
 
   c4e = models.IntegerField(
     widget = widgets.RadioSelect,
-    label="In rounds, in which points are decreasing, your goal is...",
+    label="In sample phases, there are...",
     choices=[
-      [1, "to fall below the threshold."],
-      [2, "not to fall below the threshold."],
-      [3, "There is no goal."]
+      [1, "50 trials."],
+      [2, "5 trials."],
+      [3, "50 trials, but you can move on before reaching maximum trials"]
     ])
   def c4e_error_message(self, value):
-    if value != 2:
+    if value != 3:
       return Constants.attention_fail_error_e
 
   c5e = models.BooleanField(
     widget = widgets.RadioSelectHorizontal,
 
-    label="Imagine you are in a round, in which points are decreasing and the threshold is -10 points. Your score in the end of a round is -11 points. This means you...",
+    label="Imagine you are in a decision round and the threshold is 30 points. Your score in the end of a round is 28 points. This means you...",
     choices=[
       [False, "have reached the goal."],
       [True, "have not reached the goal."]
@@ -265,27 +281,15 @@ class Player(BasePlayer):
     if value == False:
       return Constants.attention_fail_error_e
 
-  c6e = models.BooleanField(
-    widget = widgets.RadioSelectHorizontal,
-    label="Imagine you are in a round, in which points are decreasing and the threshold is -10 points. Your score in the end of a round is -10 points. This means you...",
+  c6e = models.IntegerField(
+    widget=widgets.RadioSelect,
+    label="In inspection phases, your goal is...",
     choices=[
-      [True, "have reached the goal."],
-      [False, "have not reached the goal."]
+      [1, "to meet or to exceed the threshold."],
+      [2, "gain a sense of the outcomes of the options and their probabilities."],
+      [3, "There is no goal."]
     ])
-  def c6e_error_message(self, value):
-    if value == False:
-      return Constants.attention_fail_error_e
 
-  c7e = models.BooleanField(
-    widget = widgets.RadioSelectHorizontal,
-    label="Imagine you are in a round, in which points are decreasing and the threshold is 0 points. Your score in the end of a round is 3 points. This means you...",
-    choices=[
-      [True, "have reached the goal."],
-      [False, "have not reached the goal."]
-    ])
-  def c7e_error_message(self, value):
-    if value == False:
-      return Constants.attention_fail_error_e
 
   #Incentives
   i4e = models.IntegerField(
@@ -740,7 +744,11 @@ class Player(BasePlayer):
       'max_less_state': self.participant.vars['max_earnings'][n] - 0,
       'num_blocks': self.participant.vars['num_blocks'][n],
       'decision_number': self.participant.vars['decision_number'][n],
-      'multitrial': self.phase in ['familiarization_gain', 'training']
+      'multitrial': self.phase in ['familiarization', 'training'],
+      'goal_condition': self.participant.vars['goal_condition'],
+      'sample_condition': self.participant.vars['sample_condition'],
+      'num_samples': Constants.num_samples,
+      'num_trials': Constants.num_trials
     }
 
   def draw_bonus(self):

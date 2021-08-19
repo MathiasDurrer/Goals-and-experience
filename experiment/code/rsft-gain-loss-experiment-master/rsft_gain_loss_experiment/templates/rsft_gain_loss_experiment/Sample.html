@@ -3,27 +3,27 @@
 {% load i18n %}
 
 {% block content %}
-  <div id="rsft-hidden" class="hidden">
-      <span>
-            We will move on (you reached maximum Sample trials)
+  <div id="rsft-hidden" class="hidden" style="text-align: center;">
+      <span style="font-size: 28px;">
+            We will move on now
       </span>
   </div>
 
-  <div class = "hidden" id="goal_condition">
-      Your goal will be {{ budget | to0 }}
+  <div style=" text-align: center; font-size: 24px; padding-bottom: 50px; padding-top: 30px; height: 30px">
+     {% if goal_condition == 1 %} Your goal will be {{ budget | to0 }} {% endif %}
   </div>
 
   <div class = "row" id="hide-options">
     <button type="button" value={{ stimulus_position.0 }} class="option rsft-btn-choices">
       <span class = "rsft-span-choices">
-        <div class = "{{ img1 }} sprite" id = "option1">
+        <div class = "{{ img1 }} sample_condition_{{ sample_condition }} sprite" id = "option1">
         </div>
       </span>
     </button>
       
     <button type="button" value={{ stimulus_position.1 }} class="option rsft-btn-choices">
       <span class = "rsft-span-choices">
-        <div class = "{{ img2 }} sprite" id = "option2">
+        <div class = "{{ img2 }} sample_condition_{{ sample_condition }} sprite" id = "option2">
         </div>
       </span>
     </button>
@@ -36,7 +36,7 @@
 
 
 
- <div>  class="hidden"
+ <div class="hidden">
   {% for field in form %}
     {% formfield field %}
   {% endfor %}
@@ -61,6 +61,8 @@
       budget = {{ budget|json }},
       xmin = - {{ max_earning|json }},
       xmax = {{ max_earning|json }};
+      sample_condition = {{ sample_condition }}
+      goal_condition = {{ goal_condition }}
     var direction = outcomes[0][0] < 0 ? -1 : 1;
 
     /* Variables set here */
@@ -68,54 +70,63 @@
         rt_end = 0,
         rt_start = 0,
         old_s = 0,
+       /* goal_condition = 1,  goal_condition = 1 = goal shown during sampling; goal_condition = 0 = goal not shown during sampling */
+       /* sample_condition = 0,  sample_condition = 1 = dfd (probabilities shown); sample_condition = 0 = dfe (probabilities not shown) */
         start = state; /* state at the beginning */
 
     /* ------------------------------------------------------------------------
     Next, we define a function to be executed every time a user clicks on the button  which is called .rsft-btn-choice 
     */
-    $('.rsft-btn-choices').click(function() {
-      rt_end = window.performance.now();
-      $('#id_rt_ms' + (trial)).val( Math.round(rt_end - rt_start) );
+    if (sample_condition == 1) {
+      $('.rsft-btn-choices').click(function () {
+          rt_end = window.performance.now();
+          $('#id_rt_ms' + (trial)).val(Math.round(rt_end - rt_start));
 
 
-      var choice = $(this).val();
-      var choice_position = stimulus_position[choice];
-      $('#id_sample'+trial).val(choice);
-      outcome = outcomes[choice_position][trial - 1];
-      state += outcome
-      $('#id_draw' + (trial)).val(state);
-      hideActions();
-      var x = $(this);
-      showOutcome(x);
-      set_state(outcome, state);
+          var choice = $(this).val();
+          var choice_position = stimulus_position[choice];
+          $('#id_sample' + trial).val(choice);
+          outcome = outcomes[choice_position][trial - 1];
+          state += outcome
+          $('#id_draw' + (trial)).val(state);
+          hideActions();
+          var x = $(this);
+          showOutcome(x);
+          set_state(outcome, state);
 
-      if (goal_condition = 1){
-          document.getElementById("goal_condition").classList.remove("hidden")
-      }
-      setTimeout(function() {
-        if (trial < num_trials) {
-          hideOutcome(x);
-          showActions();
-        }
-        if (trial == num_trials) {
-          $('#id_success').val( +(state >= budget) );
-          $('#id_successes').val( {{ successes }} + (state >= budget) );
-          document.getElementById("rsft-hidden").classList.remove("hidden");
-          document.getElementById("hide-options").classList.add("hidden");
-          setTimeout(clickNext(), 4000);
-        }
-        trial += 1;
-        highlight_trial(trial);    
-        rt_start = window.performance.now();
+          setTimeout(function () {
+              if (trial < num_trials) {
+                  hideOutcome(x);
+                  showActions();
+              }
+
+              if (trial == num_trials) {
+                  $('#id_success').val(+(state >= budget));
+                  $('#id_successes').val({{ successes }} +(state >= budget));
+                  document.getElementById("rsft-hidden").classList.remove("hidden");
+                  document.getElementById("hide-options").classList.add("hidden");
+                  setTimeout(clickNext(), 4000);
+              }
+              trial += 1;
+              highlight_trial(trial);
+              rt_start = window.performance.now();
 
 
-      }, 1000);
-      
-    });
-    $('#id_state' +trial).val(state);
-    draw_trials(num_trials);
-    highlight_trial(trial);
+          }, 1000);
 
-    draw_progress(s = start, b = budget, direction = direction);
+      });
+      $('#id_state' + trial).val(state);
+      draw_trials(num_trials);
+      highlight_trial(trial);
+
+      draw_progress(s = start, b = budget, direction = direction);
+    } else {
+
+      $('#id_state' + trial).val(state);
+      draw_trials(num_trials);
+      highlight_trial(trial);
+
+      draw_progress(s = start, b = budget, direction = direction);
+    }
   </script>
 {% endblock %}

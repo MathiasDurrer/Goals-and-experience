@@ -9,70 +9,33 @@
 
 {% block content %}
   <div>
-  <p>
-  {% if decision_number > 1 %}
-    {% if success == 1 %} 
-    {% blocktrans trimmed %}
-
-        You reached the goal in the last round.
-    {% endblocktrans %}
-
-    {% else %}
-    {% blocktrans trimmed %}
-        You did not reach the goal in the last round.
-    {% endblocktrans %}
-    {% endif %}
-    {% blocktrans trimmed %}
-       Continue to the next round (round
-    {% endblocktrans %}
-    {{ decision_number }}).
-  {% endif %}
-  </p>
-  
-  <h3>
-    {% blocktrans trimmed %}Starting score and threshold:{% endblocktrans %}
-  </h3>
-    <p>
-      {% blocktrans with nt=Constants.num_trials budget=budget|floatformat:"0" pstart=pstart|floatformat:"0" %}
-      The <b>starting score</b> is <span class = "blue white new-goal-info">{{ pstart }}</span> points and the <b>threshold</b> is <span class = "blue white new-goal-info">{{ budget }}</span> points.
-      {% endblocktrans %}
-    </p>
-    <p>
-      {% if budget > 0  %}
-      {% blocktrans trimmed %}
-      <b>Reach</b> the threshold in 5 decisions.
-      {% endblocktrans %}
-      {% elif budget == 0 %}
-        {% if pstart < 0 %}
-        {% blocktrans trimmed %}
-        <b>Reach</b> the threshold in 5 decisions.
-        {% endblocktrans %}
+      <p>
+      {% if decision_number > 1 %}
+        {% if success == 1 %}
+            {% blocktrans trimmed %}
+                You reached the goal in the last block.
+            {% endblocktrans %}
         {% else %}
-        {% blocktrans trimmed %}
-        <b> Do not fall below </b> the threshold in 5 decisions.
-        {% endblocktrans %}
+            {% blocktrans trimmed %}
+                You did not reach the goal in the last block.
+            {% endblocktrans %}
         {% endif %}
-      {% else %}
-      {% blocktrans trimmed %}
-      <b> Do not fall below </b> the threshold in 5 decisions.
-      {% endblocktrans %}
+        {% blocktrans trimmed %}
+           Continue to the next block (block
+        {% endblocktrans %}
+        {{ decision_number }}).
       {% endif %}
-    </p>
+      </p>
   </div>
-
-  <h3>
-    {% blocktrans trimmed %}Options:{% endblocktrans %}
-  </h3>
-  </div>
-
-  <div class = "flex row white" style = "margin: 5px; padding: 1rem; background: #FFF;">
-    <div class = "option black-border {{ img1 }} sprite">
-    </div>
-    <div class = "option black-border {{ img2 }} sprite">
-    </div>
-  </div>
-
-
+  {% if sample_condition == 1 %}
+     <p>{% blocktrans trimmed %}
+        Click on "Next" to start the next block (first sample phase, then decision phase).
+     {% endblocktrans %}</p>
+  {% else %}
+     <p>{% blocktrans trimmed %}
+        Click on "Next" to start the next block (first inspection phase, then decision phase).
+     {% endblocktrans %}</p>
+  {% endif %}
 
   <div class = "right">
     {% next_button %}
@@ -81,9 +44,9 @@
 {% endblock %}
 
 {% block scripts %}
-<script>
- /* drawAction('option1', {{ x1|json }}, {{ p1|json }}, true, true, {{ Constants.point_label|json }}, {{ Constants.action_label|json }} +" A");
-  drawAction('option2', {{ x2|json }}, {{ p2|json }}, true, true, {{ Constants.point_label|json }}, {{ Constants.action_label|json }} + " B");*/
+    <script>
+    /* drawAction('option1', {{ x1|json }}, {{ p1|json }}, true, true, {{ Constants.point_label|json }}, {{ Constants.action_label|json }} +" A");
+    drawAction('option2', {{ x2|json }}, {{ p2|json }}, true, true, {{ Constants.point_label|json }}, {{ Constants.action_label|json }} + " B");*/
 
-</script>
+    </script>
 {% endblock %}

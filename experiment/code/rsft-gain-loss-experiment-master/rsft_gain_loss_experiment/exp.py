@@ -14,16 +14,16 @@ from pathlib import Path # Requires Python v3.4 or newer
 
 # CHANGE THIS
 # 1. General setup ----------------------------------------------------------
-phases  = ["familiarization_gain", "positive_gain"]
+phases = ["familiarization", "stimuli_easy", "stimuli_medium", "stimuli_hard"]
 """String: Name or names of phases to change the stimulus material (see below) """
 
-blocks  = [1,1,1] # 1,1,3,3,3,3
+blocks = [1, 1, 1, 1]  # 1,1,3,3,3,3
 """Numbers, how often to repeat the stimulus material in a phase (= blocks)?
    1       = don't repeat, show the stimuli 1 x per phase (one block)
    1,2,3   = show stimuli of the first phase 1 x, the second 2 x, the third 3 x
 """
 
-trials  = [1]
+trials = [1]
 """How many trials to repeat each stimulus within each block in each phase?
    1 = Don't repeat, show each stimulis 1 time per block (1 trial)
    1,10,2 = in the first phase 1, in the second phase 10, in the third phase 2
@@ -55,7 +55,7 @@ numfeatures = [[2, 2]]
 
 # OPTIONALLY CHANGE THIS
 # 2. Bonus setup ------------------------------------------------------------
-bonus_trials = [0,1]
+bonus_trials = [0, 1, 1, 1]
 """How many trials are drawn for the bonus in each phase?"""
 
 bonus_blocks = [None]
@@ -67,8 +67,8 @@ bonus_blocks = [None]
 
 
 # OPTIONALLY CHANGE THIS
-# Randomization setup -------------------------------------------------------
-shuffle_phases = []
+# Randomization setup ------------------------------------------------------- 1,2,3
+shuffle_phases = [1,2,3]
 """Number, which 'phases' to show in random order (start counting at 0)?
    []    = Do not shuffle, keep the order of 'phases' as entered above
    [0,3] = shuffle among the frist and fourth phases

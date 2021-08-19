@@ -1,0 +1,33 @@
+{% extends "rsft_gain_loss_experiment/SurveyPage.html" %}
+{% load otree static %}
+{% load i18n %}
+
+{% block title %}
+    {% blocktrans trimmed %}Instructions{% endblocktrans %}
+{% endblock %}
+
+
+{% block content %}
+    {% if sample_condition == 1 %}
+      {% blocktrans trimmed %}
+        <p>In this study you repeatedly make decisions about points in several  <b> sample </b> and <b> decision </b> phases. Each phase starts with zero points.
+        Before you can influence the point score, you will sample the same options as in the decision rounds. In these sample phases, points will not be counted towards your threshold, you are instead asked to <b>gain a sense of the outcomes of the options and their probabilities.</b>
+        Once you feel you understand the options and their probabilities, you can move on to the decision rounds. Sample rounds have a limit of {{ num_samples }} trials, however you can move on whenever you feel like you gained a sense about the outcomes.
+        In the decision phases, Your task is to change your score in a way that it <b> matches or exceeds a threshold.</b> In decision rounds You change the score by clicking one of the options.
+        One block is defined as 1 sample phase and 1 decision phase, where the sample phase has a limit of {{ num_samples }} trials (or clicks), and the decision phase has always {{ num_trials }} trials (or clicks).</p>
+      {% endblocktrans %}
+    {% else %}
+      {% blocktrans trimmed %}
+        <p>In this study you repeatedly make decisions about points in several <b> decision </b> phases. Each phase starts with zero points.
+        Before you can influence the point score, you will inspect the same options as in the decision rounds. In these <b> inspection </b> phases you are asked to <b>gain a sense of the outcomes of the options and their probabilities.</b>
+        Once you feel you understand the options and their probabilities, you can move on to the decision rounds. You can move on whenever you feel like you gained a sense about the outcomes.
+        In the decision phases, Your task is to change your score in a way that it <b> matches or exceeds a threshold.</b> In decision rounds You change the score by clicking one of the options.
+        One block is defined as 1 inspection phase and 1 decision phase, where the decision phase has always {{ num_trials }} trials (or clicks).</p>
+      {% endblocktrans %}
+    {% endif %}
+    {% formfields %}
+
+ {% next_button %}
+
+{% endblock %}
+

@@ -119,14 +119,70 @@ while(n < 500000) {
 # overriding new temp to inspect
 temp <- design[t == 1]
 # view temp ordered by difficultylevel and rareevent
-View(temp[order(difficultylevel, rareevent)])
+temp <- temp[order(difficultylevel, rareevent)]
+View(temp)
+#writing the stimuli into a csv file
+fwrite(design, file = "C:/Users/mathi/Desktop/Goals-and-experience/analyses/code/stimuli_auswahl.csv")
+#reading the stimuli
+temp <- fread(file = "stimuli_auswahl.csv")
+temp <- design[t == 1]
+temp <- temp[order(difficultylevel, rareevent)]
+
+#construct missing lotteries: take ones of the same difficultylevel (and rare event) and add 3 to all options (and budget)
+a <- NULL
+a <- temp[3,]
+a[, "x_r" := x_r + 3]
+a[, "y_r" := y_r + 3]
+a[, "x" := x + 3]
+a[, "y" := y + 3]
+a[, "b" := b + (5 * 3)]
+a
+b = NULL
+b <- temp[14,]
+b[, "x_r" := x_r + 3]
+b[, "y_r" := y_r + 3]
+b[, "x" := x + 3]
+b[, "y" := y + 3]
+b[, "b" := b + (5 * 3)]
+b
+c <- NULL
+c <- temp[15,]
+c[, "x_r" := x_r + 3]
+c[, "y_r" := y_r + 3]
+c[, "x" := x + 3]
+c[, "y" := y + 3]
+c[, "b" := b + (5 * 3)]
+c
+d <- NULL
+d <- temp[17,]
+d[, "x_r" := x_r + 3]
+d[, "y_r" := y_r + 3]
+d[, "x" := x + 3]
+d[, "y" := y + 3]
+d[, "b" := b + (5 * 3)]
+d
+#adding the new constructed lotteries into temp again
+temp <- rbind(temp, a)
+temp <- rbind(temp, b)
+temp <- rbind(temp, c)
+temp <- rbind(temp, d)
+#ordering temp again
+temp <- temp[order(difficultylevel, rareevent)]
+
+#writing the stimuli into a csv file
+fwrite(design, file = "C:/Users/mathi/Desktop/Goals-and-experience/analyses/code/stimuli_auswahl_ergänzt.csv")
+#reading the stimuli
+temp <- fread(file = "stimuli_auswahl_ergänzt.csv")
+temp <- design[t == 1]
+temp <- temp[order(difficultylevel, rareevent)]
+
 # rename colums into: x1HV,x2HV,p1HV,p2HV,x1LV,x2LV,p1LV,p2LV,budget,state and only include 
-# (to get the canfiguration that sprites.R is coded for) 
+# (to get the configuration that sprites.R is coded for) 
 ## sprites.R generates sprites to display lotteries on the experiment webpage
-design_sprite <- rbind(design[t == 1,.(x_r, y_r, px_r, py_r, x, y, px, py, b, s)])
-#only taking first 8 rows to test sprite generation
-# design_sprite <- design_sprite[1:7,]
+design_sprite <- rbind(temp[,.(x_r, y_r, px_r, py_r, x, y, px, py, b, s)])
 colnames(design_sprite) <- c("x1HV","x2HV","p1HV","p2HV","x1LV","x2LV","p1LV","p2LV","budget","state")
 
 # write .csv file into static of rsft-gain-loss-experiment folder replacing positive-gain.csv
-fwrite(design_sprite, file = "C:/Users/mathi/Desktop/Goals-and-experience/experiment/code/rsft-gain-loss-experiment-master/rsft_gain_loss_experiment/static/stimuli/positive_gain.csv")
+fwrite(design_sprite[c(1:7)], file = "C:/Users/mathi/Desktop/Goals-and-experience/experiment/code/rsft-gain-loss-experiment-master/rsft_gain_loss_experiment/static/stimuli/stimuli_easy.csv")
+fwrite(design_sprite[c(8:14)], file = "C:/Users/mathi/Desktop/Goals-and-experience/experiment/code/rsft-gain-loss-experiment-master/rsft_gain_loss_experiment/static/stimuli/stimuli_medium.csv")
+fwrite(design_sprite[c(15:21)], file = "C:/Users/mathi/Desktop/Goals-and-experience/experiment/code/rsft-gain-loss-experiment-master/rsft_gain_loss_experiment/static/stimuli/stimuli_hard.csv")

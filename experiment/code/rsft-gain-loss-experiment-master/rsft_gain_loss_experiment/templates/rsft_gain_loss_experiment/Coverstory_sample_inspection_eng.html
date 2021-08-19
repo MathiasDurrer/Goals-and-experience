@@ -1,0 +1,78 @@
+{% extends "rsft_gain_loss_experiment/Page.html" %}
+{% load otree static %}
+{% load i18n %}
+
+{% block title %}
+    {% blocktrans trimmed %}Instructions II{% endblocktrans %}
+{% endblock %}
+
+
+{% block content %}
+    {% if sample_condition == 1 %}
+        <p> {% blocktrans trimmed %}
+            Here you learn about the layout and the procedure of <b> sample </b> phases.
+        {% endblocktrans %}</p>
+    {% else %}
+        <p> {% blocktrans trimmed %}
+            Here you learn about the layout and the procedure of <b> inspection </b> phases.
+        {% endblocktrans %}</p>
+    {% endif %}
+
+  <h3>{% blocktrans trimmed %}Example of options{% endblocktrans %}</h3>
+
+  {% if sample_condition == 1 %}
+    <p>{% blocktrans trimmed %}
+        In the <b> sample </b> rounds You will sample, meaning your points will not be counted instead, Your goal is to <b> gain a sense of the outcomes of the options and their probabilities </b>. Each option offers <b>points with a probability</b>.
+        You choose an <b> option by clicking on it</b>. Right after the choice you get feedback about how many points You would have received in a decision phase.
+        No matter how often you choose an option, the probabilities stay the same during the block.
+    {% endblocktrans %}</p>
+  {% else %}
+    <p>{% blocktrans trimmed %}
+        In the <b> inspection </b> phases You will inspect the options, Your goal is to <b> gain a sense of the outcomes of the options and their probabilities </b>.
+        No matter how often you choose an option, the probabilities stay the same during the block.
+    {% endblocktrans %}</p>
+  {% endif %}
+
+
+  {% if sample_condition == 1 %}
+    <div class = "flex-row">
+        <div>
+            <img class = 'center' src='{% static "img/dfe_1.png" %}'/ width = '70%'>
+            <p class = 'example2E'>
+            {% blocktrans trimmed %}
+                This option offers +7 points or +5 points.
+            {% endblocktrans %}</p>
+        </div>
+        <div>
+            <img class = 'center' src='{% static "img/dfe_2.png" %}'/ width = '70%'>
+            <p class = 'example2E'>
+            {% blocktrans trimmed %}
+                This option offers +3&nbsp;points or +9 points.
+            {% endblocktrans %}</p>
+        </div>
+    </div>
+  {% else %}
+      <div class = "flex-row">
+        <div>
+            <img class = 'center' src='{% static "img/gop1m.png" %}'/ width = '70%'>
+            <p class = 'example2E'>
+            {% blocktrans trimmed %}
+                This option offers +7&nbsp;points with a probability of 20&nbsp;% or +5 points with a probability of 80&nbsp;%.
+            {% endblocktrans %}</p>
+        </div>
+        <div>
+            <img class = 'center' src='{% static "img/gop2.png" %}'/ width = '70%'>
+            <p class = 'example2E'>
+            {% blocktrans trimmed %}
+                This option offers +3&nbsp;points with a probability of 60&nbsp;% or +9 points with a probability of 40&nbsp;%.
+            {% endblocktrans %}</p>
+        </div>
+    </div>
+  {% endif %}
+
+    {% formfields %}
+
+  {% next_button %}
+
+{% endblock %}
+

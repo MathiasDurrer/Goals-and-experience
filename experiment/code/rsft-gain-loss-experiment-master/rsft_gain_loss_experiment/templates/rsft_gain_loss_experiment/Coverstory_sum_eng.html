@@ -9,30 +9,46 @@
 
 
 {% block content %}
-  <h3>{% blocktrans trimmed %}Increasing points{% endblocktrans %}</h3>
+ {% if sample_condition == 1 %}
+    <h3>{% blocktrans trimmed %}Sampling phase{% endblocktrans %}</h3>
+    {% blocktrans trimmed %}
+    The goal is to gain a sense of the outcomes of the options and their probabilities.
+    You choose between two options, which <b> do not </b> increase your points.
+    What matters is, that you <b>gain a sense of the outcomes of the options</b> in max {{ num_samples }} decisions.
+    Remember that you <b> do not </b> need to use all {{ num_samples }} sample rounds.
+    {% endblocktrans %}
+    <h3>{% blocktrans trimmed %}Decision phase{% endblocktrans %}</h3>
+    {% blocktrans trimmed %}
+    The goal is to collect points in order to reach or exceed a predefined threshold.
+    You choose between two options, which increase your points.
+    What matters is, that you <b>reach the threshold</b> in {{ num_trials }} decisions.
+    {% endblocktrans %}
+ {% else %}
+    <h3>{% blocktrans trimmed %}Inspection phase{% endblocktrans %}</h3>
+    {% blocktrans trimmed %}
+    The goal is to gain a sense of the outcomes of the options and their probabilities.
+    You inspect two options and their probabilities.
+    What matters is, that you <b>gain a sense of the outcomes of the options and their probabilities </b>.
+    {% endblocktrans %}
+    <h3>{% blocktrans trimmed %}Decision phase{% endblocktrans %}</h3>
+    {% blocktrans trimmed %}
+    The goal is to collect points in order to reach or exceed a predefined threshold.
+    You choose between two options, which increase your points.
+    What matters is, that you <b>reach the threshold</b> in {{ num_trials }} decisions.
+    {% endblocktrans %}
+ {% endif %}
 
-  {% blocktrans trimmed %}<ul>
-  <li>The goal is to collect points in order to reach or exceed a predefined threshold.
-  <li>You choose between two options, which increase your points.
-  <li>What matters is, that you <b>reach the threshold</b> in 5 decisions.
 
-  </ul>{% endblocktrans %}
-
-  <h3>{% blocktrans trimmed %}Decreasing points{% endblocktrans %}</h3>
-
-  {% blocktrans trimmed %}<ul>
-  <li> The goal is to avoid that the score falls below a predefined threshold.
-  <li> You choose between two options, which deduct points.
-  <li> What matters is, that your score is <b>not lower than the threshold</b> after 5 decisions.
-  </ul>{% endblocktrans %}
-
-  <h3>{% blocktrans trimmed %}Rounds{% endblocktrans %}</h3>
-
-  {% blocktrans trimmed %}<ul>
-  <li><b>After 5 decisions a round ends</b>. A new round with a new starting score, a new threshold and new options starts. Note that the decisions you make in a round do not affect the next round. The rounds are independent of each other.
-  </ul>{% endblocktrans %}
-
-
+  <h3>{% blocktrans trimmed %}Blocks{% endblocktrans %}</h3>
+ {% if sample_condition == 1 %}
+    {% blocktrans trimmed %}
+        <b>After a block ends</b> (1 sample phase and 1 decision phase). A new block with a new threshold and new options starts. Note that the decisions you make in a block do not affect the next block. The blocks are independent of each other.
+    {% endblocktrans %}
+ {% else %}
+     {% blocktrans trimmed %}
+        <b>After a block ends</b> (1 inspection phase and 1 decision phase). A new block with a new threshold and new options starts. Note that the decisions you make in a block do not affect the next block. The blocks are independent of each other.
+     {% endblocktrans %}
+ {% endif %}
   {% next_button %}
 
 {% endblock %}

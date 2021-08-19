@@ -10,9 +10,15 @@
 
 {% block content %}
 
-  <p>{% blocktrans trimmed %}
-  On the next pages you will see 4 decision blocks and each block contains {{ num_blocks }} decision rounds. You can take short breaks (a couple of seconds) between rounds, if you like. However, please complete the whole study in one go without longer breaks (don't interrupt the study, don't make a longer pause, please).
-{% endblocktrans %}</p>
+  {% if sample_condition == 1 %}
+     <p>{% blocktrans trimmed %}
+         On the next pages you will see 21 blocks, consisting of a sample phase (50 sample rounds) and a decision phase ({{ num_trials }} rounds)each. You can take short breaks (a couple of seconds) between rounds, if you like. However, please complete the whole study in one go without longer breaks (don't interrupt the study, don't make a longer pause, please).
+     {% endblocktrans %}</p>
+  {% else %}
+     <p>{% blocktrans trimmed %}
+         On the next pages you will see 21 blocks, consisting of an inspection phase and a decision phase ({{ num_trials }} rounds) each. You can take short breaks (a couple of seconds) between rounds, if you like. However, please complete the whole study in one go without longer breaks (don't interrupt the study, don't make a longer pause, please).
+     {% endblocktrans %}</p>
+  {% endif %}
 
 <p>{% blocktrans trimmed %}
 	Click on "Next" to start the first block.
