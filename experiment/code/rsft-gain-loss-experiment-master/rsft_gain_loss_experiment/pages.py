@@ -43,17 +43,17 @@ class Coverstory_general_eng(Page):
       'num_trials': Constants.num_trials,
       'sample_condition': self.participant.vars['sample_condition'],
     }
-  form_model = 'player'
-  def get_form_fields(player):
-    if 'sample_condition' == 1:
-      return ["c1e", "c2e", "c3e", "c4e", "c5e"]
-    else:
-      return ["c6e", "c2e", "c3e", "c5e"]
   def is_displayed(self):
     return self.player.phase in ["familiarization"]
 
 
 class Coverstory_sample_inspection_eng(Page):
+  form_model = 'player'
+  def get_form_fields(player):
+    if 'sample_condition' == 0:
+      return ["c1e"]
+    else:
+      return ["c1e", "c4e"]
   def is_displayed(self):
     return self.player.phase in ["familiarization"]
   def vars_for_template(self):
@@ -63,7 +63,12 @@ class Coverstory_sample_inspection_eng(Page):
       'goal_condition': self.participant.vars['goal_condition'],
       'sample_condition': self.participant.vars['sample_condition']
     }
+
+
+
 class Coverstory_choice_eng(Page):
+  form_model = 'player'
+  form_fields = ["c2e", "c3e", "c5e"]
   def is_displayed(self):
     return self.player.phase in ["familiarization"]
   def vars_for_template(self):
@@ -89,7 +94,8 @@ class Instruction_Choices_eng(Page):
   def vars_for_template(self):
     return {
       'num_trials': Constants.num_trials,
-      'sample_condition': self.participant.vars['sample_condition']
+      'sample_condition': self.participant.vars['sample_condition'],
+      'num_samples': Constants.num_samples,
     }
 
 class Coverstory_check_eng(Page):
@@ -117,6 +123,7 @@ class Incentives_eng(Page):
     'participation_fee': self.participant.payoff_plus_participation_fee(),
     'bonus_amount': c(1).to_real_world_currency(self.session),
     'num_trials': Constants.num_trials,
+    'sample_condition': self.participant.vars['sample_condition'],
     #'bonus_amount': Constants.bonus_amount,
     })
 
@@ -169,7 +176,9 @@ class Choices(Page):
     context =  self.player.vars_for_template()
     context.update({
       'outcomes': self.participant.vars['outcomes'][self.round_number],
-      'successes': self.player.get_last_success()})
+      'successes': self.player.get_last_success(),
+      'num_rounds': Constants.num_rounds
+    })
     return context
   def before_next_page(self):
     self.player.draw_bonus()

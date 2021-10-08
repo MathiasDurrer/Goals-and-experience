@@ -223,11 +223,11 @@ class Player(BasePlayer):
 
   # Coverstory 0
   c1e = models.IntegerField(
-    widget = widgets.RadioSelect,
-    label = "In sampling phases, your goal is...",
+    widget=widgets.RadioSelect,
+    label="In phase 1 of a block, your goal is...",
     choices = [
       [1, "to meet or to exceed the threshold."],
-      [2, "gain a sense of the outcomes of the options and their probabilities."],
+      [2, "gain a sense of the options and their probabilities."],
       [3, "There is no goal."]
     ])
   def c1_error_message(self, value):
@@ -235,9 +235,9 @@ class Player(BasePlayer):
       return Constants.attention_fail_error
 
   c2e = models.BooleanField(
-    widget = widgets.RadioSelectHorizontal,
-    label = "Imagine you are in a phase, in which the threshold is 10. Your score in the end of a round is 10 points. This means you...",
-    choices = [
+    widget=widgets.RadioSelect,
+    label= "Imagine you are in phase 2, in which the threshold is 10. Your score in the end of a round is 10 points. This means you...",
+    choices=[
       [True, "have reached the goal."],
       [False, "have not reached the goal."]
     ])
@@ -246,11 +246,11 @@ class Player(BasePlayer):
       return Constants.attention_fail_error_e
 
   c3e = models.BooleanField(
-    widget = widgets.RadioSelect,
-    label = "In decision phases, your goal is...",
+    widget=widgets.RadioSelect,
+    label="In phase 2 of a block, your goal is...",
     choices = [
       [1, "to meet or to exceed the threshold."],
-      [2, "gain a sense of the outcomes of the options and their probabilities."],
+      [2, "gain a sense of the options and their probabilities."],
       [3, "There is no goal."]
     ])
   def c3e_error_message(self, value):
@@ -258,21 +258,21 @@ class Player(BasePlayer):
       return Constants.attention_fail_error_e
 
   c4e = models.IntegerField(
-    widget = widgets.RadioSelect,
-    label="In sample phases, there are...",
+    widget=widgets.RadioSelect,
+    label="In phase 1 of a block, there are...",
     choices=[
       [1, "50 trials."],
       [2, "5 trials."],
-      [3, "50 trials, but you can move on before reaching maximum trials"]
+      [3, "50 trials, but you can move on any time"]
     ])
   def c4e_error_message(self, value):
     if value != 3:
       return Constants.attention_fail_error_e
 
   c5e = models.BooleanField(
-    widget = widgets.RadioSelectHorizontal,
+    widget=widgets.RadioSelect,
 
-    label="Imagine you are in a decision round and the threshold is 30 points. Your score in the end of a round is 28 points. This means you...",
+    label="Imagine you are in phase 2 of a block and the threshold is 30 points. Your score in the end of a round is 28 points. This means you...",
     choices=[
       [False, "have reached the goal."],
       [True, "have not reached the goal."]
@@ -283,7 +283,7 @@ class Player(BasePlayer):
 
   c6e = models.IntegerField(
     widget=widgets.RadioSelect,
-    label="In inspection phases, your goal is...",
+    label="In phase 1, your goal is...",
     choices=[
       [1, "to meet or to exceed the threshold."],
       [2, "gain a sense of the outcomes of the options and their probabilities."],

@@ -9,46 +9,47 @@
 
 
 {% block content %}
- {% if sample_condition == 1 %}
-    <h3>{% blocktrans trimmed %}Sampling phase{% endblocktrans %}</h3>
-    {% blocktrans trimmed %}
-    The goal is to gain a sense of the outcomes of the options and their probabilities.
-    You choose between two options, which <b> do not </b> increase your points.
-    What matters is, that you <b>gain a sense of the outcomes of the options</b> in max {{ num_samples }} decisions.
-    Remember that you <b> do not </b> need to use all {{ num_samples }} sample rounds.
-    {% endblocktrans %}
-    <h3>{% blocktrans trimmed %}Decision phase{% endblocktrans %}</h3>
-    {% blocktrans trimmed %}
-    The goal is to collect points in order to reach or exceed a predefined threshold.
-    You choose between two options, which increase your points.
-    What matters is, that you <b>reach the threshold</b> in {{ num_trials }} decisions.
-    {% endblocktrans %}
- {% else %}
-    <h3>{% blocktrans trimmed %}Inspection phase{% endblocktrans %}</h3>
-    {% blocktrans trimmed %}
-    The goal is to gain a sense of the outcomes of the options and their probabilities.
-    You inspect two options and their probabilities.
-    What matters is, that you <b>gain a sense of the outcomes of the options and their probabilities </b>.
-    {% endblocktrans %}
-    <h3>{% blocktrans trimmed %}Decision phase{% endblocktrans %}</h3>
-    {% blocktrans trimmed %}
-    The goal is to collect points in order to reach or exceed a predefined threshold.
-    You choose between two options, which increase your points.
-    What matters is, that you <b>reach the threshold</b> in {{ num_trials }} decisions.
-    {% endblocktrans %}
- {% endif %}
-
-
-  <h3>{% blocktrans trimmed %}Blocks{% endblocktrans %}</h3>
+ <h3>{% blocktrans trimmed %}Blocks{% endblocktrans %}</h3>
  {% if sample_condition == 1 %}
     {% blocktrans trimmed %}
-        <b>After a block ends</b> (1 sample phase and 1 decision phase). A new block with a new threshold and new options starts. Note that the decisions you make in a block do not affect the next block. The blocks are independent of each other.
+        <b>After</b> a block ends (phase 1 and phase 2) a new block with a new threshold and new options starts. Note that the decisions you make in a block do not affect the next block. The blocks are independent of each other.
     {% endblocktrans %}
  {% else %}
      {% blocktrans trimmed %}
-        <b>After a block ends</b> (1 inspection phase and 1 decision phase). A new block with a new threshold and new options starts. Note that the decisions you make in a block do not affect the next block. The blocks are independent of each other.
+        <b>After</b> a block ends (phase 1 and phase 2) a new block with a new threshold and new options starts. Note that the decisions you make in a block do not affect the next block. The blocks are independent of each other.
      {% endblocktrans %}
  {% endif %}
+ {% if sample_condition == 1 %}
+    <h3>{% blocktrans trimmed %}Phase 1{% endblocktrans %}</h3>
+    {% blocktrans trimmed %}
+    The goal is to gain a sense of the probabilities of the options.
+    You choose between two options.
+    What matters is, that you <b>gain a sense of the probability and options in max {{ num_samples }} decisions.</b>
+    Remember that you <b> do not </b> need to use all {{ num_samples }} decisions.
+    {% endblocktrans %}
+    <h3>{% blocktrans trimmed %}Phase 2{% endblocktrans %}</h3>
+    {% blocktrans trimmed %}
+    The goal is to collect points in order to reach or exceed a predefined threshold.
+    You choose between two options, which increase your points.
+    What matters is, that you <b>reach or exceed the threshold in {{ num_trials }} decisions.</b>
+    {% endblocktrans %}
+ {% else %}
+    <h3>{% blocktrans trimmed %}Phase 1{% endblocktrans %}</h3>
+    {% blocktrans trimmed %}
+    The goal is to gain a sense of the outcomes of the options and their probabilities.
+    You inspect two options and their probabilities.
+    What matters is, that you <b>gain a sense of the probabilities and options and their probabilities </b>.
+    {% endblocktrans %}
+    <h3>{% blocktrans trimmed %}phase 2{% endblocktrans %}</h3>
+    {% blocktrans trimmed %}
+    The goal is to collect points in order to reach or exceed a predefined threshold.
+    You choose between two options, which increase your points.
+    What matters is, that you <b>reach or exceed the threshold</b> in {{ num_trials }} decisions.
+    {% endblocktrans %}
+ {% endif %}
+
+
+
   {% next_button %}
 
 {% endblock %}

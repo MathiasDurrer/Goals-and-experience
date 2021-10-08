@@ -29,6 +29,14 @@
 
   {% formfields %}
 
+<h3>{% blocktrans trimmed %}Practise round{% endblocktrans %}</h3>
+  {% if sample_condition == 1 %}
+    <p>{% blocktrans trimmed %}
+      <b>The next pages show one block (phase 1 and phase 2). This block is for you to try out the task and get familiar with it. This block will not matter for your bonus. Click on "Next" and choose an option by clicking on it.</b>{% endblocktrans %}</p>
+  {% else %}
+      <p>{% blocktrans trimmed %}
+      <b>The next pages show one block (phase 1 and phase 2). This block is for you to try out the task and get familiar with it. This block will not matter for your bonus. Click on "Next" and look at the options</b>{% endblocktrans %}
+  {% endif %}
 
   {% next_button %}
 

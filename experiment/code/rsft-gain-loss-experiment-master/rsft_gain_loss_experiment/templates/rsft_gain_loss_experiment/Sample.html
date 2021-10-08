@@ -1,6 +1,15 @@
 {% extends "rsft_gain_loss_experiment/Page.html" %}
 {% load otree static %}
 {% load i18n %}
+{% block title %}
+    {% if player.phase == "familiarization" %}
+        {% blocktrans trimmed %} Phase 1 familiarization
+        {% endblocktrans %}
+    {% else %}
+        {% blocktrans trimmed %} Phase 1
+        {% endblocktrans %}
+    {% endif %}
+{% endblock %}
 
 {% block content %}
   <div id="rsft-hidden" class="hidden" style="text-align: center;">
@@ -10,7 +19,7 @@
   </div>
 
   <div style=" text-align: center; font-size: 24px; padding-bottom: 50px; padding-top: 30px; height: 30px">
-     {% if goal_condition == 1 %} Your goal will be {{ budget | to0 }} {% endif %}
+     {% if goal_condition == 1 %} Your threshold will be {{ budget | to0 }} {% endif %}
   </div>
 
   <div class = "row" id="hide-options">

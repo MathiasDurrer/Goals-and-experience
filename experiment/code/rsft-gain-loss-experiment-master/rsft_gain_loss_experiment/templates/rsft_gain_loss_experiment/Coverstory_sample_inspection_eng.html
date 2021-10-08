@@ -3,33 +3,29 @@
 {% load i18n %}
 
 {% block title %}
-    {% blocktrans trimmed %}Instructions II{% endblocktrans %}
+    {% blocktrans trimmed %}Instructions Phase 1{% endblocktrans %}
 {% endblock %}
 
 
 {% block content %}
-    {% if sample_condition == 1 %}
-        <p> {% blocktrans trimmed %}
-            Here you learn about the layout and the procedure of <b> sample </b> phases.
-        {% endblocktrans %}</p>
-    {% else %}
-        <p> {% blocktrans trimmed %}
-            Here you learn about the layout and the procedure of <b> inspection </b> phases.
-        {% endblocktrans %}</p>
-    {% endif %}
+    <p> {% blocktrans trimmed %}
+            Here you learn about the layout and the procedure of phase 1.
+    {% endblocktrans %}</p>
 
   <h3>{% blocktrans trimmed %}Example of options{% endblocktrans %}</h3>
 
   {% if sample_condition == 1 %}
     <p>{% blocktrans trimmed %}
-        In the <b> sample </b> rounds You will sample, meaning your points will not be counted instead, Your goal is to <b> gain a sense of the outcomes of the options and their probabilities </b>. Each option offers <b>points with a probability</b>.
-        You choose an <b> option by clicking on it</b>. Right after the choice you get feedback about how many points You would have received in a decision phase.
-        No matter how often you choose an option, the probabilities stay the same during the block.
+        You choose a option by clicking on it, afterwards a result will appear in the box you just clicked. This number is the points you would generate by choosing this option.
+        In phase 1 your goal is to gain a sense of the probabilities of the options (the probabilities and options in one block are always the same). You will have a maximum of {{ num_samples }} decisions to gain a sense of the probabilities of the options, however you can move on at any time.
+        Once you feel like you understand the probabilities of the options you can continue to phase 2 by clicking on the “I am ready to move on” button.
+        Above the options there will be a header that reads “Your threshold will be XX”. This informs you about the threshold you will have to reach or exceed in phase 2 (The threshold will be explained further on the next page).
     {% endblocktrans %}</p>
   {% else %}
     <p>{% blocktrans trimmed %}
-        In the <b> inspection </b> phases You will inspect the options, Your goal is to <b> gain a sense of the outcomes of the options and their probabilities </b>.
-        No matter how often you choose an option, the probabilities stay the same during the block.
+        You choose a option by clicking on it, afterwards a result will appear in the box you just clicked. This number is the points you would generate by choosing this option.
+        In phase 1 your goal is to gain a sense of the probabilities of the options (the probabilities and options in one block are always the same). You will have a maximum of {{ num_samples }} decisions to gain a sense of the probabilities of the options, however you can move on at any time.
+        Once you feel like you understand the probabilities of the options you can continue to phase 2 by clicking on the “I am ready to move on” button.
     {% endblocktrans %}</p>
   {% endif %}
 

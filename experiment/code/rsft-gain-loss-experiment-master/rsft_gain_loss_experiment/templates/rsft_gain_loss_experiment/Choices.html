@@ -2,6 +2,16 @@
 {% load otree static %}
 {% load i18n %}
 
+{% block title %}
+    {% if player.phase == "familiarization" %}
+        {% blocktrans trimmed %} Phase 2 familiarization
+        {% endblocktrans %}
+    {% else %}
+        {% blocktrans trimmed %} Phase 2
+        {% endblocktrans %}
+    {% endif %}
+{% endblock %}
+
 {% block content %}
   <div class = "row row1">
       <div class = "trial-container"></div>
