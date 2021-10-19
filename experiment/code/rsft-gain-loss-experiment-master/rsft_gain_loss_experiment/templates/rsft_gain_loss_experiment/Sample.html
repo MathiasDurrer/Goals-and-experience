@@ -89,7 +89,7 @@
     if (sample_condition == 1) {
       $('.rsft-btn-choices').click(function () {
           rt_end = window.performance.now();
-          $('#id_rt_ms' + (trial)).val(Math.round(rt_end - rt_start));
+          $('#id_sample_rt_ms' + (trial)).val(Math.round(rt_end - rt_start));
 
 
           var choice = $(this).val();

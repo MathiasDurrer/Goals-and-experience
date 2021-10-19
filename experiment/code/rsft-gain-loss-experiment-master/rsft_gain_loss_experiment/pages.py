@@ -215,16 +215,16 @@ class Payment(Page):
 # ]
 
 page_sequence = [
-  Consent_eng,
-  General_Instruction_eng,
-  Coverstory_general_eng,
-  Coverstory_sample_inspection_eng,
-  Coverstory_choice_eng,
-  Incentives_eng,
-  Instruction_Choices_eng,
-  NewBlock_eng,
+  #Consent_eng,
+  #General_Instruction_eng,
+  #Coverstory_general_eng,
+  #Coverstory_sample_inspection_eng,
+  #Coverstory_choice_eng,
+  #Incentives_eng,
+  #Instruction_Choices_eng,
+  #NewBlock_eng,
   Sample,
   Choices,
-  Coverstory_check_eng,
-  Coverstory_sum_eng,
+  #Coverstory_check_eng,
+  #Coverstory_sum_eng,
 ]
