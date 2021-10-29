@@ -127,25 +127,56 @@ class Player(BasePlayer):
         choices = ['Mother tongue', 'Fluent', "Good knowledge", "Basic knowledge"],
         verbose_name='How good is your English knowledge?')
 
-    risk_e = models.IntegerField(
-        choices=[0,1,2,3,4,5,6,7,8,9,10],
-        label ='How do you feel about yourself: Are you generally risk seeking or are you trying to avoid risks? ( 0 = not risk seeking at all, 10 = completely risk seeking)',
-        widget = widgets.RadioSelectHorizontal)
-
     income_e = models.IntegerField(
-    choices = [
-    [0, 'up to 1000'],
-    [1, '1001 - 2000'],
-    [2, '2001 - 3000'],
-    [3, '3001 - 4000'],
-    [4, '4001 - or more'],
-    [99, 'Do not want to answer']
-    ],
-    verbose_name = 'Which category does your monthly income (in £) after tax fall into? (the amount that is available to you either from work or other sources of income)')
+    choices=[
+            [0, 'up to $2,499'],
+            [1, '$2,500 to $4,999'],
+            [2, '$5,000 to $7,499'],
+            [3, '$7,500 to $9,999'],
+            [4, '$10,000 to $12,499'],
+            [5, '$12,500 to $14,999'],
+            [6, '$15,000 to $17,499'],
+            [7, '$17,500 to $19,999'],
+            [8, '$20,000 to $22,499'],
+            [9, '$22,500 to $24,999'],
+            [10, '$25,000 to $27,499'],
+            [11, '$27,500 to $29,999'],
+            [12, '$30,000 to $32,499'],
+            [13, '$32,500 to $34,999'],
+            [14, '$35,000 to $37,499'],
+            [15, '$37,500 to $39,999'],
+            [16, '$40,000 to $42,499'],
+            [17, '$42,500 to $44,999'],
+            [18, '$45,000 to $47,499'],
+            [19, '$47,500 to $49,999'],
+            [20, '$50,000 to $52,499'],
+            [21, '$52,500 to $54,999'],
+            [22, '$55,000 to $57,499'],
+            [23, '$57,500 to $59,999'],
+            [24, '$60,000 to $62,499'],
+            [25, '$62,500 to $64,999'],
+            [26, '$65,000 to $67,499'],
+            [27, '$67,500 to $69,999'],
+            [28, '$70,000 to $72,499'],
+            [29, '$72,500 to $74,999'],
+            [30, '$75,000 to $77,499'],
+            [31, '$77,500 to $79,999'],
+            [32, '$80,000 to $82,499'],
+            [33, '$82,500 to $84,999'],
+            [34, '$85,000 to $87,499'],
+            [35, '$87,500 to $89,999'],
+            [36, '$90,000 to $92,499'],
+            [37, '$92,500 to $94,999'],
+            [37, '$95,000 to $97,499'],
+            [37, '$97,500 to $99,999'],
+            [37, '$100,000 and over'],
+            [99, 'Do not want to answer']
+        ],
+        verbose_name='Which category does your annual income (in $) after tax fall into? (the amount that is available to you either from work or other sources of income)')
 
     attention1_e = models.IntegerField(
             widget=widgets.RadioSelect,
-            label="What was your goal in rounds, in which points were increased?",
+            label="What was your goal in phase 1?",
             choices=[
                 [1, "The goal was to meet or to exceed the threshold."],
                 [2, "The goal was not to meet and not to exceed the threshold."],
@@ -154,20 +185,12 @@ class Player(BasePlayer):
 
     attention2_e = models.IntegerField(
         widget=widgets.RadioSelect,
-        label="What was your goal in rounds, in which points were deducted?",
+        label="What was your goal in phase 2",
         choices=[
-            [1, "The goal was to fall below the threshold."],
-            [2, "The goal was not to fall below the threshold."],
+            [1, "The goal was to meet or to exceed the threshold."],
+            [2, "The goal was not to meet and not to exceed the threshold."],
             [3, "There was no goal."]
         ])
-
-    eyesight_e = models.IntegerField(
-        choices=[
-            [1, 'No impairment or corrected vision (e.g. glasses/contact lenses).'],
-            [2, 'Yes, i do.'],
-        ],
-        verbose_name="Do you have a visual impairment (poor eyesight)?",
-        widget=widgets.RadioSelectHorizontal)
 
     usefulness_e = models.IntegerField(
         choices=[

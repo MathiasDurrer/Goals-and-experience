@@ -9,8 +9,10 @@
 <p>You have completed the study successfully. Thank you very much!
 </p>
 <h3>Your Bonus</h3>
-
-<p>{%if participant.payoff == 1 %}
+    <p><b>First part:</b>
+    You received {{ mpl_payoff }}.</p>
+    <p><b>Main experiment:</b>
+    {%if participant.payoff == 1 %}
     Four rounds were randomly drawn for your bonus. You have met the goal in 1 of 4 bonus rounds,
     which means your bonus payoff is {{bonus}}.
     {% elif participant.payoff == 2 %}
@@ -26,12 +28,13 @@
     Four rounds were randomly drawn for your bonus. You have met the goal in 0 of 4 bonus rounds,
     which means your bonus payoff is {{bonus}}.
      {% endif %}
+    <p><b>Total Bonus:</b> {{ total_payoff }}.</p>
 </p>
 
- <p> Please click on the <a href="https://app.prolific.co/submissions/complete?cc=414C556D" >Prolific Completion Link</a> to register your submission automatically as complete. If the link does not work, you may enter the following Completion Code manually: 414C556D.
+ <p> Please click on the <a> Completion Link (tbd)</a> to register your submission automatically as complete. If the link does not work, you may enter the following Completion Code manually:(tbd).
 </p>
 
- <p> For any further queries, please contact laura.marbacher@unibas.ch or jana.jarecki@unibas.ch.
+ <p> For any further queries, please contact m.durrer@stud.unibas.ch or jana.jarecki@unibas.ch.
 </p>
 
 <div>

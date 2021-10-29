@@ -15,7 +15,7 @@ MIDDLEWARE = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=1.00, participation_fee=0.00, doc=""
+    real_world_currency_per_point=0.5, participation_fee=0.00, doc=""
 )
 
 
@@ -38,7 +38,14 @@ SESSION_CONFIGS = [
     #     num_demo_participants=1,
     #     app_sequence=['survey', 'payment_info'],
     # ),
+    dict(name='mpl',
+         display_name= "Multiple Price List (Holt/Laury)",
+         num_demo_participants=4,
+         app_sequence=[
+            'mpl'
+         ]
 
+    ),
     dict(name='rsft_gain_loss_experiment',
         display_name="RSFT Gain Loss",
         num_demo_participants=4,

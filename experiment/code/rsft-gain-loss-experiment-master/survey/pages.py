@@ -61,14 +61,12 @@ class Demographics_eng(Page):
     form_fields = ['age_e',
                    'gender_e',
                    'language_eng',
-                   "income_e",
-                   "risk_e"]
+                   "income_e"]
 
 
 class Carefulness_eng(Page):
     form_model = 'player'
-    form_fields = ["eyesight_e",
-                   "task_clear_e",
+    form_fields = ["task_clear_e",
                    'usefulness_e',
                    'usefulness_text_e',
                    "open_text_e"]
@@ -86,7 +84,9 @@ class End_eng(Page):
   def vars_for_template(self):
     return {
     "label": self.participant.label,
-    "bonus": self.participant.payoff.to_real_world_currency(self.session)
+    "bonus": self.participant.payoff.to_real_world_currency(self.session),
+    "mpl_payoff": self.participant.payoff,
+    "total_payoff": self.participant.payoff.to_real_world_currency(self.session) + (self.participant.payoff/2)
     }
 
 #

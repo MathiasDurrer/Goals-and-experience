@@ -221,6 +221,17 @@ class Player(BasePlayer):
     if value != 9:
       return Constants.attention_fail_error_e
 
+  a1e = models.IntegerField(
+    choices=[
+      [1, "I have understood this"],
+      [2, "I have not understood this"]
+    ],
+    label= "Please indicate your answer"
+  )
+  def a1e_error_message(self, value):
+    if value != 1:
+      return Constants.attention_fail_error_e
+
   # Coverstory 0
   c1e = models.IntegerField(
     widget=widgets.RadioSelect,
@@ -232,7 +243,7 @@ class Player(BasePlayer):
     ])
   def c1_error_message(self, value):
     if value != 2:
-      return Constants.attention_fail_error
+      return Constants.attention_fail_error_e
 
   c2e = models.BooleanField(
     widget=widgets.RadioSelect,
@@ -301,7 +312,7 @@ class Player(BasePlayer):
     ])
   def i4_error_message(self, value):
     if value != 3:
-      return Constants.attention_fail_error
+      return Constants.attention_fail_error_e
 
   # GERMAN------------------------------------------------------------------
     # Gains
