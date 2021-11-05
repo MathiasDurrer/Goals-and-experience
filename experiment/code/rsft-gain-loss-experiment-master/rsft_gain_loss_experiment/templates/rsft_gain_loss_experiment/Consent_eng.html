@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block title %}
-    {% blocktrans trimmed %}Information{% endblocktrans %}
+    {% blocktrans trimmed %}Informed Consent{% endblocktrans %}
 {% endblock %}
 
 
@@ -19,7 +19,7 @@
 
 
   <p>{% blocktrans trimmed %} 
-    In this study you will be asked to answer risky choices (foraging tasks, meaning risky choices with goals over multiple risky choices). Afterwards you will be asked to answer demographic questions as well as some short questionnaires about potential confounding variables. Please note that the study also contains attentioncheck choices and attentioncheck questions. Attentioncheck choices are easy decisions, for which it is obvious how to choose.
+    In this study you will be asked to choose between two options. Afterwards you will be asked to answer demographic questions as well as some short questionnaires. Please note that the study also contains attention check choices and attention check questions. Attention check choices are easy decisions, which consist of a choice situation for which the best answer is obvious.
   {% endblocktrans %}
   </p>
 
@@ -33,29 +33,29 @@
 
   <h3>{% blocktrans trimmed %}Remuneration{% endblocktrans %}</h3>
   <p> {% blocktrans with fee=participation_fee n=num_vouchers%}
-  This study is financed by the chair of economic psychology of the University of Basel. Your participation will be compensated at {{ fee }} for this study. You can win a bonus compensation, the exact height of your bonus payment depends on your choices during the course of the study.{% endblocktrans %}
+  This study is financed by the Center for Economic Psychology at the University of Basel. Your participation will be compensated at {{ fee }} for this study. You can win a bonus compensation, the exact height of your bonus payment depends on your choices during the course of the study.{% endblocktrans %}
   </p>
 
 
   <h3>{% blocktrans trimmed %}Data Collection and Storage{% endblocktrans %}</h3>
   <p>{% blocktrans trimmed %}
-      All data collected in this study will be stored and analyzed anonymized and will only be used for scientific research. The findings of this study will be presented in an anonymized and summarized way when presented to a scientific conference, a scientific journal or if publicized in any other medias.
+      All data collected in this study will be stored and analyzed anonymized and will be used for scientific research. The findings of this study will be presented in an anonymized and summarized way when presented to a scientific conference, a scientific journal or if publicized in any other medias.
      {% endblocktrans %}
   <p>{% blocktrans trimmed %}
-      The anonymized data – referring to the portion of data without any means of identifying your person – will be publicized in online databanks for other researchers to use, to accelerate scientific progress. Before publicizing the data, we will delete or alter all data that could, with the latest scientific means, lead to an identification of your person. Especially any data concerning your IP-address, name, date of birth and e-mail address will be deleted. The data made public will include age, income, education (highest current degree), occupation, numeracy, and self-reported attention during the task. Please note: By participating in this study you are agreeing to the publication of your anonymized data.
+      The anonymized data – referring to the portion of data without information that could identify individual person – will be publicized in online databanks for other researchers to use, to accelerate scientific progress. Before publicizing the data, we will delete or alter all information that could, according to the current state of knowledge, lead to an identification of your person. Especially any data concerning your IP-address, name, date of birth and e-mail address will be deleted. The data made public will include age, income, education (highest current degree), occupation, and number sense. Please note: By participating in this study you are agreeing to the publication of your anonymized data.
      {% endblocktrans %}
   </p>
 
   <h3>{% blocktrans trimmed %}Withdrawal{% endblocktrans %}</h3>
   <p>{% blocktrans trimmed %}
-      Your participation is voluntary. You can, at any time, stop your participation without stating any reason. Your consent to the use of your data can be withdrawn, at any time during the study and without stating any reason. Withdrawal of consent to usage of data can`t be done after ending the study, because practically removal of the anonymized data can`t be done.
+      Your participation is voluntary. You can, at any time, stop your participation without stating any reason. Your consent to the use of your data can be withdrawn, at any time during the study and without stating any reason. Withdrawal of consent to usage of data can not be done after ending the study, because of the anonymized data storage".
    {% endblocktrans %}
   </p>
 
    <h3>{% blocktrans trimmed %}Open Questions{% endblocktrans %}</h3>
   <p>{% blocktrans trimmed %}
   	If you have questions regarding this study, please contact
-  	m.durrer@stud.unibas.ch or jana.jarecki@unibas.ch.
+  	m.durrer@stud.unibas.ch.
   {% endblocktrans %}
   </p>
 

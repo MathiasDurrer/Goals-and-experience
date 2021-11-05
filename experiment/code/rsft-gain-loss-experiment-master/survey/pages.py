@@ -89,6 +89,9 @@ class End_eng(Page):
     "total_payoff": self.participant.payoff.to_real_world_currency(self.session) + (self.participant.payoff/2)
     }
 
+class numbersense(Page):
+    form_model = 'player'
+    form_fields = ["n1e", "n2e", "n3e"]
 #
 # page_sequence = [
 #     Demographics,
@@ -101,6 +104,7 @@ class End_eng(Page):
 page_sequence = [
     Demographics_eng,
     attentioncheck_eng,
+    numbersense,
     Carefulness_eng,
     End_eng,
 ]

@@ -7,12 +7,19 @@
         {% blocktrans trimmed %} Phase 2 familiarization
         {% endblocktrans %}
     {% else %}
-        {% blocktrans trimmed %} Phase 2
+        {% blocktrans trimmed %} Phase 2 block {{ decision_number }}
         {% endblocktrans %}
     {% endif %}
 {% endblock %}
 
 {% block content %}
+  <div>
+  {% if player.phase == "familiarization" %}
+  {% blocktrans trimmed %}
+     Your goal is to reach or exceed the threshold in 5 decisions. Your points will be accumulated.
+  {% endblocktrans %}
+  {% endif %}
+  </div>
   <div class = "row row1">
       <div class = "trial-container"></div>
   </div>

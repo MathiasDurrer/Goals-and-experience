@@ -25,14 +25,14 @@
             <img class = 'center' src='{% static "img/dfe_1.png" %}' / width = '70%'>
             <p class = 'example2E'>
             {% blocktrans trimmed %}
-                This option offers +7&nbsp;points or +5 points.
+                This option offers +7&nbsp;points with some probability or +5 points with some probability.
             {% endblocktrans %}</p>
         </div>
         <div>
             <img class = 'center' src='{% static "img/dfe_2.png" %}' / width = '70%'>
             <p class = 'example2E'>
             {% blocktrans trimmed %}
-                This option offers +3&nbsp;points or +9 points.
+                This option offers +3&nbsp;points with some probability or +9 points with some probability.
             {% endblocktrans %}</p>
         </div>
     </div>
@@ -55,7 +55,7 @@
     </div>
   {% endif %}
 
-    <p>{% blocktrans trimmed %}The probabilities and options will be the same as in phase 1, however your goal in phase 2 is to reach or exceed a threshold in 5 decisions (or clicks). The threshold will be shown like this:{% endblocktrans %}</p>
+    <p>{% blocktrans trimmed %}The probabilities and options will be the same as in phase 1, however in phase 2 your points will be accumulated over 5 decisions, and your goal is to reach or exceed the threshold. The threshold will be shown like this:{% endblocktrans %}</p>
     <div class = "flex-row">
         <div>
             <div>

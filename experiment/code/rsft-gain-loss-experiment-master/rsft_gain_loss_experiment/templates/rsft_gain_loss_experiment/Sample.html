@@ -6,7 +6,7 @@
         {% blocktrans trimmed %} Phase 1 familiarization
         {% endblocktrans %}
     {% else %}
-        {% blocktrans trimmed %} Phase 1
+        {% blocktrans trimmed %} Phase 1 block {{ decision_number }}
         {% endblocktrans %}
     {% endif %}
 {% endblock %}
@@ -17,7 +17,13 @@
             We will move on now
       </span>
   </div>
-
+  <div>
+  {% if player.phase == "familiarization" %}
+  {% blocktrans trimmed %}
+     Your goal is to learn about the probabilities of the options below.
+  {% endblocktrans %}
+  {% endif %}
+  </div>
   <div style=" text-align: center; font-size: 24px; padding-bottom: 50px; padding-top: 30px; height: 30px">
      {% if goal_condition == 1 %} Your threshold will be {{ budget | to0 }} {% endif %}
   </div>

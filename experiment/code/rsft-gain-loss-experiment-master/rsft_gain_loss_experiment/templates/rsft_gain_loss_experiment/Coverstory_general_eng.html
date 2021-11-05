@@ -7,6 +7,7 @@ General Instructions
 {% endblock %}
 {% block content %}
     {% blocktrans trimmed %}
+        <p></p>
         <p>In this study You will make repeated decisions about two options. The options will look like this:</p>
     {% endblocktrans %}
   {% if sample_condition == 1 %}
@@ -15,14 +16,14 @@ General Instructions
             <img class = 'center' src='{% static "img/dfe_1.png" %}' / width = '70%'>
             <p class = 'example2E'>
             {% blocktrans trimmed %}
-                This option offers +7&nbsp;points or +5 points.
+                This option offers +7 points with some probability or +5 points with some probability.
             {% endblocktrans %}</p>
         </div>
         <div>
             <img class = 'center' src='{% static "img/dfe_2.png" %}' / width = '70%'>
             <p class = 'example2E'>
             {% blocktrans trimmed %}
-                This option offers +3&nbsp;points or +9 points.
+                This option offers +3 points with some probability or +9 points with some probability.
             {% endblocktrans %}</p>
         </div>
     </div>
@@ -45,8 +46,8 @@ General Instructions
     </div>
   {% endif %}
     {% blocktrans trimmed %}
-        <p>You will decide which option you pick by clicking on the field you want to choose. The experiment is structured into 21 blocks.
-            Each block will have two phases. On the next two pages you will be instructed about each of the two phases.</p>
+        <p>You will decide which option you pick by clicking on the option you want to choose. <b>The experiment contains 24 blocks.
+            Each block will have two phases.</b> On the next two pages you will be instructed about each of the two phases.</p>
     {% endblocktrans %}
 
  {% next_button %}

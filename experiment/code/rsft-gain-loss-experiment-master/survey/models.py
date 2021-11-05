@@ -179,7 +179,7 @@ class Player(BasePlayer):
             label="What was your goal in phase 1?",
             choices=[
                 [1, "The goal was to meet or to exceed the threshold."],
-                [2, "The goal was not to meet and not to exceed the threshold."],
+                [2, "The goal was gain to learn about the probabilities."],
                 [3, "There was no goal."]
             ])
 
@@ -188,7 +188,7 @@ class Player(BasePlayer):
         label="What was your goal in phase 2",
         choices=[
             [1, "The goal was to meet or to exceed the threshold."],
-            [2, "The goal was not to meet and not to exceed the threshold."],
+            [2, "The goal was to learn about the probabilities."],
             [3, "There was no goal."]
         ])
 
@@ -207,7 +207,7 @@ class Player(BasePlayer):
 
     strategy_e = models.LongStringField(
          verbose_name='''
-            Can you describe how you made the decision which of the two options to pick?''',
+            Can you describe the strategy behind your decisions?''',
      )
 
     task_clear_e = models.IntegerField(
@@ -225,4 +225,27 @@ class Player(BasePlayer):
              Is there anything you would like us to know? (Optional)''',
         blank=True
     )
+    n1e = models.IntegerField(
+        verbose_name= "Imagine that we rolled a fair, six-sided die 1,000 times. Out of 1,000 rolls, how many times do you think the die would come up even (2, 4, or 6)?",
+        min=1, max=1000,
 
+    )
+    def n1e_error_message(self, value):
+        if value != 500:
+            return Constants.attention_fail_error_e
+
+
+    n2e = models.IntegerField(
+        verbose_name= "In the BIG BUCKS LOTTERY, the chances of winning a $10.00 prize is 1%. What is your best guess about how many people would win a $10.00 prize if 1,000 people each buy a single ticket to BIG BUCKS?",
+        min=1, max=1000
+    )
+    def n2e_error_message(self, value):
+        if value != 10:
+            return Constants.attention_fail_error_e
+
+    n3e = models.FloatField(
+        verbose_name= "In the ACME PUBLISHING SWEEPSTAKES, the chance of winning a car is 1 in 1,000. What percent of tickets to ACME PUBLISHING SWEEPSTAKES win a car?",
+    )
+    def n3e_error_message(self, value):
+        if value != 0.1:
+            return Constants.attention_fail_error_e

@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block title %}
-  {% blocktrans trimmed %} Decisions
+  {% blocktrans trimmed %} Main Experiment
   {% endblocktrans %}
 {% endblock %}
 
@@ -12,11 +12,11 @@
 
   {% if sample_condition == 1 %}
      <p>{% blocktrans trimmed %}
-         On the next pages you will see 21 blocks (phase 1 with maximum {{ num_samples }} decisions and phase 2 with {{ num_trials }} each). You can take short breaks (a couple of seconds) between rounds, if you like. However, please complete the whole study in one go without longer breaks (don't interrupt the study, don't make a longer pause, please).
+         On the next pages you will see 24 blocks (phase 1 with maximum {{ num_samples }} decisions and phase 2 with {{ num_trials }} each). You can take short breaks (a couple of minutes) between blocks, if you like. However, please complete the whole study in one go without longer breaks (don't interrupt the study, don't make a longer pause, please).
      {% endblocktrans %}</p>
   {% else %}
      <p>{% blocktrans trimmed %}
-         On the next pages you will see 21 blocks (phase 1 and phase 2 with {{ num_trials }} each). You can take short breaks (a couple of seconds) between rounds, if you like. However, please complete the whole study in one go without longer breaks (don't interrupt the study, don't make a longer pause, please).
+         On the next pages you will see 24 blocks (phase 1 and phase 2 with {{ num_trials }} each). You can take short breaks (a couple of minutes) between rounds, if you like. However, please complete the whole study in one go without longer breaks (don't interrupt the study, don't make a longer pause, please).
      {% endblocktrans %}</p>
   {% endif %}
 

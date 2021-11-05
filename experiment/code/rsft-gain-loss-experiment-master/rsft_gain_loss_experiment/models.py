@@ -238,7 +238,7 @@ class Player(BasePlayer):
     label="In phase 1 of a block, your goal is...",
     choices = [
       [1, "to meet or to exceed the threshold."],
-      [2, "gain a sense of the options and their probabilities."],
+      [2, "learn about the probabilities."],
       [3, "There is no goal."]
     ])
   def c1_error_message(self, value):
@@ -261,7 +261,7 @@ class Player(BasePlayer):
     label="In phase 2 of a block, your goal is...",
     choices = [
       [1, "to meet or to exceed the threshold."],
-      [2, "gain a sense of the options and their probabilities."],
+      [2, "learn about the probabilities."],
       [3, "There is no goal."]
     ])
   def c3e_error_message(self, value):
@@ -297,7 +297,7 @@ class Player(BasePlayer):
     label="In phase 1, your goal is...",
     choices=[
       [1, "to meet or to exceed the threshold."],
-      [2, "gain a sense of the outcomes of the options and their probabilities."],
+      [2, "learn about the probabilities."],
       [3, "There is no goal."]
     ])
 
