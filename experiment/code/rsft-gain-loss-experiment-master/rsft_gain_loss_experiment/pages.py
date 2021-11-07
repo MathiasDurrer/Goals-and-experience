@@ -53,7 +53,7 @@ class Coverstory_sample_inspection_eng(Page):
     if 'sample_condition' == 0:
       return ["c1e"]
     else:
-      return ["c1e", "c4e"]
+      return ["c1e", "c4e", "c6e"]
   def is_displayed(self):
     return self.player.phase in ["familiarization"]
   def vars_for_template(self):

@@ -222,6 +222,7 @@ class Player(BasePlayer):
       return Constants.attention_fail_error_e
 
   a1e = models.IntegerField(
+    widget=widgets.RadioSelect,
     choices=[
       [1, "I have understood this"],
       [2, "I have not understood this"]
@@ -294,16 +295,19 @@ class Player(BasePlayer):
 
   c6e = models.IntegerField(
     widget=widgets.RadioSelect,
-    label="In phase 1, your goal is...",
+    label="Each amount of points occurs...",
     choices=[
-      [1, "to meet or to exceed the threshold."],
-      [2, "learn about the probabilities."],
-      [3, "There is no goal."]
+      [1, "with a completely random probability."],
+      [2, "with some probability."],
+      [3, "There are no points."]
     ])
-
+  def c6e_error_message(self, value):
+    if value != 2:
+      return Constants.attention_fail_error_e
 
   #Incentives
   i4e = models.IntegerField(
+    widget=widgets.RadioSelect,
     label="Which of the subsequent rounds are relevant for your bonus payment?",
     choices=[
       [1, "The first four rounds are relevant."],

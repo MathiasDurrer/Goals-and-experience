@@ -14,10 +14,50 @@
 
   <h3>{% blocktrans trimmed %}Example of options{% endblocktrans %}</h3>
 
-   <p>{% blocktrans trimmed %}
-    In phase 1 you will see two options like below. You choose an option by clicking on it, afterwards the result will appear in the box you just clicked.
-  {% endblocktrans %}</p>
 
+
+    {% if sample_condition == 1 %}
+      {% if goal_condition == 1 %}
+        {% blocktrans trimmed %}
+        <p>In phase 1 you will see two options like below. The options offer point amounts with some probability.
+        You know the amount of points (e.g., 5 points and 7 points). But you <b>will not know the probabilities.</b>
+        Each amount of points occurs with some probability (e.g., 5 points 80% of the time).</p>
+        <p><b>Your task is to learn about the hidden probabilities.</b> To learn about the probabilities you can click on an option.
+        Clicking causes the option to play out a point draw according to the probabilities and show the drawn amount of points
+        (e.g., in 80 of 100 clicks 5 points will be shown).
+        You will have a maximum of {{ num_samples }} clicks to do so, however you can move on at any time.
+        Once you feel like you understand the probabilities of the options you can continue to phase 2 by clicking on the
+        “I am ready to move on” button.</p>
+        <p>Above the options there will be a header that reads “Your threshold will be XX”.
+        This informs you about the threshold you will have to reach or exceed in phase 2 (The threshold will be explained further on the next page).</p>
+        {% endblocktrans %}
+      {% else %}
+        {% blocktrans trimmed %}
+        <p>In phase 1 you will see two options like below. The options offer point amounts with some probability.
+        You know the amount of points (e.g., 5 points and 7 points). But you <b>will not know the probabilities.</b>
+        Each amount of points occurs with some probability (e.g., 5 points 80% of the time).</p>
+        <p><b>Your task is to learn about the hidden probabilities.</b> To learn about the probabilities you can click on an option.
+        Clicking causes the option to play out a point draw according to the probabilities and show the drawn amount of points
+        (e.g., in 80 of 100 clicks 5 points will be shown).
+        You will have a maximum of {{ num_samples }} clicks to do so, however you can move on at any time.
+        Once you feel like you understand the probabilities of the options you can continue to phase 2 by clicking on the
+        “I am ready to move on” button.</p>
+        {% endblocktrans %}
+      {% endif %}
+  {% else %}
+      {% if goal_condition == 1 %}
+        {% blocktrans trimmed %}
+            <p>You will see the probabilities of the options, such as 5 points with a probability of 80% and 7 points with a probability of 20%, or some other probability. Your task is to view the options.
+            Once you feel like you understand the probabilities of the options you can continue to phase 2 by clicking on the “I am ready to move on” button.</p>
+            <p>Above the options there will be a header that reads “Your threshold will be XX”. This informs you about the threshold you will have to reach or exceed in phase 2 (The threshold will be explained further on the next page).</p>
+        {% endblocktrans %}
+      {% else %}
+        <p>{% blocktrans trimmed %}
+            You will see the probabilities of the options, such as 5 points with a probability of 80% and 7 points with a probability of 20%, or some other probability. Your task is to view the options.
+            Once you feel like you understand the probabilities of the options you can continue to phase 2 by clicking on the “I am ready to move on” button.
+        {% endblocktrans %}</p>
+      {% endif %}
+  {% endif %}
   {% if sample_condition == 1 %}
     <div class = "flex-row">
         <div>
@@ -53,33 +93,7 @@
         </div>
     </div>
   {% endif %}
-  {% if sample_condition == 1 %}
-      {% if goal_condition == 1 %}
-        <p>{% blocktrans trimmed %}
-            You will not see the probabilities of the options, which may be for example 5 points in 80 of 100 clicks and 7 points in 20 of 100 clicks, or some other probability. Your goal is to learn about the probabilities. You will have a maximum of {{ num_samples }} decisions to do so, however you can move on at any time.
-            Once you feel like you understand the probabilities of the options you can continue to phase 2 by clicking on the “I am ready to move on” button.
-            Above the options there will be a header that reads “Your threshold will be XX”. This informs you about the threshold you will have to reach or exceed in phase 2 (The threshold will be explained further on the next page).
-        {% endblocktrans %}</p>
-      {% else %}
-        <p>{% blocktrans trimmed %}
-            You will not see the probabilities of the options, which may be for example 5 points in 80 of 100 clicks and 7 points in 20 of 100 clicks, or some other probability. Your goal is to learn about the probabilities. You will have a maximum of {{ num_samples }} decisions to do so, however you can move on at any time.
-            Once you feel like you understand the probabilities of the options you can continue to phase 2 by clicking on the “I am ready to move on” button.
-        {% endblocktrans %}</p>
-      {% endif %}
-  {% else %}
-      {% if goal_condition == 1 %}
-        <p>{% blocktrans trimmed %}
-            You will see the probabilities of the options, such as 5 points with a probability of 80% and 7 points with a probability of 20%, or some other probability. Your goal is to view the options.
-            Once you feel like you understand the probabilities of the options you can continue to phase 2 by clicking on the “I am ready to move on” button.
-            Above the options there will be a header that reads “Your threshold will be XX”. This informs you about the threshold you will have to reach or exceed in phase 2 (The threshold will be explained further on the next page).
-        {% endblocktrans %}</p>
-      {% else %}
-        <p>{% blocktrans trimmed %}
-            You will see the probabilities of the options, such as 5 points with a probability of 80% and 7 points with a probability of 20%, or some other probability. Your goal is to view the options.
-            Once you feel like you understand the probabilities of the options you can continue to phase 2 by clicking on the “I am ready to move on” button.
-        {% endblocktrans %}</p>
-      {% endif %}
-  {% endif %}
+
     {% formfields %}
 
   {% next_button %}

@@ -7,8 +7,9 @@ General Instructions
 {% endblock %}
 {% block content %}
     {% blocktrans trimmed %}
-        <p></p>
-        <p>In this study You will make repeated decisions about two options. The options will look like this:</p>
+        <p>In this study You will make repeated decisions about two options. The options will look like shown below.
+        You will decide which option you pick by clicking on the option you want to choose. <b>The experiment contains 24 blocks.
+        Each block will have two phases (Phase 1 and Phase 2).</b> On the next two pages you will be instructed about each of the two phases.</p>
     {% endblocktrans %}
   {% if sample_condition == 1 %}
     <div class = "flex-row">
@@ -45,10 +46,7 @@ General Instructions
         </div>
     </div>
   {% endif %}
-    {% blocktrans trimmed %}
-        <p>You will decide which option you pick by clicking on the option you want to choose. <b>The experiment contains 24 blocks.
-            Each block will have two phases.</b> On the next two pages you will be instructed about each of the two phases.</p>
-    {% endblocktrans %}
+
 
  {% next_button %}
 
