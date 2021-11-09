@@ -125,7 +125,8 @@ class Player(BasePlayer):
 
     language_eng = models.StringField(
         choices = ['Mother tongue', 'Fluent', "Good knowledge", "Basic knowledge"],
-        verbose_name='How good is your English knowledge?')
+        verbose_name='How good is your English knowledge?',
+        widget=widgets.RadioSelect)
 
     income_e = models.IntegerField(
     choices=[
@@ -170,35 +171,36 @@ class Player(BasePlayer):
             [37, '$95,000 to $97,499'],
             [37, '$97,500 to $99,999'],
             [37, '$100,000 and over'],
-            [99, 'Do not want to answer']
+            [99, 'Do not want to answer'],
         ],
-        verbose_name='Which category does your annual income (in $) after tax fall into? (the amount that is available to you either from work or other sources of income)')
+        verbose_name='Which category does your annual income (in $) after tax fall into? (the amount that is available to you either from work or other sources of income)'
+    )
 
     attention1_e = models.IntegerField(
-            widget=widgets.RadioSelect,
-            label="What was your goal in phase 1?",
+            label="What was your task in phase 1?",
             choices=[
-                [1, "The goal was to meet or to exceed the threshold."],
-                [2, "The goal was gain to learn about the probabilities."],
-                [3, "There was no goal."]
+                [1, "The task was to meet or to exceed the threshold."],
+                [2, "The task was gain to learn about the probabilities."],
+                [3, "There was no task."]
             ])
 
+
     attention2_e = models.IntegerField(
-        widget=widgets.RadioSelect,
-        label="What was your goal in phase 2",
+        label="What was your task in phase 2",
         choices=[
-            [1, "The goal was to meet or to exceed the threshold."],
-            [2, "The goal was to learn about the probabilities."],
-            [3, "There was no goal."]
+            [1, "The task was to meet or to exceed the threshold."],
+            [2, "The task was to learn about the probabilities."],
+            [3, "There was no task."]
         ])
 
-    usefulness_e = models.IntegerField(
+
+    usefulness_e = models.StringField(
         choices=[
             [1, 'Yes'],
             [2, 'No'],
         ],
         verbose_name="Is the data you just generated of sufficient quality to be useful for scientific research?",
-        widget=widgets.RadioSelectHorizontal)
+        widget=widgets.RadioSelect)
 
     usefulness_text_e = models.StringField(
         verbose_name="If you clicked No to the question above, please describe shortly why we should not use your data in our analyses?",
@@ -210,7 +212,7 @@ class Player(BasePlayer):
             Can you describe the strategy behind your decisions?''',
      )
 
-    task_clear_e = models.IntegerField(
+    task_clear_e = models.StringField(
         choices = [
         [0, 'Not clear'],
         [1, 'Mostly not clear'],
@@ -225,7 +227,7 @@ class Player(BasePlayer):
              Is there anything you would like us to know? (Optional)''',
         blank=True
     )
-    n1e = models.IntegerField(
+    n1e = models.StringField(
         verbose_name= "Imagine that we rolled a fair, six-sided die 1,000 times. Out of 1,000 rolls, how many times do you think the die would come up even (2, 4, or 6)?",
         min=1, max=1000,
 
@@ -235,7 +237,7 @@ class Player(BasePlayer):
             return Constants.attention_fail_error_e
 
 
-    n2e = models.IntegerField(
+    n2e = models.StringField(
         verbose_name= "In the BIG BUCKS LOTTERY, the chances of winning a $10.00 prize is 1%. What is your best guess about how many people would win a $10.00 prize if 1,000 people each buy a single ticket to BIG BUCKS?",
         min=1, max=1000
     )

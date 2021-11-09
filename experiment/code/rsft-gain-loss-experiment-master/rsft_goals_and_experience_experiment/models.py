@@ -236,7 +236,7 @@ class Player(BasePlayer):
   # Coverstory 0
   c1e = models.IntegerField(
     widget=widgets.RadioSelect,
-    label="In phase 1 of a block, your goal is...",
+    label="In phase 1 of a block, your task is...",
     choices = [
       [1, "to meet or to exceed the threshold."],
       [2, "learn about the probabilities."],
@@ -259,7 +259,7 @@ class Player(BasePlayer):
 
   c3e = models.BooleanField(
     widget=widgets.RadioSelect,
-    label="In phase 2 of a block, your goal is...",
+    label="In phase 2 of a block, your task is...",
     choices = [
       [1, "to meet or to exceed the threshold."],
       [2, "learn about the probabilities."],
