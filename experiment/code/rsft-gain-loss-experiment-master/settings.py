@@ -46,12 +46,12 @@ SESSION_CONFIGS = [
          ]
 
     ),
-    dict(name='rsft_gain_loss_experiment',
-        display_name="RSFT Gain Loss",
+    dict(name='rsft_goals_and_experience_experiment',
+        display_name="RSFT goals and experience",
         num_demo_participants=4,
         participation_fee = 6.88,
         app_sequence=[
-            'rsft_gain_loss_experiment',
+            'rsft_goals_and_experience_experiment',
         "survey"],
         real_world_currency_per_point = 0.25,
         use_browser_bots = False,

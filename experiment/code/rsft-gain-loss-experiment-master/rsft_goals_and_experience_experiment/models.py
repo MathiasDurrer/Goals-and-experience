@@ -19,7 +19,7 @@ Risk sensitive foraging
 
 
 class Constants(BaseConstants):
-  name_in_url = 'rsft_gain_loss_experiment'
+  name_in_url = 'rsft_goals_and_experience_experiment'
   players_per_group = None
   num_familiarization_rounds = 1
   num_repetitions = 1
