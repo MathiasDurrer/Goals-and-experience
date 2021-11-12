@@ -183,7 +183,7 @@ class Player(BasePlayer):
     if value != 29:
       return Constants.attention_fail_error_e
 
-  g3e = models.IntegerField(label = "How high is the current score?")
+  g3e = models.IntegerField(label = "How high is the current point amount?")
   def g3e_error_message(self, value):
     if value != 12:
       return Constants.attention_fail_error_e
@@ -211,7 +211,7 @@ class Player(BasePlayer):
     if value != 29:
       return Constants.attention_fail_error_e
 
-  l3e = models.IntegerField(label="How high is the current score?")
+  l3e = models.IntegerField(label="How high is the current point amount?")
   def g3e_error_message(self, value):
     if value != 12:
       return Constants.attention_fail_error_e
@@ -222,12 +222,12 @@ class Player(BasePlayer):
       return Constants.attention_fail_error_e
 
   a1e = models.IntegerField(
-    widget=widgets.RadioSelect,
     choices=[
       [1, "I have understood this"],
       [2, "I have not understood this"]
     ],
-    label= "Please indicate your answer"
+    label= "Please indicate your answer",
+    widget=widgets.RadioSelect
   )
   def a1e_error_message(self, value):
     if value != 1:
@@ -240,7 +240,7 @@ class Player(BasePlayer):
     choices = [
       [1, "to meet or to exceed the threshold."],
       [2, "learn about the probabilities."],
-      [3, "There is no goal."]
+      [3, "There is no task."]
     ])
   def c1_error_message(self, value):
     if value != 2:
@@ -250,8 +250,8 @@ class Player(BasePlayer):
     widget=widgets.RadioSelect,
     label= "Imagine you are in phase 2, in which the threshold is 10. Your score in the end of a round is 10 points. This means you...",
     choices=[
-      [True, "have reached the goal."],
-      [False, "have not reached the goal."]
+      [True, "have reached the threshold."],
+      [False, "have not reached the threshold."]
     ])
   def c2e_error_message(self, value):
     if value == False:
@@ -263,7 +263,7 @@ class Player(BasePlayer):
     choices = [
       [1, "to meet or to exceed the threshold."],
       [2, "learn about the probabilities."],
-      [3, "There is no goal."]
+      [3, "There is no task."]
     ])
   def c3e_error_message(self, value):
     if value != 1:
@@ -286,8 +286,8 @@ class Player(BasePlayer):
 
     label="Imagine you are in phase 2 of a block and the threshold is 30 points. Your score in the end of a round is 28 points. This means you...",
     choices=[
-      [False, "have reached the goal."],
-      [True, "have not reached the goal."]
+      [False, "have reached the threshold."],
+      [True, "have not reached the threshold."]
     ])
   def c5e_error_message(self, value):
     if value == False:

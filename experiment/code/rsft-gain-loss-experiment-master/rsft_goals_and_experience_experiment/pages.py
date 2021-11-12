@@ -130,7 +130,7 @@ class Incentives_eng(Page):
 
 class NewBlock_eng(Page):
   def is_displayed(self):
-    return (self.player.phase in ["stimuli_easy", "stimuli_medium", "stimuli_hard"])
+    return (self.round_number > 2)
   form_model = 'player'
   def vars_for_template(self):
     context =  self.player.vars_for_template()

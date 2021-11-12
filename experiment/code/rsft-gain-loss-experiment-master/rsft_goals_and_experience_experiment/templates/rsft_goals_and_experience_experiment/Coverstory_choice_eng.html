@@ -15,9 +15,13 @@
 
   <h3>{% blocktrans trimmed %}Example of options{% endblocktrans %}</h3>
 
-  <p>{% blocktrans trimmed %}
-    In phase 2 you will see two options like this:
-  {% endblocktrans %}</p>
+  {% blocktrans trimmed %}
+  <p>After you have moved on from learning the hidden probabilities phase 2 begins. The hidden probabilities and options will be the same as in phase 1. </p>
+  <p>Similar to phase 1 clicking causes the option to play out a point draw according to the probabilities and show the drawn amount of points.
+  In phase 2 however the point amount will be accumulated – meaning every click matters. You must click or choose 5 times.</p>
+  <p>The accumulated points will be shown in a progress bar (shown below).
+  In this progress bar you will see an additional value – this is your threshold in this phase. Your task in phase 2 is to reach or exceed the threshold in 5 clicks or choices.</p>
+  {% endblocktrans %}
 
    {% if sample_condition == 1 %}
     <div class = "flex-row">
@@ -55,7 +59,7 @@
     </div>
   {% endif %}
 
-    <p>{% blocktrans trimmed %}The probabilities and options will be the same as in phase 1, however in phase 2 your points will be accumulated over 5 decisions, and your goal is to reach or exceed the threshold. The threshold will be shown like this:{% endblocktrans %}</p>
+    <p>{% blocktrans trimmed %} The threshold will be shown like this: {% endblocktrans %}</p>
     <div class = "flex-row">
         <div>
             <div>

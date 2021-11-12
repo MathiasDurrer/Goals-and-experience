@@ -13,19 +13,19 @@
     You received {{ mpl_payoff }}.</p>
     <p><b>Main experiment:</b>
     {%if participant.payoff == 1 %}
-    Four rounds were randomly drawn for your bonus. You have met the goal in 1 of 4 bonus rounds,
+    Four rounds were randomly drawn for your bonus. You have met the threshold in 1 of 4 bonus rounds,
     which means your bonus payoff is {{bonus}}.
     {% elif participant.payoff == 2 %}
-    Four rounds were randomly drawn for your bonus. You have met the goal in 2 of 4 bonus rounds,
+    Four rounds were randomly drawn for your bonus. You have met the threshold in 2 of 4 bonus rounds,
     which means your bonus payoff is {{bonus}}.
     {% elif participant.payoff == 3 %}
-    Four rounds were randomly drawn for your bonus. You have met the goal in 3 of 4 bonus rounds,
+    Four rounds were randomly drawn for your bonus. You have met the threshold in 3 of 4 bonus rounds,
     which means your bonus payoff is {{bonus}}.
      {% elif participant.payoff == 4 %}
-    Four rounds were randomly drawn for your bonus. You have met the goal in 4 of 4 bonus rounds,
+    Four rounds were randomly drawn for your bonus. You have met the threshold in 4 of 4 bonus rounds,
     which means your bonus payoff is {{bonus}}.
     {% elif participant.payoff == 0 %}
-    Four rounds were randomly drawn for your bonus. You have met the goal in 0 of 4 bonus rounds,
+    Four rounds were randomly drawn for your bonus. You have met the threshold in 0 of 4 bonus rounds,
     which means your bonus payoff is {{bonus}}.
      {% endif %}
     <p><b>Total Bonus:</b> {{ total_payoff }}.</p>

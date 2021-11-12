@@ -13,11 +13,11 @@
       {% if decision_number > 1 %}
         {% if success == 1 %}
             {% blocktrans trimmed %}
-                You reached the goal in the last block.
+                You reached the threshold in the last block.
             {% endblocktrans %}
         {% else %}
             {% blocktrans trimmed %}
-                You did not reach the goal in the last block.
+                You did not reach the threshold in the last block.
             {% endblocktrans %}
         {% endif %}
         {% blocktrans trimmed %}
@@ -27,15 +27,11 @@
       {% endif %}
       </p>
   </div>
-  {% if sample_condition == 1 %}
-     <p>{% blocktrans trimmed %}
-        Click on "Next" to start the next block (first phase 1, then phase 2).
-     {% endblocktrans %}</p>
-  {% else %}
-     <p>{% blocktrans trimmed %}
-        Click on "Next" to start the next block (first phase 1, then phase 2).
-     {% endblocktrans %}</p>
-  {% endif %}
+
+  <p>{% blocktrans trimmed %}
+  Click on "Next" to start the next block (first phase 1, then phase 2).
+  {% endblocktrans %}</p>
+
 
   <div class = "right">
     {% next_button %}

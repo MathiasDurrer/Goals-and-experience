@@ -32,7 +32,7 @@ make_sprites <- function(d = d) {
     dd <- d[i]
     dd[, id := 1:.N]
     dd <- melt(dd, id = 'id', measure = list(1:2, 3:4), value = c('x','p'))
-    dd[, variablef := factor(x, levels = x, labels = paste0(ifelse(sign(x) == 1, "+", "-"), abs(x)))]
+    dd[, variablef := factor(x, levels = x,  abs(x))] #labels = paste0(ifelse(sign(x) == 1, "+", "-"), include this in factor(x,levels = x ...)labels = paste0(ifelse(sign(x) == 1, "+", "-"), to get "-" and "+" signs
     dd[, variablef2 := reorder(variablef, 2:1)]
     plot_and_save(dd, 'variablef2', 1:2)
     plot_and_save(dd, 'variablef2', 2:1)

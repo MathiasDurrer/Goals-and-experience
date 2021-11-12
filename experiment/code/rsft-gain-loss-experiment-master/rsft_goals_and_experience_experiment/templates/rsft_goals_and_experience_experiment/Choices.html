@@ -4,10 +4,10 @@
 
 {% block title %}
     {% if player.phase == "familiarization" %}
-        {% blocktrans trimmed %} Phase 2 familiarization
+        {% blocktrans trimmed %} Example for Phase 2
         {% endblocktrans %}
     {% else %}
-        {% blocktrans trimmed %} Phase 2 block {{ decision_number }}
+        {% blocktrans trimmed %} block {{ decision_number }} - Phase 2
         {% endblocktrans %}
     {% endif %}
 {% endblock %}
