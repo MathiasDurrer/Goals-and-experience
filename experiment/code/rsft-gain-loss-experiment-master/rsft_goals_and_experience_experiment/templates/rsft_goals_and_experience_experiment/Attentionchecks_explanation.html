@@ -1,23 +1,33 @@
 {% extends "rsft_goals_and_experience_experiment/Page.html" %}
+{% load otree %}
 {% load otree static %}
 {% load i18n %}
 
 {% block title %}
-  {% blocktrans trimmed %} Attention Checks
+  {% blocktrans trimmed %} General Instructions
   {% endblocktrans %}
 {% endblock %}
 
 {% block content %}
-<p>{% blocktrans trimmed %}
-   In this experiment there are attention checks. This means there are trials in the experiment that are designed to have a very obvious correct answer.
+    {% blocktrans trimmed %}
+        <p>In this study You will make repeated decisions about two options.
+        You will decide which option you pick by clicking on the option you want to choose. <b>The experiment contains 24 blocks.
+        Each block will have two phases (a learning phase and a choice phase).</b> On the next pages you will be instructed about each of the two phases.</p>
+    {% endblocktrans %}
+    {% blocktrans trimmed %}
+    <h3>Attention checks</h3>
+    <p>In this experiment there are attention checks. This means there are trials in the experiment that are designed to have a very obvious correct answer.
     If you answer more than 50% of those trials incorrectly, we have to assume you did not pay attention and therefore can only pay 50% of your earnings.
-    Please indicate that you have understood this below. By selecting "I have understood this" you acknowledge that this might impact your payment.
-{% endblocktrans %}</p>
+    Please indicate that you have understood this below. By selecting "I have understood this" you acknowledge that this might impact your payment.</p>
+    {% endblocktrans %}
+
 {% formfields %}
 
-<p>{% blocktrans trimmed %}
-   Click on "Next" to navigate to the next page.
-{% endblocktrans %}</p>
+{% blocktrans trimmed %}
+          <h3>Duration</h3>
+          <p>Please ensure, that you have {{ duration }} minutes undisturbed time to participate in the study.</p>
+          <p>Click on "Next" to navigate to the next page.</p>
+{% endblocktrans %}
 
   {% next_button %}
 

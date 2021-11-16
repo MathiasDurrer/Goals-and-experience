@@ -10,44 +10,8 @@ from .models import Constants
 #     return self.round_number == 1
 
 # ENGLISCH -----------------------------------------------------------------------
-class Consent_eng(Page):
-  def is_displayed(self):
-    return self.player.phase in ["familiarization"]
-  def vars_for_template(self):
-    return {
-    'participation_fee': self.participant.payoff_plus_participation_fee(),
-    'real_world_currency_per_point': c(1).to_real_world_currency(self.session),
-    'example_pay': c(12).to_real_world_currency(self.session),
-    'num_vouchers': 20,
-    "duration": Constants.duration,
-    }
-  # def vars_for_template(self):
-  #   return {
-  #   'participation_fee': self.participant.payoff_plus_participation_fee(),
-  #   }
 
-
-class General_Instruction_eng(Page):
-  def is_displayed(self):
-    return self.player.phase in ["familiarization"]
-  def vars_for_template(self):
-    return {
-    'duration': Constants.duration,
-    }
-
-
-class Coverstory_general_eng(Page):
-  def vars_for_template(self):
-    return {
-      'num_samples': Constants.num_samples,
-      'num_trials': Constants.num_trials,
-      'sample_condition': self.participant.vars['sample_condition'],
-    }
-  def is_displayed(self):
-    return self.player.phase in ["familiarization"]
-
-
-class Coverstory_sample_inspection_eng(Page):
+class Coverstory_learning_eng(Page):
   form_model = 'player'
   def get_form_fields(player):
     if 'sample_condition' == 0:
@@ -63,8 +27,6 @@ class Coverstory_sample_inspection_eng(Page):
       'goal_condition': self.participant.vars['goal_condition'],
       'sample_condition': self.participant.vars['sample_condition']
     }
-
-
 
 class Coverstory_choice_eng(Page):
   form_model = 'player'
@@ -88,9 +50,10 @@ class Coverstory_sum_eng(Page):
       'num_trials': Constants.num_trials,
       'sample_condition': self.participant.vars['sample_condition']
     }
+
 class Instruction_Choices_eng(Page):
   def is_displayed(self):
-    return self.round_number == 2
+    return self.round_number == (self.player.phase in ["familiarization"])
   def vars_for_template(self):
     return {
       'num_trials': Constants.num_trials,
@@ -127,10 +90,9 @@ class Incentives_eng(Page):
     #'bonus_amount': Constants.bonus_amount,
     })
 
-
 class NewBlock_eng(Page):
   def is_displayed(self):
-    return (self.round_number > 2)
+    return (self.round_number > 1)
   form_model = 'player'
   def vars_for_template(self):
     context =  self.player.vars_for_template()
@@ -177,7 +139,8 @@ class Choices(Page):
     context.update({
       'outcomes': self.participant.vars['outcomes'][self.round_number],
       'successes': self.player.get_last_success(),
-      'num_rounds': Constants.num_rounds
+      'num_rounds': Constants.num_rounds,
+      'num_trials': Constants.num_trials,
     })
     return context
   def before_next_page(self):
@@ -199,6 +162,10 @@ class Attentionchecks_explanation(Page):
     return self.player.phase in ["familiarization"]
   form_model = 'player'
   form_fields = ["a1e"]
+  def vars_for_template(self):
+    return {
+    'duration': Constants.duration,
+    }
 
 
 
@@ -223,17 +190,14 @@ class Attentionchecks_explanation(Page):
 # ]
 
 page_sequence = [
-  Consent_eng,
   Attentionchecks_explanation,
-  General_Instruction_eng,
-  Coverstory_general_eng,
-  Coverstory_sample_inspection_eng,
-  Coverstory_choice_eng,
-  Incentives_eng,
-  Instruction_Choices_eng,
+  Coverstory_learning_eng,
   NewBlock_eng,
   Sample,
+  Coverstory_choice_eng,
   Choices,
   Coverstory_check_eng,
+  Incentives_eng,
   Coverstory_sum_eng,
+  Instruction_Choices_eng,
 ]

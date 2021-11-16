@@ -1,17 +1,15 @@
 {% extends "rsft_goals_and_experience_experiment/Page.html" %}
 {% load otree static %}
 {% load i18n %}
-{% block title %}
-    {% if player.phase == "familiarization" %}
-        {% blocktrans trimmed %} Example for Phase 1
-        {% endblocktrans %}
-    {% else %}
-        {% blocktrans trimmed %} block {{ decision_number }} - Phase 1
-        {% endblocktrans %}
-    {% endif %}
-{% endblock %}
 
 {% block content %}
+    {% if player.phase == "familiarization" %}
+        {% blocktrans trimmed %} <h3>Example for Learning Phase</h3>
+        {% endblocktrans %}
+    {% else %}
+        {% blocktrans trimmed %}<h3> block {{ decision_number }} of 24 - Learning Phase</h3>
+        {% endblocktrans %}
+    {% endif %}
   <div id="rsft-hidden" class="hidden" style="text-align: center;">
       <span style="font-size: 28px;">
             We will move on now
@@ -20,12 +18,12 @@
   <div>
   {% if player.phase == "familiarization" %}
   {% blocktrans trimmed %}
-     Your task is to learn about the probabilities of the options below.
+      <p>This page is an example of a learning phase. Click on the options below. Your task is to learn the outcomes' hidden probabilities. Click on "i am ready to move on" button if you feel like you understand the hidden probabilities.</p>
   {% endblocktrans %}
   {% endif %}
   </div>
-  <div style=" text-align: center; font-size: 24px; padding-bottom: 50px; padding-top: 30px; height: 30px">
-     {% if goal_condition == 1 %} Your threshold will be {{ budget | to0 }} {% endif %}
+  <div style=" text-align: center; font-size: 16px; padding-bottom: 50px; padding-top: 30px; height: 30px">
+     {% if goal_condition == 1 %} Threshold: {{ budget | to0 }} {% endif %}
   </div>
 
   <div class = "row" id="hide-options">
@@ -48,7 +46,6 @@
           <input class="otree-btn-next" type="submit" value="I am ready to move on"/>
       </span>
   </div>
-
 
 
  <div class="hidden">

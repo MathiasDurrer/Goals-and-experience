@@ -2,21 +2,21 @@
 {% load otree static %}
 {% load i18n %}
 
-{% block title %}
-    {% if player.phase == "familiarization" %}
-        {% blocktrans trimmed %} Example for Phase 2
-        {% endblocktrans %}
-    {% else %}
-        {% blocktrans trimmed %} block {{ decision_number }} - Phase 2
-        {% endblocktrans %}
-    {% endif %}
-{% endblock %}
 
 {% block content %}
   <div>
   {% if player.phase == "familiarization" %}
+      {% blocktrans trimmed %} <h3>Example for choice Phase </h3>
+        {% endblocktrans %}
+    {% else %}
+      {% blocktrans trimmed %}<h3> block {{ decision_number }} of 24 - choice Phase</h3>
+        {% endblocktrans %}
+  {% endif %}
+  {% if player.phase == "familiarization" %}
   {% blocktrans trimmed %}
-     Your task is to reach or exceed the threshold in 5 decisions. Your points will be accumulated.
+  <p>This is an example of a choice phase. The hidden probabilities are the same as in the learning phase.
+      Your task is to reach or exceed the point threshold by accumulating from the options.
+      The progress bar shows your points and the threshold you want to reach or exceed. You have {{ num_trials }} decisions.</p>
   {% endblocktrans %}
   {% endif %}
   </div>

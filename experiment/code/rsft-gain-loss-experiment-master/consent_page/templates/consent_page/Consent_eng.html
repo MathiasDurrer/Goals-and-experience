@@ -1,4 +1,4 @@
-{% extends "rsft_goals_and_experience_experiment/Page.html" %}
+{% extends "exp_files/SurveyPage.html" %}
 {% load otree static %}
 {% load i18n %}
 
@@ -11,7 +11,7 @@
   <div class = "dialogue" id = "checkdisplay">
     <p>You need a screen wider than 800px for this study. Cellphones won't work, a tablet may work.</p>
   </div>
-
+<div>
   <h3>{% blocktrans trimmed %}Introduction{% endblocktrans %}</h3>
   <p> {% blocktrans trimmed %} Dear participant, <br> thank you for your interest in taking part in this study. The aim of this study is to investigate human decision making. The study will take around {{duration}} minutes to complete.
   {% endblocktrans %} </p>
@@ -32,8 +32,8 @@
   </p>
 
   <h3>{% blocktrans trimmed %}Remuneration{% endblocktrans %}</h3>
-  <p> {% blocktrans with fee=participation_fee n=num_vouchers%}
-  This study is financed by the Center for Economic Psychology at the University of Basel. Your participation will be compensated at {{ fee }} for this study. You can win a bonus compensation, the exact height of your bonus payment depends on your choices during the course of the study.{% endblocktrans %}
+  <p> {% blocktrans trimmed %}
+  This study is financed by the Center for Economic Psychology at the University of Basel. Your participation will be compensated at {{ participation_fee }} for this study. You can win a bonus compensation, the exact height of your bonus payment depends on your choices during the course of the study.{% endblocktrans %}
   </p>
 
 
@@ -42,7 +42,7 @@
       All data collected in this study will be stored and analyzed anonymized and will be used for scientific research. The findings of this study will be presented in an anonymized and summarized way when presented to a scientific conference, a scientific journal or if publicized in any other medias.
      {% endblocktrans %}
   <p>{% blocktrans trimmed %}
-      The anonymized data – referring to the portion of data without information that could identify individual person – will be publicized in online databanks for other researchers to use, to accelerate scientific progress. Before publicizing the data, we will delete or alter all information that could, according to the current state of knowledge, lead to an identification of your person. Especially any data concerning your IP-address, name, date of birth and e-mail address will be deleted. The data made public will include age, income, education (highest current degree), occupation, and number sense. Please note: By participating in this study you are agreeing to the publication of your anonymized data.
+      The anonymized data – referring to the data without information that could identify individuals – will be publicized in online databanks for other researchers to use, to accelerate scientific progress. Before publicizing the data, we will delete or alter all information that could, according to the current state of knowledge, lead to an identification of your person. Especially any data concerning your IP-address, name, date of birth and e-mail address will be deleted. The data made public will include age, income, education (highest current degree), occupation, and number sense. Please note: By participating in this study you are agreeing to the publication of your anonymized data.
      {% endblocktrans %}
   </p>
 
@@ -58,7 +58,7 @@
   	m.durrer@stud.unibas.ch.
   {% endblocktrans %}
   </p>
-
+</div>
   <p>Please copy/screenshot this consent form for your records.</p>
 
   <p><strong>{% blocktrans trimmed %}

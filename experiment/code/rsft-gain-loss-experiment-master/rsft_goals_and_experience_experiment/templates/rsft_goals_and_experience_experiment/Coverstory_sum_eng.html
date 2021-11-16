@@ -10,45 +10,35 @@
 
 {% block content %}
  <h3>{% blocktrans trimmed %}Blocks{% endblocktrans %}</h3>
- {% if sample_condition == 1 %}
     {% blocktrans trimmed %}
-        <b>After</b> a block ends (phase 1 and phase 2) a new block with a new threshold and new options starts. Note that the decisions you make in a block do not affect the next block. The blocks are independent of each other.
+        <b>After</b> a block ends (learning phase and choice phase) a new block with a new threshold and new options starts. Note that the decisions you make in a block do not affect the next block. The blocks are independent of each other.
+    {% endblocktrans %}
+
+ {% if sample_condition == 1 %}
+    <h3>{% blocktrans trimmed %}Learning Phase{% endblocktrans %}</h3>
+    {% blocktrans trimmed %}
+        <p>Your task is to <b> learn about the hidden probabilities of the options in max {{ num_samples }} decisions.</b></p>
+    {% endblocktrans %}
+    <h3>{% blocktrans trimmed %}Choice Phase{% endblocktrans %}</h3>
+    {% blocktrans trimmed %}
+        <p>Your task is to collect points in order to <b>reach or exceed the threshold in {{ num_trials }} decisions.
+        Remember that your points accumulate over the 5 decisions.</b></p>
     {% endblocktrans %}
  {% else %}
-     {% blocktrans trimmed %}
-        <b>After</b> a block ends (phase 1 and phase 2) a new block with a new threshold and new options starts. Note that the decisions you make in a block do not affect the next block. The blocks are independent of each other.
-     {% endblocktrans %}
- {% endif %}
- {% if sample_condition == 1 %}
-    <h3>{% blocktrans trimmed %}Phase 1{% endblocktrans %}</h3>
+    <h3>{% blocktrans trimmed %}Learning Phase{% endblocktrans %}</h3>
     {% blocktrans trimmed %}
-    Your task is to learn about the hidden probabilities of the options.
-    You choose between two options.
-    What matters is, that you <b>learn about the hidden probabilities in max {{ num_samples }} decisions.</b>
+        <p>Your task is to learn about the probabilities of the options.</p>
     {% endblocktrans %}
-    <h3>{% blocktrans trimmed %}Phase 2{% endblocktrans %}</h3>
+    <h3>{% blocktrans trimmed %}Choice Phase{% endblocktrans %}</h3>
     {% blocktrans trimmed %}
-    Your task is to collect points in order to reach or exceed a predefined threshold.
-    You choose between two options, which increase your points.
-    What matters is, that you <b>reach or exceed the threshold in {{ num_trials }} decisions.
-    Remember that your points accumulate over the 5 decisions</b>
-    {% endblocktrans %}
- {% else %}
-    <h3>{% blocktrans trimmed %}Phase 1{% endblocktrans %}</h3>
-    {% blocktrans trimmed %}
-    Your task is to learn about the probabilities of the options.
-    You inspect two options and their probabilities.
-    What matters is, that you <b>learn about the probabilities of the options </b>.
-    {% endblocktrans %}
-    <h3>{% blocktrans trimmed %}phase 2{% endblocktrans %}</h3>
-    {% blocktrans trimmed %}
-    Your task is to collect points in order to reach or exceed a predefined threshold.
-    You choose between two options, which increase your points.
-    What matters is, that you <b>reach or exceed the threshold</b> in {{ num_trials }} decisions.
-    Remember that your points accumulate over the 5 decisions
+        <p>Your task is to collect points in order to <b>reach or exceed the threshold in {{ num_trials }} decisions.
+        Remember that your points accumulate over the 5 decisions.</b></p>
     {% endblocktrans %}
  {% endif %}
 
+    {% blocktrans trimmed %}
+        <p><b>Click on "Next" to navigate to the next page.</b></p>
+    {% endblocktrans %}
 
 
   {% next_button %}

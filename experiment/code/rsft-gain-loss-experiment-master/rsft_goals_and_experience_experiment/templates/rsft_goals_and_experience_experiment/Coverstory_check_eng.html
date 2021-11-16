@@ -2,7 +2,6 @@
 {% load otree static %}
 {% load i18n %}
 
-
 {% block title %}
   {% blocktrans trimmed %}Comprehension check{% endblocktrans %}
 {% endblock %}
@@ -11,14 +10,14 @@
 {% block content %}
   {% if sample_condition == 0 %}
     <p>{% blocktrans trimmed %}
-    It is important that you understand the task. Below you see an example of phase 2. Please answer the questions regarding this phase 2 situation.
+    It is important that you understand the task. Below you see an example of a choice phase situation. Please answer the questions regarding this situation.
     {% endblocktrans %}</p>
     <div style = "display: inline-block; width: 60%; margin-top:40px;">
     <img style = 'border:.1em solid #000000' src='{% static "img/dfdcheck.png" %}'/ width = '98%'>
     </div>
   {% else %}
     <p>{% blocktrans trimmed %}
-    It is important that you understand the task. Below you see an example choice situation. Please answer the questions regarding this phase 2 situation.
+    It is important that you understand the task. Below you see an example of a choice phase situation. Please answer the questions regarding this situation.
     {% endblocktrans %}</p>
     <div style = "display: inline-block; width: 60%; margin-top:40px;">
     <img style = 'border:.1em solid #000000' src='{% static "img/dfecheck.png" %}'/ width = '98%'>
@@ -27,7 +26,9 @@
   <div style = "display: inline-block; width: 40%; margin-top:0px;">
     {% formfields %}
   </div>
-
+  {% blocktrans trimmed %}
+      <p><b>On the next page you will be informed about possible bunus payment. Click on "Next" to navigate to the next page.</b></p>
+  {% endblocktrans %}
 
   {% next_button %}
 

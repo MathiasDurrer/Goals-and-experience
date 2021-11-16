@@ -118,7 +118,14 @@ class Subsession(BaseSubsession):
         sampling_outcomes_orig_position = [p.draw_outcomes(x, Constants.num_samples) for x in p.participant.vars['AM'].get_stimuli(round_number, phase_number)[ :2]]
         p.participant.vars['sampling_outcomes'][round_number] = [sampling_outcomes_orig_position[i] for i in stimulus_position]
       maxx = max([max(list(map(abs, stimuli[i]))) for i in [0,1]])
-      p.participant.vars['max_earnings'][round_number] = max(maxx * (Constants.num_trials), p.budget)
+      max_earnings = max(maxx * (Constants.num_trials), p.budget)
+      # select overall maximum points to be earned to determine the width of the progress bar
+      if (round_number == 1):
+        last_max_earnings = max_earnings
+      else:
+        last_max_earnings = p.participant.vars['max_earnings'][(round_number - 1)]
+      max_earnings = max(last_max_earnings, max_earnings)
+      p.participant.vars['max_earnings'] = [max_earnings] * n
       p.participant.vars['num_blocks'][round_number] = p.participant.vars['PM'].get_num_trials_in_phase(round_number)
       p.participant.vars['decision_number'][round_number] = p.participant.vars['PM'].get_decision_number_in_phase(round_number)
       if (self.round_number == 1):
@@ -236,7 +243,7 @@ class Player(BasePlayer):
   # Coverstory 0
   c1e = models.IntegerField(
     widget=widgets.RadioSelect,
-    label="In phase 1 of a block, your task is...",
+    label="In the learning phase of a block, your task is...",
     choices = [
       [1, "to meet or to exceed the threshold."],
       [2, "learn about the probabilities."],
@@ -248,7 +255,7 @@ class Player(BasePlayer):
 
   c2e = models.BooleanField(
     widget=widgets.RadioSelect,
-    label= "Imagine you are in phase 2, in which the threshold is 10. Your score in the end of a round is 10 points. This means you...",
+    label= "Imagine you are in a choice phase, in which the threshold is 10. Your score in the end of a round is 10 points. This means you...",
     choices=[
       [True, "have reached the threshold."],
       [False, "have not reached the threshold."]
@@ -259,7 +266,7 @@ class Player(BasePlayer):
 
   c3e = models.BooleanField(
     widget=widgets.RadioSelect,
-    label="In phase 2 of a block, your task is...",
+    label="In the choice phase of a block, your task is...",
     choices = [
       [1, "to meet or to exceed the threshold."],
       [2, "learn about the probabilities."],
@@ -271,7 +278,7 @@ class Player(BasePlayer):
 
   c4e = models.IntegerField(
     widget=widgets.RadioSelect,
-    label="In phase 1 of a block, there are...",
+    label="In the learning phase of a block, there are...",
     choices=[
       [1, "50 trials."],
       [2, "5 trials."],
@@ -284,7 +291,7 @@ class Player(BasePlayer):
   c5e = models.BooleanField(
     widget=widgets.RadioSelect,
 
-    label="Imagine you are in phase 2 of a block and the threshold is 30 points. Your score in the end of a round is 28 points. This means you...",
+    label="Imagine you are in the choice phase of a block and the threshold is 30 points. Your score in the end of a round is 28 points. This means you...",
     choices=[
       [False, "have reached the threshold."],
       [True, "have not reached the threshold."]
