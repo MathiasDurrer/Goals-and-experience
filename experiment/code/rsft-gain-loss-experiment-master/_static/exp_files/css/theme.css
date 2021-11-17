@@ -77,7 +77,7 @@ Settings for the title and headings
 --------------------------------------------------------------------------- */
 /* title and h1 have the same style: */
 h1, h2.otree-title {
-  font-family:    "Coming Soon", cursive !important; /* we use a fancy font */
+  font-family:    "Arial", cursive !important; /* we use a fancy font */
   color:          var(--dark-color); /* we color this heading diffrently */
   font-size:      2em; /* we enlarge it to 2 x the size of the text (em)*/
   text-align: center; /* we alogn the heading to the center */
