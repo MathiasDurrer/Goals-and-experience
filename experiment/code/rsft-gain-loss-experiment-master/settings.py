@@ -38,51 +38,51 @@ SESSION_CONFIGS = [
     #     num_demo_participants=1,
     #     app_sequence=['survey', 'payment_info'],
     # ),
-    dict(name='consent_page',
-         display_name= "Consent",
-         num_demo_participants=4,
-         participation_fee=6.46,
-         app_sequence=[
-            'consent_page'
-         ],
-         real_world_currency_per_point = 0.25,
-         use_browser_bots = False,
+    #dict(name='consent_page',
+    #     display_name= "Consent",
+    #     num_demo_participants=4,
+    #     participation_fee=6.46,
+    #     app_sequence=[
+    #        'consent_page'
+    #     ],
+    #     real_world_currency_per_point = 0.25,
+    #     use_browser_bots = False,
 
-    ),
-    dict(name='mpl',
-         display_name= "Multiple Price List (Holt/Laury)",
-         num_demo_participants=4,
-         participation_fee=6.46,
-         app_sequence=[
-            'mpl'
-         ],
-         real_world_currency_per_point = 0.25,
-         use_browser_bots = False,
+    #),
+    #dict(name='mpl',
+    #     display_name= "Multiple Price List (Holt/Laury)",
+    #     num_demo_participants=4,
+    #     participation_fee=6.46,
+    #     app_sequence=[
+    #        'mpl'
+    #     ],
+    #     real_world_currency_per_point = 0.25,
+    #     use_browser_bots = False,
 
-    ),
+    #),
     dict(name='rsft_goals_and_experience_experiment',
         display_name="RSFT goals and experience",
         num_demo_participants=4,
         participation_fee=6.46,
         app_sequence=[
-            #'consent_page',
-            #'mpl',
+            'consent_page',
+            'mpl',
             'rsft_goals_and_experience_experiment',
-            #'survey'
+            'survey'
             ],
         real_world_currency_per_point = 0.25,
         use_browser_bots = False,
     ),
-    dict(name='survey',
-         display_name="demographics",
-         num_demo_participants=4,
-         participation_fee=6.46,
-         app_sequence=[
-             'survey'
-         ],
-         real_world_currency_per_point=0.25,
-         use_browser_bots = False,
-         ),
+    #dict(name='survey',
+    #     display_name="demographics",
+    #     num_demo_participants=4,
+    #     participation_fee=6.46,
+    #     app_sequence=[
+    #         'survey'
+    #     ],
+    #     real_world_currency_per_point=0.25,
+    #     use_browser_bots = False,
+    #     ),
 ]
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
