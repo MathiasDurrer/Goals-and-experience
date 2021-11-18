@@ -103,6 +103,7 @@ class NewBlock_eng(Page):
       'success': p.get_last_success(),
       'successes': p.update_successes(),
       "pstart": p.state,
+      'round_number': self.round_number - 1,
       })
     return context
 
@@ -121,7 +122,9 @@ class Sample(Page):
       'outcomes': self.participant.vars['sampling_outcomes'][self.round_number],
       'successes': self.player.get_last_success(),
       'goal_condition': self.participant.vars['goal_condition'],
-      'sample_condition': self.participant.vars['sample_condition']})
+      'sample_condition': self.participant.vars['sample_condition'],
+      'round_number': self.round_number - 1,
+    })
     return context
 
 
@@ -141,6 +144,7 @@ class Choices(Page):
       'successes': self.player.get_last_success(),
       'num_rounds': Constants.num_rounds,
       'num_trials': Constants.num_trials,
+      'round_number': self.round_number - 1,
     })
     return context
   def before_next_page(self):

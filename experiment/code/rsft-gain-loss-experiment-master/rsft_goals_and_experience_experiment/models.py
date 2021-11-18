@@ -42,6 +42,7 @@ class Constants(BaseConstants):
 
 
 
+
 class Subsession(BaseSubsession):
 
   def concat_stimulus(self, i, stimuli):
@@ -65,7 +66,7 @@ class Subsession(BaseSubsession):
       stimuli = p.participant.vars['AM'].get_stimuli(round_number, phase_number)
       stimulus_position = p.participant.vars['AM'].get_action_position(round_number)
       feature_color = p.participant.vars['AM'].get_feature_appearance(round_number)[0]
-
+      block_number = self.round_number - 1
 
       # Store variables
       p.phase = p.participant.vars['PM'].get_phaseL(round_number)
@@ -101,6 +102,7 @@ class Subsession(BaseSubsession):
         p.participant.vars['decision_number'] = [None] * n
         p.participant.vars['outcomes'] = [None] * n
         p.participant.vars['sampling_outcomes'] = [None] * n
+        p.participant.vars['block_number'] = [None] * n
         p.participant.vars['goal_condition'] = next(goal_condition) # goal_condition = 1 = goal shown during sampling; goal_condition = 0 = goal not shown during sampling #
         p.participant.vars['sample_condition'] = 1  # sample_condition = 0 = dfd (probabilities shown); sample_condition = 1 = dfe (probabilities not shown) #
       p.participant.vars['stimulus_position'][round_number] = stimulus_position
@@ -245,7 +247,7 @@ class Player(BasePlayer):
     widget=widgets.RadioSelect,
     label="In the learning phase of a block, your task is...",
     choices = [
-      [1, "to meet or to exceed the threshold."],
+      [1, "to meet or to exceed a threshold."],
       [2, "learn about the probabilities."],
       [3, "There is no task."]
     ])
@@ -255,7 +257,7 @@ class Player(BasePlayer):
 
   c2e = models.BooleanField(
     widget=widgets.RadioSelect,
-    label= "Imagine you are in a choice phase, in which the threshold is 10. Your score in the end of a round is 10 points. This means you...",
+    label= "Imagine you are in a choice phase, in which the threshold is 10. Your score in the end of a block is 10 points. This means you...",
     choices=[
       [True, "have reached the threshold."],
       [False, "have not reached the threshold."]
@@ -268,7 +270,7 @@ class Player(BasePlayer):
     widget=widgets.RadioSelect,
     label="In the choice phase of a block, your task is...",
     choices = [
-      [1, "to meet or to exceed the threshold."],
+      [1, "to meet or to exceed a threshold."],
       [2, "learn about the probabilities."],
       [3, "There is no task."]
     ])
@@ -291,7 +293,7 @@ class Player(BasePlayer):
   c5e = models.BooleanField(
     widget=widgets.RadioSelect,
 
-    label="Imagine you are in the choice phase of a block and the threshold is 30 points. Your score in the end of a round is 28 points. This means you...",
+    label="Imagine you are in the choice phase of a block and the threshold is 30 points. Your score in the end of a block is 28 points. This means you...",
     choices=[
       [False, "have reached the threshold."],
       [True, "have not reached the threshold."]
@@ -318,7 +320,7 @@ class Player(BasePlayer):
     label="Which of the subsequent rounds are relevant for your bonus payment?",
     choices=[
       [1, "The first four rounds are relevant."],
-      [2, "The last five rounds are relevant."],
+      [2, "The last four rounds are relevant."],
       [3, "Each round is relevant, because four bonus rounds will be randomly drawn."]
     ])
   def i4_error_message(self, value):

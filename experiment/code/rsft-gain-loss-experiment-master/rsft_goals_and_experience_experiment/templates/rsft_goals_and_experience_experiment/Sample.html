@@ -7,7 +7,7 @@
         {% blocktrans trimmed %} <h3>Example for Learning Phase</h3>
         {% endblocktrans %}
     {% else %}
-        {% blocktrans trimmed %}<h3> block {{ decision_number }} of 24 - Learning Phase</h3>
+        {% blocktrans trimmed %}<h3> block {{ round_number }} of 24 - Learning Phase</h3>
         {% endblocktrans %}
     {% endif %}
   <div id="rsft-hidden" class="hidden" style="text-align: center;">
@@ -18,12 +18,14 @@
   <div>
   {% if player.phase == "familiarization" %}
   {% blocktrans trimmed %}
-      <p>This page is an example of a learning phase. Click on the options below. Your task is to learn the outcomes' hidden probabilities. Click on "i am ready to move on" button if you feel like you understand the hidden probabilities.</p>
+      <p>This page is an example of a learning phase. Click on the options below. Your task is to learn the outcomes' hidden probabilities. If you feel like you understood the hidden probabilities, click the "i am ready to move on" button .</p>
   {% endblocktrans %}
   {% endif %}
   </div>
-  <div style=" text-align: center; font-size: 16px; padding-bottom: 50px; padding-top: 30px; height: 30px">
-     {% if goal_condition == 1 %} Threshold: {{ budget | to0 }} {% endif %}
+  <div id = "threshold", class = "hidden", style=" text-align: center; font-size: 16px; padding-bottom: 50px; padding-top: 30px; height: 30px">
+   {% if goal_condition == 1 %}
+       Threshold: {{ budget | to0 }}
+   {% endif %}
   </div>
 
   <div class = "row" id="hide-options">
@@ -111,7 +113,9 @@
                   hideOutcome(x);
                   showActions();
               }
-
+              if (trial == 2){
+                document.getElementById("threshold").classList.remove("hidden");
+              }
               if (trial == num_trials) {
                   $('#id_success').val(+(state >= budget));
                   $('#id_successes').val({{ successes }} +(state >= budget));

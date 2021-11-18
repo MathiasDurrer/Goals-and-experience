@@ -28,8 +28,6 @@
         <p>You will have a maximum of {{ num_samples }} clicks to learn about the hidden probabilities. However you can move on at any time.
         Once you feel like you understand the probabilities of the options you can continue to phase 2 by clicking on the
         “I am ready to move on” button.</p>
-        <p>Above the options there will be a header that reads “Threshold: XX”.
-        This informs you about the threshold you will have to reach or exceed in the choice phase (The threshold will be explained further on the next pages).</p>
         {% endblocktrans %}
       {% else %}
         {% blocktrans trimmed %}
@@ -93,7 +91,7 @@
         </div>
     </div>
   {% endif %}
-
+    <h3>Comprehension Check</h3>
     {% formfields %}
   {% blocktrans trimmed %}
       <p><b>On the next page you will see an example of a learning phase. Click on "Next" to navigate to the next page.</b></p>

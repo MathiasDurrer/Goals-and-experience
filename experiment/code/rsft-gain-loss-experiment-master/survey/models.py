@@ -178,9 +178,9 @@ class Player(BasePlayer):
     )
 
     attention1_e = models.IntegerField(
-            label="What was your task in phase 1?",
+            label="What was your task in the learning phase?",
             choices=[
-                [1, "The task was to meet or to exceed the threshold."],
+                [1, "The task was to meet or to exceed a threshold."],
                 [2, "The task was gain to learn about the probabilities."],
                 [3, "There was no task."]
             ],
@@ -188,9 +188,9 @@ class Player(BasePlayer):
     )
 
     attention2_e = models.IntegerField(
-        label="What was your task in phase 2?",
+        label="What was your task in the choice phase?",
         choices=[
-            [1, "The task was to meet or to exceed the threshold."],
+            [1, "The task was to meet or to exceed a threshold."],
             [2, "The task was to learn about the probabilities."],
             [3, "There was no task."]
         ],
