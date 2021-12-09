@@ -22,11 +22,15 @@
   {% endblocktrans %}
   {% endif %}
   </div>
-  <div id = "threshold", class = "hidden", style=" text-align: center; font-size: 16px; padding-bottom: 50px; padding-top: 30px; height: 30px">
+  <div style="text-align: center; font-size: 16px; padding-top: 20px; padding-bottom: 20px">
    {% if goal_condition == 1 %}
-       Threshold: {{ budget | to0 }}
+       {% if player.phase == "familiarization" %}
+           {% blocktrans trimmed %}{% endblocktrans %}
+       {% else %}
+            Threshold: {{ budget | to0 }}
+       {% endif %}
    {% endif %}
-  </div>
+   </div>
 
   <div class = "row" id="hide-options">
     <button type="button" value={{ stimulus_position.0 }} class="option rsft-btn-choices">
@@ -112,9 +116,6 @@
               if (trial < num_trials) {
                   hideOutcome(x);
                   showActions();
-              }
-              if (trial == 2){
-                document.getElementById("threshold").classList.remove("hidden");
               }
               if (trial == num_trials) {
                   $('#id_success').val(+(state >= budget));

@@ -21,6 +21,8 @@ drop_these_columns <- c("budget", "state")
 # Load stimuli drop cols_to_drop
 d <- rbindlist(lapply(list.files('stimuli', full = TRUE), fread, drop = drop_these_columns, fill = TRUE))
 
+
+
 make_sprites <- function(d = d) {
   d1 <- d[,1:(1/2*ncol(d)),]
   d2 <- d[, (1/2*ncol(d)+1):ncol(d),]

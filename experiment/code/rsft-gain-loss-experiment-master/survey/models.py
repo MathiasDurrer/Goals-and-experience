@@ -181,7 +181,7 @@ class Player(BasePlayer):
             label="What was your task in the learning phase?",
             choices=[
                 [1, "The task was to meet or to exceed a threshold."],
-                [2, "The task was gain to learn about the probabilities."],
+                [2, "The task was to learn about the hidden probabilities."],
                 [3, "There was no task."]
             ],
             widget=widgets.RadioSelect
@@ -191,7 +191,7 @@ class Player(BasePlayer):
         label="What was your task in the choice phase?",
         choices=[
             [1, "The task was to meet or to exceed a threshold."],
-            [2, "The task was to learn about the probabilities."],
+            [2, "The task was to learn about the hidden probabilities."],
             [3, "There was no task."]
         ],
         widget=widgets.RadioSelect
@@ -207,7 +207,7 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect)
 
     usefulness_text_e = models.StringField(
-        verbose_name="If you clicked No to the question above, please describe shortly why we should not use your data in our analyses?",
+        verbose_name="If you clicked «No» to the question above, please describe shortly why we should not use your data in our analyses?",
         blank=True
     )
 
@@ -236,22 +236,12 @@ class Player(BasePlayer):
         min=1, max=1000,
 
     )
-    def n1e_error_message(self, value):
-        if value != 500:
-            return Constants.attention_fail_error_e
-
 
     n2e = models.IntegerField(
         verbose_name= "In the BIG BUCKS LOTTERY, the chances of winning a $10.00 prize is 1%. What is your best guess about how many people would win a $10.00 prize if 1,000 people each buy a single ticket to BIG BUCKS?",
         min=1, max=1000
     )
-    def n2e_error_message(self, value):
-        if value != 10:
-            return Constants.attention_fail_error_e
 
     n3e = models.FloatField(
         verbose_name= "In the ACME PUBLISHING SWEEPSTAKES, the chance of winning a car is 1 in 1,000. What percent of tickets to ACME PUBLISHING SWEEPSTAKES win a car?",
     )
-    def n3e_error_message(self, value):
-        if value != 0.1:
-            return Constants.attention_fail_error_e

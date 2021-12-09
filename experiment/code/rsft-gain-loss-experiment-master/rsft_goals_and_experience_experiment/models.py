@@ -50,7 +50,7 @@ class Subsession(BaseSubsession):
     return(y)
 
   def creating_session(self):
-    goal_condition = itertools.cycle([0, 1])
+    goal_conditions = itertools.cycle([0, 1])
     #  sample_condition = itertools.cycle([0, 1]) to iterate the sample condition as well: change "p.participant.vars['sample_condition'] = 1" to "p.participant.vars['sample_condition'] = next(sample_condition)" and use this line again
   # Executed at the very start
   # Loops through all the round_numbers and players
@@ -60,21 +60,27 @@ class Subsession(BaseSubsession):
         p.participant.vars['PM'] = exp.Phasemanager(exp.phases, exp.stimuli, exp.blocks, exp.trials)
         # Initialize the object 'Appearancemanager' (see exp.py)
         p.participant.vars['AM'] = exp.Appearancemanager(p.participant.vars['PM'], exp.filepaths, exp.numfeatures, exp.numactions, exp.randomize_feature, exp.randomize_action, exp.randomize_stimulus_order)
+        p.participant.vars['goal_condition'] = next(goal_conditions)
+
       round_number = self.round_number
       phase_number = p.participant.vars['PM'].get_phaseN(round_number)
       phase = p.participant.vars['PM'].get_phaseL(round_number) # phase label
       stimuli = p.participant.vars['AM'].get_stimuli(round_number, phase_number)
       stimulus_position = p.participant.vars['AM'].get_action_position(round_number)
       feature_color = p.participant.vars['AM'].get_feature_appearance(round_number)[0]
-      block_number = self.round_number - 1
+      goal_condition = next(goal_conditions)
+      p.participant.vars['goal_condition'] = goal_condition
+      p.goal_condition = goal_condition
 
       # Store variables
       p.phase = p.participant.vars['PM'].get_phaseL(round_number)
-      p.block = p.participant.vars['PM'].get_block(round_number)
+      p.block = self.round_number
       p.budget = stimuli[2][0]
       p.stimulus0 = self.concat_stimulus(0, stimuli)
       p.stimulus1 = self.concat_stimulus(1, stimuli)
       p.state = stimuli[2][1]
+
+
 
 
 
@@ -103,9 +109,10 @@ class Subsession(BaseSubsession):
         p.participant.vars['outcomes'] = [None] * n
         p.participant.vars['sampling_outcomes'] = [None] * n
         p.participant.vars['block_number'] = [None] * n
-        p.participant.vars['goal_condition'] = next(goal_condition) # goal_condition = 1 = goal shown during sampling; goal_condition = 0 = goal not shown during sampling #
+         # goal_condition = 1 = goal shown during sampling; goal_condition = 0 = goal not shown during sampling #
         p.participant.vars['sample_condition'] = 1  # sample_condition = 0 = dfd (probabilities shown); sample_condition = 1 = dfe (probabilities not shown) #
       p.participant.vars['stimulus_position'][round_number] = stimulus_position
+
 
       # Define the names of teh sprites for the images
       css_img_orig_position = [
@@ -248,7 +255,7 @@ class Player(BasePlayer):
     label="In the learning phase of a block, your task is...",
     choices = [
       [1, "to meet or to exceed a threshold."],
-      [2, "learn about the probabilities."],
+      [2, "to learn about the hidden probabilities."],
       [3, "There is no task."]
     ])
   def c1_error_message(self, value):
@@ -271,7 +278,7 @@ class Player(BasePlayer):
     label="In the choice phase of a block, your task is...",
     choices = [
       [1, "to meet or to exceed a threshold."],
-      [2, "learn about the probabilities."],
+      [2, "to learn about the hidden probabilities."],
       [3, "There is no task."]
     ])
   def c3e_error_message(self, value):
@@ -321,7 +328,7 @@ class Player(BasePlayer):
     choices=[
       [1, "The first four rounds are relevant."],
       [2, "The last four rounds are relevant."],
-      [3, "Each round is relevant, because four bonus rounds will be randomly drawn."]
+      [3, "Each round is relevant, because four bonus rounds will be drawn randomly."]
     ])
   def i4_error_message(self, value):
     if value != 3:
@@ -531,6 +538,9 @@ class Player(BasePlayer):
     doc = "Accumulated points before the current decision")
   budget = models.FloatField(
     doc = "Earnings requirement in current block")
+  goal_condition = models.IntegerField(
+    doc= "goal_condition: 1 is goal shown during sampling, 0 is goal hidden during sampling"
+  )
 
   sample1 = make_sample_field(1)
   sample2 = make_sample_field(2)

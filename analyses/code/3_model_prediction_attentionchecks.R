@@ -7,19 +7,31 @@ library(devtools)
 library(cognitivemodels)
 library(cognitiveutils)
 library(data.table)
+#setting working directory
+setwd("C:/Users/mathi/Desktop/Goals-and-experience/experiment/code/rsft-gain-loss-experiment-master/rsft_goals_and_experience_experiment/static/stimuli")
 
-A <- fread(file = "stimuli_auswahl_ergänzt.csv")
-#binding the new lotteries to the existing ones
-attentionchecks <- A[22:24,]
+#loading in stimuli 
+stimuli_easy <- fread(file = "stimuli_easy.csv")
+stimuli_medium <- fread(file = "stimuli_medium.csv")
+stimuli_hard <- fread(file = "stimuli_hard.csv")
 
-M <- hm1988(formula = ~ x+px+y+py | x_r+px_r+y_r+py_r,
-            trials = ".ALL", states = ".ALL" , budget = ~b , ntrials = 5,
+attentionchecks <- data.table(rbind(stimuli_easy[6,], stimuli_medium[6,], stimuli_hard[6,]))
+
+M <- hm1988(formula = ~ x1LV+p1LV+x2LV+p2LV | x1HV+p1HV+x2HV+p2HV,
+            trials = ".ALL", states = ".ALL" , budget = ~budget , ntrials = 5,
             initstate = 0, data = attentionchecks, choicerule = NULL)
+
+
+### TO DO: die echten daten ins modell nehmen (nur attentioncheck daten) 
+#(anstatt trials = .ALL und states = .ALL hier die variablen aus den daten)
 
 sim <- data.table(
   s = M$get_states(), #states = accumulated points in trials beforehand
   t = 6-M$get_timehorizons(), # 6- m$get_timehorizon = number of trials, as get_timehorizon = trials left
   predict(M) # predict = prediction of choice
 )
-setnames(sim, c("xp", "x_"), c("ps", "pr"))
+#setnames(sim, c("xp", "x_"), c("ps", "pr"))
 sim$bid <- cumsum(sim$t == 1)
+
+### UNSURE IF IT IS CLEAR FOR THE EASY ATTENTIONCHECK ###
+### AS THERE IS STILL SOME CHANCE TO GET TO THE GOAL EVEN WHEN CHOOSING THE RISKY OPTION IN SOME SPECIFIC CASES ###

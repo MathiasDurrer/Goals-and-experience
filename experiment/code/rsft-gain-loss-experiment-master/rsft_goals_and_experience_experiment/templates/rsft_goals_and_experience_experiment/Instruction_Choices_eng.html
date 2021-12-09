@@ -12,12 +12,12 @@
 
   {% if sample_condition == 1 %}
      <p>{% blocktrans trimmed %}
-         On the next pages you will see 24 blocks (learning phases with maximum {{ num_samples }} decisions and choice phases with {{ num_trials }} each). You can take short breaks (a couple of minutes) between blocks, if you like. However, please complete the whole block in one go without longer breaks (don't interrupt the study, don't make a longer pause, please).
+         On the next pages you will see 24 blocks (learning phases with maximum {{ num_samples }} decisions per block and choice phases with {{ num_trials }} each). Please complete a single block in one go without longer breaks. You can take short breaks (a couple of minutes) <b>between</b> blocks, if you like.
      {% endblocktrans %}</p>
   {% else %}
      <p>{% blocktrans trimmed %}
-         On the next pages you will see 24 blocks (learning phases and choice phases with {{ num_trials }} each). You can take short breaks (a couple of minutes) between rounds, if you like. However, please complete the whole block in one go without longer breaks (don't interrupt the study, don't make a longer pause, please).
-     {% endblocktrans %}</p>
+        On the next pages you will see 24 blocks (learning phases with maximum {{ num_samples }} decisions per block and choice phases with {{ num_trials }} each). Please complete a single block in one go without longer breaks. You can take short breaks (a couple of minutes) <b>between</b> blocks, if you like.
+        {% endblocktrans %}</p>
   {% endif %}
 
 <p>{% blocktrans trimmed %}
