@@ -49,10 +49,6 @@ d <- merge(d, stimuli, by = "stimulus_id")
 d <- d[participant.code != "gy3mh7mq"]
 d <- d[participant.code != "czuo8pd5"]
 
-#inverting risky_choice: now 1 is the risky (high variance) choice and 0 the safe (low variance) choice 
-#(here because attentionchecks are taken out into their own data table, making sure they have the same logic)
-d[, risky_choice := 1 - choice]
-
 #generating data table for all attentionchecks (to simulate the model answers later)
 attentioncheck <- d[stimulus_type == "attentioncheck"]
 
@@ -61,6 +57,10 @@ d <- d[stimulus_type != "attentioncheck"]
 
 #deleting familiarization data
 d <- d[stimulus_type != "familiarization"]
+
+#renaming duplicated budget column and deleting one
+setnames(d, "budget.x", "budget")
+d$budget.y <- NULL
 
 ##melting data tables into the format needed to do further analysis
 #melting sample data
@@ -72,11 +72,16 @@ sample_d <- melt(d, id.vars = (c("participant.code", "block_id", "goal_condition
 sample_d <- sample_d[!(is.na(rt_ms) & is.na(draw) & is.na(sample))]
 
 #melting choice data
-choice_d <- melt(d, id.vars = (c("participant.code", "block_id", "goal_condition", "stimulus_type")), 
+choice_d <- melt(d, id.vars = (c("participant.code", "block_id", "goal_condition", "stimulus_type", "terminal_state", "budget")), 
              measure.vars = patterns("^choice[1-9]", "^state[1-9]", "^rt_ms[1-9]"), 
              value.name = c("choice", "state", "rt_ms"), variable.name = "trial", na.rm = TRUE)
 
-setnames(choice_d, "choice", "risky_choice")
+#inverting risky_choice: now 1 is the risky (high variance) choice and 0 the safe (low variance) choice 
+#(here because attentionchecks are taken out into their own data table, making sure they have the same logic)
+choice_d[, risky_choice := 1 - choice]
+choice_d$choice <- NULL
+
+
 
 #writing files for all generated data tables for further analysis (to data/processed folder)
 fwrite(attentioncheck, file = "C:/Users/mathi/Desktop/Goals-and-experience/data/processed/attentioncheck.csv")
