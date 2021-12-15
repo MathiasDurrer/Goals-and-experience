@@ -1,1 +1,0 @@
-only raw data goes here - make it read only. Per default data won't be pushed to github (see .gitignore)
