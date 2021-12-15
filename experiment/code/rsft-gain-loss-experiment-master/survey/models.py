@@ -204,7 +204,8 @@ class Player(BasePlayer):
             [2, 'No'],
         ],
         verbose_name="Is the data you just generated of sufficient quality to be useful for scientific research?",
-        widget=widgets.RadioSelect)
+        widget=widgets.RadioSelect
+    )
 
     usefulness_text_e = models.StringField(
         verbose_name="If you clicked «No» to the question above, please describe shortly why we should not use your data in our analyses?",
@@ -224,7 +225,8 @@ class Player(BasePlayer):
         [3, 'Completely clear']
         ],
         verbose_name = 'Was it clear to you what your task was during this study?',
-        widget=widgets.RadioSelect)
+        widget=widgets.RadioSelect
+    )
 
     open_text_e = models.LongStringField(
         verbose_name='''
@@ -244,4 +246,40 @@ class Player(BasePlayer):
 
     n3e = models.FloatField(
         verbose_name= "In the ACME PUBLISHING SWEEPSTAKES, the chance of winning a car is 1 in 1,000. What percent of tickets to ACME PUBLISHING SWEEPSTAKES win a car?",
+    )
+
+    t1e = models.IntegerField(
+        choices=[
+            [0, "very easy"],
+            [1, "easy"],
+            [2, "medium"],
+            [3, "hard"],
+            [4, "very hard"]
+        ],
+        verbose_name="Please indicate how difficult this threshold appears to you given Option A with the threshold = 9",
+        widget=widgets.RadioSelect
+    )
+
+    t2e = models.IntegerField(
+        choices=[
+            [0, "very easy"],
+            [1, "easy"],
+            [2, "medium"],
+            [3, "hard"],
+            [4, "very hard"]
+        ],
+        verbose_name="Please indicate how difficult this threshold appears to you given Option B with the threshold = 24",
+        widget=widgets.RadioSelect
+    )
+
+    t3e = models.IntegerField(
+        choices=[
+            [0, "very easy"],
+            [1, "easy"],
+            [2, "medium"],
+            [3, "hard"],
+            [4, "very hard"]
+        ],
+        verbose_name="Please indicate how difficult this threshold appears to you given Option C with the threshold = 37",
+        widget=widgets.RadioSelect
     )

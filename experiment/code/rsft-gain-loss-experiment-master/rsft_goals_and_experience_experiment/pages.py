@@ -44,6 +44,8 @@ class Coverstory_choice_eng(Page):
 class Coverstory_sum_eng(Page):
   def is_displayed(self):
     return self.round_number == (self.player.phase in ["familiarization"])
+  form_model = 'player'
+  form_fields = ["c7e"]
   def vars_for_template(self):
     return {
       'num_samples': Constants.num_samples,
@@ -171,37 +173,15 @@ class Attentionchecks_explanation(Page):
     'duration': Constants.duration,
     }
 
-
-
-# page_sequence = [
-#   #Consent,
-#   ConsentVorstudie,
-#   General_Instruction,
-#   Coverstory,
-#   Coverstory_gain1,
-#   Coverstory_gain2,
-#   Coverstory_loss1,
-#   Coverstory_loss2,
-#   Instruction_Choices,
-#   Block_Instruction1,
-#   NewBlock,
-#   Choices,
-#   Coverstory_check_gain,
-#   Coverstory_check_loss,
-#   Coverstory_sum,
-#   #Incentives,
-#
-# ]
-
 page_sequence = [
-  Attentionchecks_explanation,
-  Coverstory_learning_eng,
-  NewBlock_eng,
-  Sample,
-  Coverstory_choice_eng,
-  Choices,
-  Coverstory_check_eng,
-  Incentives_eng,
+  #Attentionchecks_explanation,
+  #Coverstory_learning_eng,
+  #NewBlock_eng,
+  #Sample,
+  #Coverstory_choice_eng,
+  #Choices,
+  #Coverstory_check_eng,
+  #Incentives_eng,
   Coverstory_sum_eng,
   Instruction_Choices_eng,
 ]

@@ -321,6 +321,19 @@ class Player(BasePlayer):
     if value != 2:
       return Constants.attention_fail_error_e
 
+  c7e = models.IntegerField(
+    widget=widgets.RadioSelect,
+    label="A Block is structured as follows...",
+    choices=[
+      [1, "First Choice phase, then learning phase (with 50 maximum choices for the whole experiment)."],
+      [2, "First learning phase (with 50 maximum choices for each block), then choice phase."],
+      [3, "There are no Blocks"]
+    ])
+  def c7e_error_message(self, value):
+    if value != 2:
+      return Constants.attention_fail_error_e
+
+
   #Incentives
   i4e = models.IntegerField(
     widget=widgets.RadioSelect,

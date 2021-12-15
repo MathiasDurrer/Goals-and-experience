@@ -92,6 +92,13 @@ class End_eng(Page):
 class numbersense(Page):
     form_model = 'player'
     form_fields = ["n1e", "n2e", "n3e"]
+
+class Threshold_difficulty(Page):
+    form_model = 'player'
+    form_fields = ["t1e", "t2e", "t3e"]
+
+
+
 #
 # page_sequence = [
 #     Demographics,
@@ -102,9 +109,10 @@ class numbersense(Page):
 # ]
 
 page_sequence = [
-    Demographics_eng,
-    attentioncheck_eng,
-    numbersense,
-    Carefulness_eng,
+    #Demographics_eng,
+    #attentioncheck_eng,
+    #numbersense,
+    Threshold_difficulty,
+    #Carefulness_eng,
     End_eng,
 ]

@@ -65,8 +65,8 @@ SESSION_CONFIGS = [
         num_demo_participants=4,
         participation_fee=6.46,
         app_sequence=[
-            'consent_page',
-            'mpl',
+            #'consent_page',
+            #'mpl',
             'rsft_goals_and_experience_experiment',
             'survey'
             ],
