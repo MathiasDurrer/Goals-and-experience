@@ -176,12 +176,12 @@ class Attentionchecks_explanation(Page):
 page_sequence = [
   #Attentionchecks_explanation,
   #Coverstory_learning_eng,
-  #NewBlock_eng,
-  #Sample,
+  NewBlock_eng,
+  Sample,
   #Coverstory_choice_eng,
-  #Choices,
+  Choices,
   #Coverstory_check_eng,
   #Incentives_eng,
-  Coverstory_sum_eng,
-  Instruction_Choices_eng,
+  #Coverstory_sum_eng,
+  #Instruction_Choices_eng,
 ]

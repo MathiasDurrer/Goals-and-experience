@@ -68,7 +68,7 @@ SESSION_CONFIGS = [
             #'consent_page',
             #'mpl',
             'rsft_goals_and_experience_experiment',
-            'survey'
+            #'survey'
             ],
         real_world_currency_per_point = 0.25,
         use_browser_bots = False,

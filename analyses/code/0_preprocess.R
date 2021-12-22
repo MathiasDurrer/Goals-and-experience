@@ -4,16 +4,17 @@
 
 # ==========================================================================
 # Before you start: set working directora to THIS source file's location
-if(.Platform$GUI == "RStudio") setwd(dirname(getActiveDocumentContext()$path))
+if(.Platform$GUI == "RStudio") setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 # ==========================================================================
 
 # Load packages and install missing packages in one go
 pacman::p_load(data.table)
-
+library(cognitivemodels)
 
 # load data ----------------------------------------------------------------
-d <- rbind(fread("../../data/raw/choices.csv"),
-           fread("../../data/raw/choices_2021-12-09.csv"))
+
+d <- rbind(fread("../../data/raw/choices1.csv"),
+           fread("../../data/raw/choices2.csv"))
 
 
 # Clean data ----------------------------------------------------------------
@@ -39,7 +40,7 @@ d <- save_remove(d, "gy3mh7mq", "misunderstanding the task")
 
 
 # Reformat/melt data --------------------------------------------------------
-idcols <- c("id", "phase", "stimulus1", "stimulus0", "budget", "terminal_state", "success", "successes")
+idcols <- c("id", "phase", "stimulus1", "stimulus0", "budget", "terminal_state", "success", "successes") #add goal_condition in actual experiment data
 sample_d <- melt(d, id = idcols,
   measure = patterns("sample[1-9]", "draw[1-9]", "sample_rt_ms[1-9]"),
   value.name =     c("risky_choice", "draw",     "rt_ms"),

@@ -14,10 +14,10 @@ from pathlib import Path # Requires Python v3.4 or newer
 
 # CHANGE THIS
 # 1. General setup ----------------------------------------------------------
-phases = ["familiarization", "stimuli_easy", "stimuli_medium", "stimuli_hard"]
+phases = ["familiarization", "stimuli_easy", "attentioncheck_easy", "stimuli_medium", "attentioncheck_medium", "stimuli_hard", "attentioncheck_hard"]
 """String: Name or names of phases to change the stimulus material (see below) """
 
-blocks = [1, 1, 1, 1]  # 1,1,3,3,3,3
+blocks = [1, 1, 1, 1, 1, 1, 1]  # 1,1,3,3,3,3
 """Numbers, how often to repeat the stimulus material in a phase (= blocks)?
    1       = don't repeat, show the stimuli 1 x per phase (one block)
    1,2,3   = show stimuli of the first phase 1 x, the second 2 x, the third 3 x
@@ -55,7 +55,7 @@ numfeatures = [[2, 2]]
 
 # OPTIONALLY CHANGE THIS
 # 2. Bonus setup ------------------------------------------------------------
-bonus_trials = [0, 1, 1, 1]
+bonus_trials = [0, 1, 0, 1, 0, 1, 0]
 """How many trials are drawn for the bonus in each phase?"""
 
 bonus_blocks = [None]
@@ -68,7 +68,7 @@ bonus_blocks = [None]
 
 # OPTIONALLY CHANGE THIS
 # Randomization setup ------------------------------------------------------- 1,2,3
-shuffle_phases = [1,2,3]
+shuffle_phases = [1, 3, 5]
 """Number, which 'phases' to show in random order (start counting at 0)?
    []    = Do not shuffle, keep the order of 'phases' as entered above
    [0,3] = shuffle among the frist and fourth phases
@@ -161,6 +161,7 @@ class Phasemanager:
     # Randomization of the display order of the phases
     phase_dict = dict(zip(shuffle_phases, random.sample(shuffle_phases, k = len(shuffle_phases))))
     phase_order = list(map(phase_dict.get, phaseN, phaseN))
+
     self.phases = [phases[i] for i in phase_order]
     self.blocks = [blocks[i] for i in phase_order]
     self.trials = [trials[i] for i in phase_order]

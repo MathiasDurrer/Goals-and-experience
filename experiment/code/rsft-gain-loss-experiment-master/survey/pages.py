@@ -109,10 +109,10 @@ class Threshold_difficulty(Page):
 # ]
 
 page_sequence = [
-    #Demographics_eng,
-    #attentioncheck_eng,
-    #numbersense,
+    Demographics_eng,
+    attentioncheck_eng,
+    numbersense,
     Threshold_difficulty,
-    #Carefulness_eng,
+    Carefulness_eng,
     End_eng,
 ]

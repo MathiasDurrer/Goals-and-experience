@@ -42,7 +42,7 @@ assigndifficulty <- function(level, prange, brange, p, b) {
 # Constructing difficultylevel 
 # resetting difficultylevel (for repeated runs)
 res[,difficultylevel := NULL]
-# taking all stimulipairs (=by designid) and the predictions until trial 3 (t > 4) and assigning difficulty (with assigndifficulty fuction)
+# taking all stimulipairs (=by designid) and the predictions until trial 3 (t > 4) and assigning difficulty (with assigndifficulty function)
 # p = max(ps, pr): the maximum of predicted choice probability for the safe(ps) and risky(pr) lottery of each pair
 res[t <  4                         , difficultylevel := assigndifficulty(level = 1, prange = prob_cutoff_e, brange = b_cutoff_e, p = pmax(ps, pr), b = b), by = designid]
 res[t <  4 & is.na(difficultylevel), difficultylevel := assigndifficulty(level = 2, prange = prob_cutoff_m, brange = b_cutoff_m, p = pmax(ps, pr), b = b), by = designid]
@@ -51,7 +51,7 @@ res[t <  4 & is.na(difficultylevel), difficultylevel := assigndifficulty(level =
 res[,difficultylevel := difficultylevel[t == 1] , by = designid]
 
 # controlling how many rows each difficultylevel has
-# res[,.N, by = difficultylevel]
+res[,.N, by = difficultylevel]
 
 # overallutility function
 # restricts utility for repeated values
@@ -67,18 +67,20 @@ overallutility <- function(stimuli){
 # resetting rareevent (for repeated runs)
 res[, rareevent := NULL]
 # defining rareevent as 80% to 100% and 0% to 20%
-res[, rareevent := (px_r >= 0.8 | px_r <= 0.2) & (px >= 0.2 | py <= 0.8)]
+# res[, rareevent := (px_r >= 0.8 | px_r <= 0.2) & (px >= 0.2 | py <= 0.8)]
+#attempt 2
+res[, rareevent := ifelse(pmin(px_r, py_r)  <= 0.20 & pmin(px, py) <= 0.20, TRUE, FALSE)]
+
 # taking out all Na`s
 res <- na.omit(res)
 # drawdesign function: takes random draws from each difficultylevel; 5 without rareevent and 2 with rareevent
 drawdesign <- function(res) {
   res[(difficultylevel == 1 & designid %in% sample(designid[difficultylevel == 1 & rareevent == T], 2)) |
-      (difficultylevel == 1 & designid %in% sample(designid[difficultylevel == 1 & rareevent == F], 5)) |
+      (difficultylevel == 1 & designid %in% sample(designid[difficultylevel == 1 & rareevent == F], 2)) |
       (difficultylevel == 2 & designid %in% sample(designid[difficultylevel == 2 & rareevent == T], 2)) |
-      (difficultylevel == 2 & designid %in% sample(designid[difficultylevel == 2 & rareevent == F], 5)) |
+      (difficultylevel == 2 & designid %in% sample(designid[difficultylevel == 2 & rareevent == F], 2)) |
       (difficultylevel == 3 & designid %in% sample(designid[difficultylevel == 3 & rareevent == T], 2)) |
-      (difficultylevel == 3 & designid %in% sample(designid[difficultylevel == 3 & rareevent == F], 5)), ]
-  
+      (difficultylevel == 3 & designid %in% sample(designid[difficultylevel == 3 & rareevent == F], 2)), ]
 }
 
 # check if there are rare events in every difficultylevel
@@ -99,7 +101,7 @@ design[,sum(rareevent), by = difficultylevel]
 length(unique(design$designid))
 # generating temp as an overview of design
 temp <- design[t == 1]
-
+temp <- temp[order(difficultylevel, rareevent)]
 # resetting n
 n <- 0
 # loops picking a proposaldesign and genereating  proposalutility, then comparing proposalutility and utility, 
@@ -124,61 +126,45 @@ View(temp)
 #writing the stimuli into a csv file
 fwrite(design, file = "C:/Users/mathi/Desktop/Goals-and-experience/analyses/code/stimuli_auswahl.csv")
 #reading the stimuli
-temp <- fread(file = "stimuli_auswahl.csv")
-temp <- temp[t == 1]
-temp <- temp[order(difficultylevel, rareevent)]
+stimuli <- fread(file = "stimuli_auswahl.csv")
+stimuli <- stimuli[t == 1]
+stimuli <- stimuli[order(difficultylevel, rareevent)]
 
 #construct missing lotteries: take ones of the same difficultylevel (and rare event) and add 3 to all options (and budget)
 a <- NULL
-a <- temp[3,]
-a[, "x_r" := x_r + 3]
-a[, "y_r" := y_r + 3]
-a[, "x" := x + 3]
-a[, "y" := y + 3]
-a[, "b" := b + (5 * 3)]
+a <- stimuli[7,]
+a[, "x_r" := x_r + 1]
+a[, "y_r" := y_r + 1]
+a[, "x" := x + 1]
+a[, "y" := y + 1]
+a[, "b" := b + (5 * 1)]
 a
 b = NULL
-b <- temp[14,]
-b[, "x_r" := x_r + 3]
-b[, "y_r" := y_r + 3]
-b[, "x" := x + 3]
-b[, "y" := y + 3]
-b[, "b" := b + (5 * 3)]
+b <- stimuli[10,]
+b[, "x_r" := x_r + 1]
+b[, "y_r" := y_r + 1]
+b[, "x" := x + 1]
+b[, "y" := y + 1]
+b[, "b" := b + (5 * 1)]
 b
-c <- NULL
-c <- temp[15,]
-c[, "x_r" := x_r + 3]
-c[, "y_r" := y_r + 3]
-c[, "x" := x + 3]
-c[, "y" := y + 3]
-c[, "b" := b + (5 * 3)]
-c
-d <- NULL
-d <- temp[17,]
-d[, "x_r" := x_r + 3]
-d[, "y_r" := y_r + 3]
-d[, "x" := x + 3]
-d[, "y" := y + 3]
-d[, "b" := b + (5 * 3)]
-d
-#adding the new constructed lotteries into temp again
-temp <- rbind(temp, a)
-temp <- rbind(temp, b)
-temp <- rbind(temp, c)
-temp <- rbind(temp, d)
-#ordering temp again
-temp <- temp[order(difficultylevel, rareevent)]
+
+#adding the new constructed lotteries into stimuli again
+stimuli <- rbind(stimuli, a)
+stimuli <- rbind(stimuli, b)
+
+#ordering stimuli again
+stimuli <- stimuli[order(difficultylevel, rareevent)]
 
 #writing the stimuli into a csv file
-fwrite(temp, file = "C:/Users/mathi/Desktop/Goals-and-experience/analyses/code/stimuli_auswahl_ergänzt.csv")
+fwrite(stimuli, file = "C:/Users/mathi/Desktop/Goals-and-experience/analyses/code/stimuli_auswahl_ergänzt.csv")
 #reading the stimuli
-temp <- fread(file = "stimuli_auswahl_ergänzt.csv")
-temp <- temp[t == 1]
-temp <- temp[order(difficultylevel, rareevent)]
+stimuli_ergänzt <- fread(file = "stimuli_auswahl_ergänzt.csv")
+stimuli_ergänzt <- stimuli_ergänzt[t == 1]
+stimuli_ergänzt <- stimuli_ergänzt[order(difficultylevel, rareevent)]
 
 #constructing attention checks
 e <- NULL
-e<- temp[3,]
+e<- stimuli_ergänzt[3,]
 e[, "x_r" := 0]
 e[, "px_r" := 0.7]
 e[, "y_r" := 1]
@@ -191,7 +177,7 @@ e[, "b" := 10]
 e[, "difficultylevel" := 1]
 e
 f <- NULL
-f<- temp[3,]
+f<- stimuli_ergänzt[3,]
 f[, "x_r" := 1]
 f[, "px_r" := 0.7]
 f[, "y_r" := 2]
@@ -204,7 +190,7 @@ f[, "b" := 35]
 f[, "difficultylevel" := 2]
 f
 g <- NULL
-g<- temp[3,]
+g<- stimuli_ergänzt[3,]
 g[, "x_r" := 3]
 g[, "px_r" := 0.7]
 g[, "y_r" := 4]
@@ -217,17 +203,22 @@ g[, "b" := 45]
 g[, "difficultylevel" := 3]
 g
 
-temp <- rbind(temp, e)
-temp <- rbind(temp, f)
-temp <- rbind(temp, g)
-temp <- temp[order(difficultylevel, rareevent)]
+stimuli_ergänzt <- rbind(stimuli_ergänzt, e)
+stimuli_ergänzt <- rbind(stimuli_ergänzt, f)
+stimuli_ergänzt <- rbind(stimuli_ergänzt, g)
+stimuli_ergänzt <- stimuli_ergänzt[order(difficultylevel, rareevent)]
 # rename colums into: x1HV,x2HV,p1HV,p2HV,x1LV,x2LV,p1LV,p2LV,budget,state and only include 
 # (to get the configuration that sprites.R is coded for) 
 ## sprites.R generates sprites to display lotteries on the experiment webpage
-design_sprite <- rbind(temp[,.(x_r, y_r, px_r, py_r, x, y, px, py, b, s)])
+design_sprite <- rbind(stimuli_ergänzt[,.(x_r, y_r, px_r, py_r, x, y, px, py, b, s)])
 colnames(design_sprite) <- c("x1HV","x2HV","p1HV","p2HV","x1LV","x2LV","p1LV","p2LV","budget","state")
 
-# write .csv file into static of rsft-gain-loss-experiment folder replacing positive-gain.csv
-fwrite(design_sprite[c(1:8)], file = "C:/Users/mathi/Desktop/Goals-and-experience/experiment/code/rsft-gain-loss-experiment-master/rsft_gain_loss_experiment/static/stimuli/stimuli_easy.csv")
-fwrite(design_sprite[c(9:16)], file = "C:/Users/mathi/Desktop/Goals-and-experience/experiment/code/rsft-gain-loss-experiment-master/rsft_gain_loss_experiment/static/stimuli/stimuli_medium.csv")
-fwrite(design_sprite[c(17:24)], file = "C:/Users/mathi/Desktop/Goals-and-experience/experiment/code/rsft-gain-loss-experiment-master/rsft_gain_loss_experiment/static/stimuli/stimuli_hard.csv")
+# write .csv file into static of rsft-gain-loss-experiment folder replacing positive-gain.csv 
+#### TO DO: èberprèfen ob die .csv die richtigen stimuli entghalten
+fwrite(design_sprite[c(1:4)], file = "../../experiment/code/rsft-gain-loss-experiment-master/rsft_goals_and_experience_experiment/static/stimuli/stimuli_easy.csv")
+fwrite(design_sprite[5], file = "../../experiment/code/rsft-gain-loss-experiment-master/rsft_goals_and_experience_experiment/static/stimuli/attentioncheck_easy.csv")
+fwrite(design_sprite[c(6:9)], file = "../../experiment/code/rsft-gain-loss-experiment-master/rsft_goals_and_experience_experiment/static/stimuli/stimuli_medium.csv")
+fwrite(design_sprite[c(10)], file = "../../experiment/code/rsft-gain-loss-experiment-master/rsft_goals_and_experience_experiment/static/stimuli/attentioncheck_medium.csv")
+fwrite(design_sprite[c(11:14)], file = "../../experiment/code/rsft-gain-loss-experiment-master/rsft_goals_and_experience_experiment/static/stimuli/stimuli_hard.csv")
+fwrite(design_sprite[c(15)], file = "../../experiment/code/rsft-gain-loss-experiment-master/rsft_goals_and_experience_experiment/static/stimuli/attentioncheck_hard.csv")
+

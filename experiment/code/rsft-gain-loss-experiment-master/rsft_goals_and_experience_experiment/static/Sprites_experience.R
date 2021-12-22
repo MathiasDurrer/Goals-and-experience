@@ -13,8 +13,7 @@ library(extrafont)
 library(ggplot2)
 library(scales)
 
-setwd("C:/Users/mathi/Desktop/Goals-and-experience/experiment/code/rsft-gain-loss-experiment-master/rsft_gain_loss_experiment/static")
-
+setwd("C:/Users/mathi/Desktop/Goals-and-experience/experiment/code/rsft-gain-loss-experiment-master/rsft_goals_and_experience_experiment/static")
 # Load stimuli ----------------------------------------------------------------
 # Names of columns we would like to drop
 drop_these_columns <- c("budget", "state")
