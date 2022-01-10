@@ -111,7 +111,7 @@ class NewBlock_eng(Page):
 
 class Sample(Page):
   def is_displayed(self):
-    return (self.player.phase in ["familiarization", "stimuli_easy", "stimuli_medium", "stimuli_hard"])
+    return (self.player.phase in ["familiarization", "stimuli_easy", "attentioncheck_easy", "stimuli_medium", "attentioncheck_medium", "stimuli_hard", "attentioncheck_hard"])
   form_model = 'player'
   def get_form_fields(self):
     samplefields = ['sample{}'.format(i) for i in range(1, Constants.num_samples + 1)]
@@ -132,7 +132,7 @@ class Sample(Page):
 
 class Choices(Page):
   def is_displayed(self):
-    return (self.player.phase in ["familiarization", "stimuli_easy", "stimuli_medium", "stimuli_hard"])
+    return (self.player.phase in ["familiarization", "stimuli_easy", "attentioncheck_easy", "stimuli_medium", "attentioncheck_medium", "stimuli_hard", "attentioncheck_hard"])
   form_model = 'player'
   def get_form_fields(self):
     choicefields = ['choice{}'.format(i) for i in range(1, Constants.num_trials + 1)]
@@ -174,14 +174,14 @@ class Attentionchecks_explanation(Page):
     }
 
 page_sequence = [
-  #Attentionchecks_explanation,
-  #Coverstory_learning_eng,
+  Attentionchecks_explanation,
+  Coverstory_learning_eng,
   NewBlock_eng,
   Sample,
-  #Coverstory_choice_eng,
+  Coverstory_choice_eng,
   Choices,
-  #Coverstory_check_eng,
-  #Incentives_eng,
-  #Coverstory_sum_eng,
-  #Instruction_Choices_eng,
+  Coverstory_check_eng,
+  Incentives_eng,
+  Coverstory_sum_eng,
+  Instruction_Choices_eng,
 ]
