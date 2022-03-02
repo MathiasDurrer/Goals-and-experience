@@ -1,6 +1,5 @@
 ### otree 5.xx does not support django anymore
-otree < 5
+otree[mturk] < 5
 numpy
 pandas
-
-
+django < 3

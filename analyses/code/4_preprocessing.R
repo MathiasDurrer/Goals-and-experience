@@ -10,6 +10,7 @@ library(patchwork)
 #reading d and d2
 d <-fread(file = "choices1.csv")
 d2 <-fread(file = "choices2.csv")
+t1 <- fread(file= "PageTimes-2022-01-11.csv")
 
 #combining d and d2
 d <- rbind(d,d2)
@@ -34,7 +35,7 @@ stimuli_filenames <- list.files(path ="../../experiment/code/rsft-gain-loss-expe
 stimuli <- lapply(stimuli_filenames, fread)
 stimuli <- rbindlist(stimuli, idcol = "stimulus_type")
 
-stimuli$stimulus_type <- factor(stimuli$stimulus_type, labels = c("familiarization", "easy", "hard", "medium"))
+stimuli$stimulus_type <- factor(stimuli$stimulus_type, labels = c("attentioncheck_easy", "attentioncheck_hard", "attentioncheck_medium", "familiarization", "stimuli_easy", "stimuli_hard", "stimuli_medium"))
 stimuli[, stimulus_id := paste(x1HV, p1HV*100, x2HV, x1LV, p1LV*100, x2LV, budget, sep = "_")]
 
 #adding attentioncheck as type to attentioncheck stimuli

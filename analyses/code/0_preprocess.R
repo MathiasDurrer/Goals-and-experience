@@ -63,14 +63,14 @@ d[, risky_choice := 1 - risky_choice]
 
 # Add stimuli ---------------------------------------------------------------
 stimuli <- rbindlist(lapply(list.files("../../experiment/code/rsft-gain-loss-experiment-master/rsft_goals_and_experience_experiment/static/stimuli", full = T), fread), id = "stimulus_type")
-stimuli[, stimulus_type := factor(stimulus_type, labels = c("familiarization", "easy", "hard", "medium"))]
+stimuli[, stimulus_type := factor(stimulus_type, labels = c("attentioncheck_easy", "attentioncheck_hard", "attentioncheck_medium", "familiarization", "stimuli_easy", "stimuli_hard", "stimuli_medium"))]
 stimuli[, stimulus_id := paste(x1HV, p1HV*100, x2HV, x1LV, p1LV*100, x2LV, budget, sep = "_")]
-stimuli[, attention_check := ifelse(.I %in% c(7,15,23), TRUE, FALSE)]
+stimuli[, attention_check := ifelse(stimulus_type %in% c("attentioncheck_easy", "attentioncheck_hard", "attentioncheck_medium"), TRUE, FALSE)]
 stimuli[, rare_event := ifelse(pmin(p1HV,p2HV) <= 0.20, TRUE, FALSE)]
 
 # Mege choice and stimuli
 d[, stimulus_id := paste(stimulus0, stimulus1, budget, sep ="_")]
-d <- merge(d, stimuli[, !"state"], all = T, by = c("stimulus_id", "budget"))
+d <- merge(d, stimuli[, !"state"], by = c("stimulus_id", "budget")) #, all = T
 
 
 # Cosmetics ------------------------------------------------------------------
@@ -79,7 +79,7 @@ setcolorder(d, c("id", "phase", "goal_condition", "task", "budget", "stimulus0",
 
 
 # Run attention check ---------------------------------------------------------
-a <- d[attention_check == TRUE & phase != "familiarization" & task == "goal"]
+a <- d[attention_check == TRUE & task == "goal"]
 M <- hm1988( ~ x1HV + p1HV + x2HV + p2HV | x1LV + p1LV + x2LV + p2LV, 
              trials = ~trial, states = ~state, budget = ~budget, init = 0,
              ntrials = 5, data = a)

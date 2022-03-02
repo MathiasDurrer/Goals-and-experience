@@ -9,61 +9,53 @@ USE_I18N = True
 
 MIDDLEWARE = [
   'django.middleware.security.SecurityMiddleware',
-  'whitenoise.middleware.WhiteNoiseMiddleware',
+  'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=0.25, participation_fee=0.00, doc=""
-)
+SESSION_CONFIG_DEFAULTS = {
+    'real_world_currency_per_point': 0.25,
+    'participation_fee': 0.00,
+}
+
+# mturk_hit_settings = {
+#        'keywords': ['risk', 'goals', 'academic', 'experience', 'study'],
+#        'title': 'Goals and Experience ($5.025 for about 40 min, $2 possible bonus)',
+#        'description': 'Decide between options to reach a goal',
+#        'frame_height': 800,
+#        'template': 'global/mturkPreview.html',
+#        'minutes_allotted_per_assignement': 80,
+#        'expiration_hours': 7*24,
+#        'qualification_requirements': [
+#        # Only US
+#        {
+#            'QualificationTypeId': "00000000000000000071",
+#            'Comparator': "EqualTo",
+#            'LocaleValues': [{'Country': "US"}]
+#        },
+#        # At least 200 HITs approved
+#        {
+#            'QualificationTypeId': "00000000000000000040",
+#            'Comparator': "GreaterThanOrEqualTo",
+#            'IntegerValues': [200]
+#        },
+#        # At least 95% of HITs approved
+#        {
+#            'QualificationTypeId': "000000000000000000L0",
+#            'Comparator': "GreaterThanOrEqualTo",
+#            'IntegerValues': [95]
+#        },
+#        ],
+# }
+
 
 
 SESSION_CONFIGS = [
-    # dict(
-    #     name='public_goods',
-    #     display_name="Public Goods",
-    #     num_demo_participants=3,
-    #     app_sequence=['public_goods', 'payment_info'],
-    # ),
-    # dict(
-    #     name='guess_two_thirds',
-    #     display_name="Guess 2/3 of the Average",
-    #     num_demo_participants=3,
-    #     app_sequence=['guess_two_thirds', 'payment_info'],
-    # ),
-    # dict(
-    #     name='survey',
-    #     display_name='survey',
-    #     num_demo_participants=1,
-    #     app_sequence=['survey', 'payment_info'],
-    # ),
-    #dict(name='consent_page',
-    #     display_name= "Consent",
-    #     num_demo_participants=4,
-    #     participation_fee=6.46,
-    #     app_sequence=[
-    #        'consent_page'
-    #     ],
-    #     real_world_currency_per_point = 0.25,
-    #     use_browser_bots = False,
-
-    #),
-    #dict(name='mpl',
-    #     display_name= "Multiple Price List (Holt/Laury)",
-    #     num_demo_participants=4,
-    #     participation_fee=6.46,
-    #     app_sequence=[
-    #        'mpl'
-    #     ],
-    #     real_world_currency_per_point = 0.25,
-    #     use_browser_bots = False,
-
-    #),
     dict(name='rsft_goals_and_experience_experiment',
         display_name="RSFT goals and experience",
         num_demo_participants=4,
-        participation_fee=6.46,
+        participation_fee=5.025,
         app_sequence=[
             'consent_page',
             'mpl',
@@ -72,17 +64,7 @@ SESSION_CONFIGS = [
             ],
         real_world_currency_per_point = 0.25,
         use_browser_bots = False,
-    ),
-    #dict(name='survey',
-    #     display_name="demographics",
-    #     num_demo_participants=4,
-    #     participation_fee=6.46,
-    #     app_sequence=[
-    #         'survey'
-    #     ],
-    #     real_world_currency_per_point=0.25,
-    #     use_browser_bots = False,
-    #     ),
+        ),
 ]
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
@@ -104,6 +86,9 @@ ROOMS = [
 ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
+
+AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
 
 DEMO_PAGE_INTRO_HTML = """
 Here are some oTree games.

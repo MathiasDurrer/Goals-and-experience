@@ -36,8 +36,9 @@ class Constants(BaseConstants):
   lang = 'en'
   attention_fail_error = "Nicht ganz richtig"
   attention_fail_error_e = "Not totally correct"
-  duration = 55
+  duration = 40
   bonus_amount = 0.25
+  completion_code = '0473826'
 
 
 
@@ -62,6 +63,7 @@ class Subsession(BaseSubsession):
         p.participant.vars['AM'] = exp.Appearancemanager(p.participant.vars['PM'], exp.filepaths, exp.numfeatures, exp.numactions, exp.randomize_feature, exp.randomize_action, exp.randomize_stimulus_order)
         p.participant.vars['goal_condition'] = next(goal_conditions)
 
+      completion_code = Constants.completion_code
       round_number = self.round_number
       phase_number = p.participant.vars['PM'].get_phaseN(round_number)
       phase = p.participant.vars['PM'].get_phaseL(round_number) # phase label
