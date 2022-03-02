@@ -2,4 +2,3 @@
 otree[mturk] < 5
 numpy
 pandas
-django < 3

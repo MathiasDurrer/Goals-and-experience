@@ -5,6 +5,37 @@ from os import environ
 # the session config can be accessed from methods in your apps as self.session.config,
 # e.g. self.session.config['participation_fee']
 
+mturk_hit_settings = dict({
+    'keywords': ['risk', 'goals', 'academic', 'experience', 'study'],
+    'template': 'global/mturk_template.html',
+    'title': 'Goals and Experience ($5.025 for about 40 min, $2 possible bonus)',
+    'description': 'Decide between options to reach a goal',
+    'frame_height': 800,
+    'minutes_allotted_per_assignement': 80,
+    'expiration_hours': 7 * 24,
+    'qualification_requirements': [
+        # Only US
+        {
+            'QualificationTypeId': "00000000000000000071",
+            'Comparator': "EqualTo",
+            'LocaleValues': [{'Country': "US"}]
+        },
+        # At least 200 HITs approved
+        {
+            'QualificationTypeId': "00000000000000000040",
+            'Comparator': "GreaterThanOrEqualTo",
+            'IntegerValues': [200]
+        },
+        # At least 95% of HITs approved
+        {
+            'QualificationTypeId': "000000000000000000L0",
+            'Comparator': "GreaterThanOrEqualTo",
+            'IntegerValues': [95]
+        },
+        ]
+}),
+
+
 USE_I18N = True
 
 MIDDLEWARE = [
@@ -17,38 +48,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 0.25,
     'participation_fee': 0.00,
+    'doc': '',
+    'mturk_hit_settings': mturk_hit_settings
 }
-
-# mturk_hit_settings = {
-#        'keywords': ['risk', 'goals', 'academic', 'experience', 'study'],
-#        'title': 'Goals and Experience ($5.025 for about 40 min, $2 possible bonus)',
-#        'description': 'Decide between options to reach a goal',
-#        'frame_height': 800,
-#        'template': 'global/mturkPreview.html',
-#        'minutes_allotted_per_assignement': 80,
-#        'expiration_hours': 7*24,
-#        'qualification_requirements': [
-#        # Only US
-#        {
-#            'QualificationTypeId': "00000000000000000071",
-#            'Comparator': "EqualTo",
-#            'LocaleValues': [{'Country': "US"}]
-#        },
-#        # At least 200 HITs approved
-#        {
-#            'QualificationTypeId': "00000000000000000040",
-#            'Comparator': "GreaterThanOrEqualTo",
-#            'IntegerValues': [200]
-#        },
-#        # At least 95% of HITs approved
-#        {
-#            'QualificationTypeId': "000000000000000000L0",
-#            'Comparator': "GreaterThanOrEqualTo",
-#            'IntegerValues': [95]
-#        },
-#        ],
-# }
-
 
 
 SESSION_CONFIGS = [
@@ -66,6 +68,9 @@ SESSION_CONFIGS = [
         use_browser_bots = False,
         ),
 ]
+
+
+
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
 LANGUAGE_CODE = 'en-us'
@@ -87,8 +92,8 @@ ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 
-AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_ACCESS_KEY_ID = 'AKIAUOEZ2UHWXGQHCAUV'
+AWS_SECRET_ACCESS_KEY = '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'
 
 DEMO_PAGE_INTRO_HTML = """
 Here are some oTree games.
