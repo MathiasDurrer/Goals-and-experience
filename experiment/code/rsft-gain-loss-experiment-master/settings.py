@@ -92,8 +92,8 @@ ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 
-AWS_ACCESS_KEY_ID = 'AKIAUOEZ2UHWXGQHCAUV'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = environ.get()
+AWS_SECRET_ACCESS_KEY = environ.get()
 
 DEMO_PAGE_INTRO_HTML = """
 Here are some oTree games.
