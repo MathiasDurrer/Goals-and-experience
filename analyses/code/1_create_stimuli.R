@@ -192,35 +192,3 @@ for (i in 1:nrow(df_pairs)) {
 
 ### writing csv file (to store, and reload without having to run the code above, to save time)
 fwrite(res, file = "all_stimuli.csv")
-
-res <- fread(file = "all_stimuli.csv")
-
-# ### 23.3.2021 (zur abklärung meiner Veränderungen)
-# df_pairs <- as.data.table(df_pairs)
-# df_gamble_set <- as.data.table(df_gamble_set)
-# out <- NULL
-# for (i in 1:nrow(df_pairs)) {
-#   gamble1 <- df_gamble_set[id == df_pairs$id1[i]]
-#   gamble2 <- df_gamble_set[id == df_pairs$id2[i]]
-#   budgets <- df_pairs$bmin[i]:df_pairs$bmax[i]
-#   if(gamble1$var > gamble2$var){
-#     setnames(gamble1, c("id", "x", "px", "y", "py", "ev", "var"),c("id_r","x_r", "px_r", "y_r", "py_r", "ev_r", "var_r"))
-#   } else{
-#     setnames(gamble2, c("x", "px", "y", "py"),c("x_r", "px_r", "y_r", "py_r")) 
-#   }
-#   gambles <- cbind(gamble1,gamble2,b = budgets, id = 1:length(budgets))
-#   
-#   M <- hm1988(formula = ~ x+px+y+py | x_r+px_r+y_r+py_r,
-#               trials = ".ALL", states = ".ALL" , budget = ~b , ntrials = 5,
-#               initstate = 0, data = gambles, choicerule = NULL)
-#   
-#   sim <- data.table(s = M$get_states(),
-#                     t = 6-M$get_timehorizons(),
-#                     predict(M)
-#   )
-#   setnames(sim, c("xp", "x_"), c("ps", "pr"))
-#   sim$bid <- cumsum(sim$t == 1)
-#   out <- rbind(out, merge(sim, gambles, by = "bid"))
-# }
-
-
