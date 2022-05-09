@@ -12,7 +12,7 @@ mturk_hit_settings = dict({
     'description': 'Decide between options to reach a goal',
     'frame_height': 800,
     'template': 'global/mturk_template.html',
-    'minutes_allotted_per_assignement': 80,
+    'minutes_allotted_per_assignment': 80,
     'expiration_hours': 7 * 24,
     'qualification_requirements': [
         # Only US
@@ -61,9 +61,9 @@ SESSION_CONFIGS = [
         participation_fee=5.025,
         app_sequence=[
             'consent_page',
-            #'mpl',
-            #'rsft_goals_and_experience_experiment',
-            #'survey'
+            'mpl',
+            'rsft_goals_and_experience_experiment',
+            'survey'
             ],
         real_world_currency_per_point = 0.25,
         use_browser_bots = False,
@@ -92,9 +92,7 @@ ROOMS = [
 ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
-print("i am here")
-print(environ.get('AWS_ACCESS_KEY_ID'))
-print(environ.get('AWS_SECRET_ACCESS_KEY'))
+
 AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
 
