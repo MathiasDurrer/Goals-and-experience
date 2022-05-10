@@ -6,3 +6,4 @@ psycopg2>=2.5.1,<2.9
 otree[mturk] == 3.4.0
 numpy
 pandas
+python-3.8.13
