@@ -1,4 +1,5 @@
 from os import environ
+import os
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
 # in SESSION_CONFIGS, except those that explicitly override it.
@@ -7,11 +8,11 @@ from os import environ
 
 mturk_hit_settings = dict({
     'keywords': ['risk', 'goals', 'academic', 'experience', 'study'],
-    'template': 'global/mturk_template.html',
     'title': 'Goals and Experience ($5.025 for about 40 min, $2 possible bonus)',
     'description': 'Decide between options to reach a goal',
     'frame_height': 800,
-    'minutes_allotted_per_assignement': 80,
+    'template': 'global/mturk_template.html',
+    'minutes_allotted_per_assignment': 80,
     'expiration_hours': 7 * 24,
     'qualification_requirements': [
         # Only US
@@ -33,7 +34,7 @@ mturk_hit_settings = dict({
             'IntegerValues': [95]
         },
         ]
-}),
+})
 
 
 USE_I18N = True
@@ -95,39 +96,10 @@ ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
 
-DEMO_PAGE_INTRO_HTML = """
-Here are some oTree games.
-"""
+INSTALLED_APPS = ['otree']
+
 
 # don't share this with anybody.
 SECRET_KEY = 'd$vavnmwdqxbhtn@5ue^6dbhvez+)ue4mz+6$&!1#^n!=+g7e$'
 
-INSTALLED_APPS = ['otree']
 
-# inactive session configs
-# dict(name='trust', display_name="Trust Game", num_demo_participants=2, app_sequence=['trust', 'payment_info']),
-# dict(name='prisoner', display_name="Prisoner's Dilemma", num_demo_participants=2,
-#      app_sequence=['prisoner', 'payment_info']),
-# dict(name='volunteer_dilemma', display_name="Volunteer's Dilemma", num_demo_participants=3,
-#      app_sequence=['volunteer_dilemma', 'payment_info']),
-# dict(name='cournot', display_name="Cournot Competition", num_demo_participants=2, app_sequence=[
-#     'cournot', 'payment_info'
-# ]),
-# dict(name='dictator', display_name="Dictator Game", num_demo_participants=2,
-#      app_sequence=['dictator', 'payment_info']),
-# dict(name='matching_pennies', display_name="Matching Pennies", num_demo_participants=2, app_sequence=[
-#     'matching_pennies',
-# ]),
-# dict(name='traveler_dilemma', display_name="Traveler's Dilemma", num_demo_participants=2,
-#      app_sequence=['traveler_dilemma', 'payment_info']),
-# dict(name='bargaining', display_name="Bargaining Game", num_demo_participants=2,
-#      app_sequence=['bargaining', 'payment_info']),
-# dict(name='common_value_auction', display_name="Common Value Auction", num_demo_participants=3,
-#      app_sequence=['common_value_auction', 'payment_info']),
-# dict(name='bertrand', display_name="Bertrand Competition", num_demo_participants=2, app_sequence=[
-#     'bertrand', 'payment_info'
-# ]),
-# dict(name='public_goods_simple', display_name="Public Goods (simple version from tutorial)",
-#      num_demo_participants=3, app_sequence=['public_goods_simple', 'payment_info']),
-# dict(name='trust_simple', display_name="Trust Game (simple version from tutorial)", num_demo_participants=2,
-#      app_sequence=['trust_simple']),
