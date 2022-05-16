@@ -1,0 +1,3 @@
+[submodule "experiment/otree-code"]
+	path = experiment/otree-code
+	url = https://github.com/JanaJarecki/Goals-and-experience-experiment.git
